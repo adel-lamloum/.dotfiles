@@ -1,0 +1,113 @@
+#+TITLE: AD'S Personal Emacs Config
+#+AUTHOR: Adel Lamloum
+#+STARTUP: fold
+
+* customize emacs screen
+
+#+BEGIN_SRC emacs-lisp
+
+      (scroll-bar-mode -1) ; disable visible scrollbar
+      (tool-bar-mode -1) ; disable tool bar
+      (tooltip-mode -1) ; disable tooltips
+      (set-fringe-mode 10) ; give some breathing room
+      (menu-bar-mode -1) ;disable menu bar
+    (setq inhibit-startup-message t)
+
+      ;; setup visible bell
+      (setq visible-bell t)
+
+     (set-face-attribute 'default nil :font "JetBrains Mono NL" :height 105) ;set font
+
+      ;; set line numbers
+      (add-hook 'org-mode-hook #'display-line-numbers-mode)
+
+#+END_SRC
+
+* install packages
+** install emacs Dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+  :ensure t
+  :init
+  ;;set dashboard banner title
+  (setq dashboard-banner-logo-title "This Adel`s Lamloum Emacs")
+  (setq dashboard-set-file-icons t) ;show files icons
+  (setq dasshboard-set-heading-icons t)
+  ;; set your image in emacs startup
+  ;; (setq dashboard-startup-banner "~/Pictures/me.png")
+  ;; to set items you want to show in start up .
+  (setq dashboard-items '((recents   . 5)
+			(bookmarks . 5)
+			(projects  . 5)
+			(agenda    . 5)))
+  :config
+  (dashboard-setup-startup-hook))
+#+end_src
+** Vim Bindings evil-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+  :demand t
+  :bind (("<escape>" . keyboard-escape-quit))
+  :init
+  ;; allows for using cgn
+  ;; (setq evil-search-module 'evil-search)
+  (setq evil-want-keybinding nil)
+  ;; no vim insert bindings
+  (setq evil-undo-system 'undo-fu)
+  :config
+  (evil-mode 1))
+#+END_SRC
+** Vim Bindings Everywhere else
+#+BEGIN_SRC emacs-lisp
+(use-package evil-collection
+  :after evil
+  :config
+  (setq evil-want-integration t)
+  (evil-collection-init))
+  #+END_SRC
+** set new theme
+#+BEGIN_SRC emacs-lisp
+ 
+(use-package gruvbox-theme
+ :config
+ (load-theme 'gruvbox t))
+ #+END_src
+
+** enable vertico mode to show sugestions
+#+BEGIN_SRC emacs-lisp
+
+(use-package vertico
+  :config
+  (vertico-mode))
+#+END_src
+
+** enable org modern
+#+BEGIN_SRC emacs-lisp
+;; Option 1: Per buffer
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+;; Option 2: Globally
+(with-eval-after-load 'org (global-org-modern-mode))
+
+#+END_SRC
+** install which-key
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+ #+END_SRC
+** corfu auto complete
+#+BEGIN_SRC emacs-lisp
+(use-package corfu)
+
+(global-corfu-mode)
+
+(setq completion-cycle-threshold 3)
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+(setq corfu-auto t)
+(setq corfu-quit-no-match 'separator)
+#+END_SRC
