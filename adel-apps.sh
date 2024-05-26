@@ -60,8 +60,17 @@ sudo pacman -S --noconfirm --needed thunderbird
 sudo pacman -S --noconfirm --needed fd
 sudo pacman -S --noconfirm --needed libreoffice-fresh
 sudo pacman -S --noconfirm --needed virt-manager
+sudo systemctl start libvirtd.service
+sudo systemctl enable libvirtd.service 
 sudo pacman -S --noconfirm --needed arcolinux-meta-fun
-
+sudo pacman -S --noconfirm --needed audacity
+sudo pacman -S --noconfirm --needed lollypop
+sudo pacman -S --noconfirm --needed rnote
+sudo pacman -S --noconfirm --needed imagemagick
+sudo pacman -S --noconfirm --needed pdfarranger
+sudo pacman -S --noconfirm --needed nomacs
+sudo pacman -S --noconfirm --needed tlp
+sudo systemctl enable tlp.service
 echo "###################pacman packages installing Done###################"
 sleep 2
 echo "###################LETS INSTALL FLATPAK PACKAGES#####################"
@@ -72,5 +81,9 @@ flatpak install -y Flatseal
 flatpak install -y org.telegram.desktop
 flatpak install -y drawio
 flatpak install -y midori 
+flatpak install -y com.obsproject.Studio
+flatpak install -y com.github.xournalpp.xournalpp
 flatpak install -y bottles
+flatpak install -y com.github.arminstraub.krop
+flatpak install -y org.onlyoffice.desktopeditors
 echo "#####################DONE###############################################"
