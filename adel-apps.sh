@@ -55,6 +55,22 @@ sudo pacman -S --noconfirm --needed brave
 sudo pacman -S --noconfirm --needed flameshot
 sudo pacman -S --noconfirm --needed simplescreenrecorder
 sudo pacman -S --noconfirm --needed font-manager
+sudo pacman -S --noconfirm --needed krita
+sudo pacman -S --noconfirm --needed thunderbird
+sudo pacman -S --noconfirm --needed fd
+sudo pacman -S --noconfirm --needed libreoffice-fresh
+sudo pacman -S --noconfirm --needed virt-manager
+sudo pacman -S --noconfirm --needed arcolinux-meta-fun
 
+echo "###################pacman packages installing Done###################"
+sleep 2
+echo "###################LETS INSTALL FLATPAK PACKAGES#####################"
 
-echo "###################Done###################"
+sleep 3
+
+flatpak install -y Flatseal
+flatpak install -y org.telegram.desktop
+flatpak install -y drawio
+flatpak install -y midori 
+flatpak install -y bottles
+echo "#####################DONE###############################################"
