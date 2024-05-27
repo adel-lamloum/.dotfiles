@@ -7,9 +7,10 @@
 #                                                                                                                                 #
 ###################################################################################################################################
 echo "##########################################"
-echo "####### this is selected adel's apps #####"
+echo "####### INSTALL SELECTED ADEL'S APPS #####"
 sudo pacman -Syu
 sudo pacman -S --noconfirm --needed remmina
+sudo pacman -S --noconfirm --needed variety
 sudo pacman -S --noconfirm --needed xcolor
 sudo pacman -S --noconfirm --needed xorg-xkill
 sudo pacman -S --noconfirm --needed bash-completion
@@ -71,7 +72,7 @@ sudo pacman -S --noconfirm --needed pdfarranger
 sudo pacman -S --noconfirm --needed nomacs
 sudo pacman -S --noconfirm --needed tlp
 sudo systemctl enable tlp.service
-echo "###################pacman packages installing Done###################"
+echo "################### INSTALLING PACKAGES DONE ###################"
 sleep 2
 echo "###################LETS INSTALL FLATPAK PACKAGES#####################"
 
@@ -86,4 +87,12 @@ flatpak install -y com.github.xournalpp.xournalpp
 flatpak install -y bottles
 flatpak install -y com.github.arminstraub.krop
 flatpak install -y org.onlyoffice.desktopeditors
-echo "#####################DONE###############################################"
+echo "##################### DONE ###############################################"
+sleep 3
+echo "##################### NOW WE UNINSTALL UNWANTED APPS ######################"
+sudo pacman -Rs --noconfirm --needed firefox
+echo "##################### UNINSTALLING DONE ###############################################"
+echo "########## NOW REBOOT #######"
+reboot
+
+########################### SCRIPT END ###############################################
