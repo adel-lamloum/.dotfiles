@@ -278,3 +278,25 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
                  (setq auto-hscroll-mode nil)))))
 
 #+end_src
+
+** Olivetti
+A configurable minor mode that automatically centers the content and balances window margins, with adjustable workspace width.
+
+It's particularly useful for writers, as it solves the problem of 'floating' text.
+
+Read more: https://github.com/rnkn/olivetti
+#+BEGIN_SRC emacs-lisp
+(use-package olivetti
+  :ensure t)
+  #+END_SRC
+  
+** Sudo-Edit
+This package allows you to edit files as a root user. For example, quick modification /etc/resolv.conf
+
+Read more: https://melpa.org/#/sudo-edit
+#+BEGIN_SRC emacs-lisp
+(use-package sudo-edit
+  :ensure t
+  :bind (("C-x x f" . sudo-edit-find-file)
+	 ("C-x x e" . sudo-edit)))
+  #+END_SRC
