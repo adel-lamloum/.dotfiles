@@ -72,6 +72,7 @@ sudo pacman -S --noconfirm --needed pdfarranger
 sudo pacman -S --noconfirm --needed nomacs
 sudo pacman -S --noconfirm --needed tlp
 sudo systemctl enable tlp.service
+sudo pacman -S --noconfirm --needed syncthing
 echo "################### INSTALLING PACKAGES DONE ###################"
 sleep 2
 echo "###################LETS INSTALL FLATPAK PACKAGES#####################"
@@ -87,10 +88,14 @@ flatpak install -y com.github.xournalpp.xournalpp
 flatpak install -y bottles
 flatpak install -y com.github.arminstraub.krop
 flatpak install -y org.onlyoffice.desktopeditors
+flatpak install -y flathub com.discordapp.Discord
+flatpak install -y flathub com.github.taiko2k.tauonmb
 echo "##################### DONE ###############################################"
 sleep 3
 echo "##################### NOW WE UNINSTALL UNWANTED APPS ######################"
 sudo pacman -Rs --noconfirm --needed firefox
+sudo pacman -Rs --noconfirm --needed discord
+
 echo "##################### UNINSTALLING DONE ###############################################"
 echo "########## NOW REBOOT #######"
 reboot
