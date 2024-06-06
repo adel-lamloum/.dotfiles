@@ -2,12 +2,16 @@
 
 ###################################################################################################################################
 #                                                                                                                                 #
-# Author: ADEL LAMLOUM                                                                                                            # 
+# Author: ADEL LAMLOUM                                                                                                            #
 # Title : Install Adel Default Arch Apps                                                                                          #
 #                                                                                                                                 #
 ###################################################################################################################################
+echo "##################### NOW WE UNINSTALL UNWANTED APPS ######################"
+sudo pacman -Rs --noconfirm --needed firefox
+sudo pacman -Rs --noconfirm --needed discord
+echo "##################### UNINSTALLING DONE##################################"
 echo "##########################################"
-echo "####### INSTALL SELECTED ADEL'S APPS #####"
+echo "####### INSTALL SELECTED ADEL'S APPS #####################################"
 sudo pacman -Syu
 sudo pacman -S --noconfirm --needed remmina
 sudo pacman -S --noconfirm --needed variety
@@ -62,7 +66,7 @@ sudo pacman -S --noconfirm --needed fd
 sudo pacman -S --noconfirm --needed libreoffice-fresh
 sudo pacman -S --noconfirm --needed virt-manager
 sudo systemctl start libvirtd.service
-sudo systemctl enable libvirtd.service 
+sudo systemctl enable libvirtd.service
 sudo pacman -S --noconfirm --needed arcolinux-meta-fun
 sudo pacman -S --noconfirm --needed audacity
 sudo pacman -S --noconfirm --needed lollypop
@@ -82,7 +86,7 @@ sleep 3
 flatpak install -y Flatseal
 flatpak install -y org.telegram.desktop
 flatpak install -y drawio
-flatpak install -y midori 
+flatpak install -y midori
 flatpak install -y com.obsproject.Studio
 flatpak install -y com.github.xournalpp.xournalpp
 flatpak install -y bottles
@@ -92,11 +96,7 @@ flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub com.github.taiko2k.tauonmb
 echo "##################### DONE ###############################################"
 sleep 3
-echo "##################### NOW WE UNINSTALL UNWANTED APPS ######################"
-sudo pacman -Rs --noconfirm --needed firefox
-sudo pacman -Rs --noconfirm --needed discord
 
-echo "##################### UNINSTALLING DONE ###############################################"
 echo "########## NOW REBOOT #######"
 reboot
 
