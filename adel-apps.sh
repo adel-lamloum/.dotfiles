@@ -12,6 +12,7 @@ sudo pacman -Rs --noconfirm --needed discord
 echo "##################### UNINSTALLING DONE##################################"
 echo "##########################################"
 echo "####### INSTALL SELECTED ADEL'S APPS #####################################"
+sleep 3
 sudo pacman -Syu
 sudo pacman -S --noconfirm --needed remmina
 sudo pacman -S --noconfirm --needed variety
@@ -77,7 +78,7 @@ sudo pacman -S --noconfirm --needed nomacs
 sudo pacman -S --noconfirm --needed tlp
 sudo systemctl enable tlp.service
 sudo pacman -S --noconfirm --needed syncthing
-echo "################### INSTALLING PACKAGES DONE ###################"
+echo "###################INSTALLING PACKAGES DONE###################"
 sleep 2
 echo "###################LETS INSTALL FLATPAK PACKAGES#####################"
 
@@ -94,10 +95,14 @@ flatpak install -y com.github.arminstraub.krop
 flatpak install -y org.onlyoffice.desktopeditors
 flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub com.github.taiko2k.tauonmb
-echo "##################### DONE ###############################################"
+flatpak install -y flathub it.mijorus.gearlever
+flatpak install -y flathub us.zoom.Zoom
+flatpak install -y flathub net.ankiweb.Anki
+flatpak install -y flathub org.gnome.gitlab.YaLTeR.VideoTrimmer
+echo "#####################DONE###############################################"
 sleep 3
 
-echo "########## NOW REBOOT #######"
+echo "##########NOW REBOOT#######"
 reboot
 
 ########################### SCRIPT END ###############################################
