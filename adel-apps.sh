@@ -106,6 +106,10 @@ flatpak install -y flathub net.ankiweb.Anki
 flatpak install -y flathub org.gnome.gitlab.YaLTeR.VideoTrimmer
 flatpak install -y flathub dev.geopjr.Calligraphy
 flatpak install -y flathub dev.bragefuglseth.Keypunch
+flatpak install -y flathub org.gaphor.Gaphor
+flatpak install -y flathub io.github.flattool.Warehouse
+flatpak install -y flathub fr.handbrake.ghb
+flatpak install -y flathub org.filezillaproject.Filezilla
 echo "#####################DONE###############################################"
 sleep 3
 
