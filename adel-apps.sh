@@ -72,6 +72,8 @@ sudo pacman -S --noconfirm --needed arcolinux-meta-fun
 sudo pacman -S --noconfirm --needed audacity
 sudo pacman -S --noconfirm --needed lollypop
 sudo pacman -S --noconfirm --needed rnote
+sudo pacman -S --noconfirm --needed rnote
+sudo pacman -S --noconfirm --needed bitwarden
 sudo pacman -S --noconfirm --needed imagemagick
 sudo pacman -S --noconfirm --needed pdfarranger
 sudo pacman -S --noconfirm --needed nomacs
@@ -84,6 +86,9 @@ echo "###################LETS INSTALL FLATPAK PACKAGES#####################"
 
 sleep 3
 
+flatpak install -y flathub io.github.benini.scid
+flatpak install -y flathub com.github.d4nj1.tlpui
+flatpak install -y flathub com.jetbrains.PyCharm-Community
 flatpak install -y Flatseal
 flatpak install -y org.telegram.desktop
 flatpak install -y drawio
@@ -99,6 +104,8 @@ flatpak install -y flathub it.mijorus.gearlever
 flatpak install -y flathub us.zoom.Zoom
 flatpak install -y flathub net.ankiweb.Anki
 flatpak install -y flathub org.gnome.gitlab.YaLTeR.VideoTrimmer
+flatpak install -y flathub dev.geopjr.Calligraphy
+flatpak install -y flathub dev.bragefuglseth.Keypunch
 echo "#####################DONE###############################################"
 sleep 3
 
