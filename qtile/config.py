@@ -72,9 +72,11 @@ keys = [
 
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
+# language switch
+Key([mod], "F1", lazy.widget["keyboardlayout"].next_keyboard()),
 
 
-# SUPER + SHIFT KEYS
+# SUPER + SHIFT KEYSr
 
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
