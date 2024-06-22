@@ -6,10 +6,7 @@
 # Title : Install Adel Default Arch Apps                                                                                          #
 #                                                                                                                                 #
 ###################################################################################################################################
-echo "##################### NOW WE UNINSTALL UNWANTED APPS ######################"
-sudo pacman -Rs --noconfirm --needed firefox
-sudo pacman -Rs --noconfirm --needed discord
-echo "##################### UNINSTALLING DONE##################################"
+
 echo "##########################################"
 echo "####### INSTALL SELECTED ADEL'S APPS #####################################"
 sleep 3
@@ -112,6 +109,11 @@ flatpak install -y flathub fr.handbrake.ghb
 flatpak install -y flathub org.filezillaproject.Filezilla
 echo "#####################DONE###############################################"
 sleep 3
+
+echo "##################### NOW WE UNINSTALL UNWANTED APPS ######################"
+sudo pacman -Rs --noconfirm --needed firefox
+sudo pacman -Rs --noconfirm --needed discord
+echo "##################### UNINSTALLING DONE##################################"
 
 echo "##########NOW REBOOT#######"
 reboot
