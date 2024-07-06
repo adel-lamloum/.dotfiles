@@ -77,6 +77,14 @@ sudo pacman -S --noconfirm --needed nomacs
 sudo pacman -S --noconfirm --needed tlp
 sudo systemctl enable tlp.service
 sudo pacman -S --noconfirm --needed syncthing
+sudo pacman -S --noconfirm --needed telegram-desktop
+sudo pacman -S --noconfirm --needed obs-studio
+sudo pacman -S --noconfirm --needed pycharm-community-edition
+sudo pacman -S --noconfirm --needed xournalpp
+sudo pacman -S --noconfirm --needed discord
+sudo pacman -S --noconfirm --needed handbrake
+sudo pacman -S --noconfirm --needed filezilla
+
 echo "###################INSTALLING PACKAGES DONE###################"
 sleep 2
 echo "###################LETS INSTALL FLATPAK PACKAGES#####################"
@@ -85,19 +93,19 @@ sleep 3
 
 flatpak install -y flathub io.github.benini.scid
 flatpak install -y flathub com.github.d4nj1.tlpui
-flatpak install -y flathub com.jetbrains.PyCharm-Community
+#flatpak install -y flathub com.jetbrains.PyCharm-Community
 flatpak install -y Flatseal
-flatpak install -y org.telegram.desktop
+#flatpak install -y org.telegram.desktop
 flatpak install -y drawio
 flatpak install -y midori
-flatpak install -y com.obsproject.Studio
-flatpak install -y com.github.xournalpp.xournalpp
+#flatpak install -y com.obsproject.Studio
+#flatpak install -y com.github.xournalpp.xournalpp
 flatpak install -y bottles
 flatpak install -y com.github.arminstraub.krop
 flatpak install -y org.onlyoffice.desktopeditors
-flatpak install -y flathub com.discordapp.Discord
-flatpak install -y flathub com.github.taiko2k.tauonmb
-flatpak install -y flathub it.mijorus.gearlever
+#flatpak install -y flathub com.discordapp.Discord
+#flatpak install -y flathub com.github.taiko2k.tauonmb
+#flatpak install -y flathub it.mijorus.gearlever
 flatpak install -y flathub us.zoom.Zoom
 flatpak install -y flathub net.ankiweb.Anki
 flatpak install -y flathub org.gnome.gitlab.YaLTeR.VideoTrimmer
@@ -106,16 +114,17 @@ flatpak install -y flathub dev.bragefuglseth.Keypunch
 flatpak install -y flathub org.gaphor.Gaphor
 flatpak install -y flathub io.github.flattool.Warehouse
 flatpak install -y flathub fr.handbrake.ghb
-flatpak install -y flathub org.filezillaproject.Filezilla
+#flatpak install -y flathub org.filezillaproject.Filezilla
+flatpak install -y flathub app.drey.Warp
 echo "#####################DONE###############################################"
 sleep 3
 
 echo "##################### NOW WE UNINSTALL UNWANTED APPS ######################"
 sudo pacman -Rs --noconfirm --needed firefox
-sudo pacman -Rs --noconfirm --needed discord
 echo "##################### UNINSTALLING DONE##################################"
 
 echo "##########NOW REBOOT#######"
+sleep 5
 reboot
 
 ########################### SCRIPT END ###############################################
