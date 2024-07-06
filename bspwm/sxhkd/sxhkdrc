@@ -60,11 +60,15 @@ super + F12
 
 #lutris
 super + g
- lutris
+lutris
 
 #emacs
 super + e
     emacs
+
+#telegram
+super + t
+    flatpak run org.telegram.desktop
 
 #Browser-brave
 super + b
@@ -95,7 +99,7 @@ super + d
     rofi -show drun
 
 #Thunar 
-super + t
+super + f
     thunar
 
 #Pavucontrol
@@ -106,7 +110,7 @@ super + v
 super + m
     lollypop
 
-#alacritty
+#kitty
 super + Return
     kitty
 
