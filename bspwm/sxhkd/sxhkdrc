@@ -60,14 +60,14 @@ super + F12
 
 #lutris
 super + g
-lutris
+    lutris
 
 #emacs
 super + e
     emacs
 
 #telegram
-super + t
+super + m
     flatpak run org.telegram.desktop
 
 #Browser-brave
@@ -99,7 +99,7 @@ super + d
     rofi -show drun
 
 #Thunar 
-super + f
+super + t
     thunar
 
 #Pavucontrol
@@ -152,7 +152,8 @@ super + shift + s
 #super + shift + KP_Enter
 #	thunar
 
-
+super + {_,shift + }{1-9,0}
+  bspc {desktop -f, node -d} '^{1-9,10}'
 #################################################################
 # CONTROL + ALT KEYS
 #################################################################
