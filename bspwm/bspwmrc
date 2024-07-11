@@ -5,7 +5,7 @@ $HOME/.config/bspwm/autostart.sh
 #fix for moving spotify to specific workspace
 #bspc config external_rules_command ~/.config/bspwm/scripts/external_rules_command
 #BSPWM language layout
-setxkbmap -option grp:alt_shift_toggle us,ara
+setxkbmap -option grp:alt_shift_toggle us,ara&
 #BSPWM configuration
 #bspc config border_radius       8
 bspc config border_width         2
