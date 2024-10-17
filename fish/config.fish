@@ -18,7 +18,7 @@
 #set VIRTUAL_ENV_DISABLE_PROMPT "1"
 
 if not status --is-interactive
-  exit
+    exit
 end
 
 # Load private config
@@ -57,7 +57,7 @@ set -x EDITOR nano
 set -x VISUAL nano
 #set -x TERM alacritty
 # Sets the terminal type for proper colors
-set TERM "xterm-256color"
+set TERM xterm-256color
 
 # Suppresses fish's intro message
 set fish_greeting
@@ -70,7 +70,7 @@ set fish_prompt_pwd_dir_length 0
 set -x FZF_DEFAULT_OPTS "--color=16,header:13,info:5,pointer:3,marker:9,spinner:1,prompt:5,fg:7,hl:14,fg+:3,hl+:9 --inline-info --tiebreak=end,length --bind=shift-tab:toggle-down,tab:toggle-up"
 # "bat" as manpager
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-set -x MANROFFOPT "-c"
+set -x MANROFFOPT -c
 set -g theme_nerd_fonts yes
 
 
@@ -87,11 +87,11 @@ if type -q bat
 end
 
 if command -sq fzf && type -q fzf_configure_bindings
-  fzf_configure_bindings --directory=\ct
+    fzf_configure_bindings --directory=\ct
 end
 
 if not set -q -g fish_user_abbreviations
-  set -gx fish_user_abbreviations
+    set -gx fish_user_abbreviations
 end
 
 #if type -f fortune >/dev/null
@@ -104,12 +104,24 @@ end
 #end
 
 if test tree >/dev/null
-    function l1;  tree --dirsfirst -ChFL 1 $argv; end
-    function l2;  tree --dirsfirst -ChFL 2 $argv; end
-    function l3;  tree --dirsfirst -ChFL 3 $argv; end
-    function ll1; tree --dirsfirst -ChFupDaL 1 $argv; end
-    function ll2; tree --dirsfirst -ChFupDaL 2 $argv; end
-    function ll3; tree --dirsfirst -ChFupDaL 3 $argv; end
+    function l1
+        tree --dirsfirst -ChFL 1 $argv
+    end
+    function l2
+        tree --dirsfirst -ChFL 2 $argv
+    end
+    function l3
+        tree --dirsfirst -ChFL 3 $argv
+    end
+    function ll1
+        tree --dirsfirst -ChFupDaL 1 $argv
+    end
+    function ll2
+        tree --dirsfirst -ChFupDaL 2 $argv
+    end
+    function ll3
+        tree --dirsfirst -ChFupDaL 3 $argv
+    end
 end
 
 if type -q direnv
@@ -175,9 +187,9 @@ function ex --description "Extract bundled & compressed files"
             case '*'
                 echo "'$argv[1]' cannot be extracted via ex"
         end
-   else
-       echo "'$argv[1]' is not a valid file"
-   end
+    else
+        echo "'$argv[1]' is not a valid file"
+    end
 end
 
 function less
@@ -205,11 +217,14 @@ alias sprs='sudo pacman -Rs'
 alias sprdd='sudo pacman -Rdd'
 alias spqo='sudo pacman -Qo'
 alias spsii='sudo pacman -Sii'
+# the fuck alias 
+alias oh='fuck'
 
 # show the list of packages that need this package - depends mpv as example
+
 function function_depends
     set search $argv[1]
-    sudo pacman -Sii $search | grep "Required" | sed -e "s/Required By     : //g" | sed -e "s/  /\n/g"
+    sudo pacman -Sii $search | grep Required | sed -e "s/Required By     : //g" | sed -e "s/  /\n/g"
 end
 
 alias depends='function_depends'
@@ -242,12 +257,12 @@ alias ip="ip -color"
 alias df="df -h"
 
 #keyboard
-alias give-me-azerty-be="sudo localectl set-x11-keymap be"
-alias give-me-qwerty-us="sudo localectl set-x11-keymap us"
+#alias give-me-azerty-be="sudo localectl set-x11-keymap be"
+#alias give-me-qwerty-us="sudo localectl set-x11-keymap us"
 
 #setlocale
-alias setlocale="sudo localectl set-locale LANG=en_US.UTF-8"
-alias setlocales="sudo localectl set-x11-keymap be && sudo localectl set-locale LANG=en_US.UTF-8"
+#alias setlocale="sudo localectl set-locale LANG=en_US.UTF-8"
+#alias setlocales="sudo localectl set-x11-keymap be && sudo localectl set-locale LANG=en_US.UTF-8"
 
 #pacman unlock
 alias unlock="sudo rm /var/lib/pacman/db.lck"
@@ -377,7 +392,7 @@ alias yta-best="yt-dlp --extract-audio --audio-format best"
 alias yta-flac="yt-dlp --extract-audio --audio-format flac"
 alias yta-mp3="yt-dlp --extract-audio --audio-format mp3"
 alias ytv-best="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4"
-
+alias ytsvh="yt-dlp -f 600+229 --write-auto-subs"
 #Recent Installed Packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
@@ -614,4 +629,8 @@ set fish_pager_color_prefix normal --bold underline
 set fish_pager_color_prefix white --bold --underline
 set fish_pager_color_progress brwhite --background=cyan
 set fish_color_search_match --background="#60AEFF"
+
+
 starship init fish | source
+
+thefuck --alias | source
