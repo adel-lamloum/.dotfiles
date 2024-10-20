@@ -1,9 +1,8 @@
 #!/bin/bash
 
 function run {
-  if ! pgrep -x $(basename $1 | head -c 15) 1>/dev/null;
-  then
-    $@&
+  if ! pgrep -x $(basename $1 | head -c 15) 1>/dev/null; then
+    $@ &
   fi
 }
 
@@ -25,8 +24,8 @@ function run {
 run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop &
 
 #Some ways to set your wallpaper besides variety or nitrogen
-feh --bg-fill /usr/share/backgrounds/archlinux/arch-wallpaper.jpg &
-feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
+#feh --bg-fill /usr/share/backgrounds/archlinux/arch-wallpaper.jpg &
+#feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
 #wallpaper for other Arch based systems
 #feh --bg-fill /usr/share/archlinux-tweak-tool/data/wallpaper/wallpaper.png &
 #start the conky to learn the shortcuts
@@ -35,16 +34,12 @@ feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
 #start sxhkd to replace Qtile native key-bindings
 run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 
-setxkbmap -layout us,ara -variant ,phonetic -option grp:alt_shift_toggle &
-
-
-
 #starting utility applications at boot time
 run variety &
 run nm-applet &
 #run pamac-tray &
 run xfce4-power-manager &
-numlockx on &
+#numlockx on &
 blueberry-tray &
 picom --config $HOME/.config/qtile/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -61,6 +56,7 @@ run volumeicon &
 #run dropbox &
 #run insync start &
 #run spotify &
-#run atom &
 #run telegram-desktop &
 #run /usr/bin/octopi-notifier &
+#run code
+setxkbmap -layout "us,ara" -option "grp:alt_shift_toggle" -variant &

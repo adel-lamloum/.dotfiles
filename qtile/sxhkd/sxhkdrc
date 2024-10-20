@@ -6,21 +6,21 @@
 # SUPER + FUNCTION KEYS
 #################################################################
 
-# Vivaldi
-super + F1
-	vivaldi-stable
+# gimp
+#super + F1
+#	 gimp
 
-# Atom
+# inkscape
 super + F2
-	atom
+	inkscape
 
-#Inkscape
+#audacity
 super + F3
-    inkscape
+    audacity
 
-#Gimp
+#kdenlive
 super + F4
-    gimp
+    kdenlive
 
 #Meld
 super + F5
@@ -58,13 +58,13 @@ super + F12
 # SUPER + ... KEYS
 #################################################################
 
-#Atom
+#Code
 super + e
-    atom
+    code
 
 #Browser
 super + w
-    vivaldi-stable
+    brave
 
 #Conky-toggle
 super + c
@@ -90,21 +90,21 @@ super + shift + x
 super + r
     rofi-theme-selector
 
-#Urxvt
+#thunar 
 super + t
-    urxvt
+    thunar
 
-#Pavucontrol
+#neovim
 super + v
-    pavucontrol
+    neovim
 
 #Audio player
 super + m
     lollypop
 
-#alacritty
+#kitty terminal
 super + Return
-    alacritty
+    kitty
 
 #Xkill
 super + Escape
@@ -134,7 +134,7 @@ super + shift + d
     
 #dmenu
 super + d
-    rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/qtile/rofi/launcher2.rasi
+     rofi -show drun
 
 #reload sxhkd:
 super + shift + s

@@ -41,10 +41,6 @@ mod = "mod4"
 mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser('~')
-myBrowser = "brave"       # My browser of choice
-myTerm = "kitty"      # My terminal of choice
-
-
 
 
 @lazy.function
@@ -60,23 +56,18 @@ def window_to_next_group(qtile):
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
 
 keys = [
-
-    # adel'apps keys
-    Key([mod], "b", lazy.spawn(myBrowser), desc='Web browser'),
-    Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
-    Key([mod], "d", lazy.spawn("rofi -show drun"), desc='Run Launcher'),
-    Key([mod], "e", lazy.spawn("emacs"), desc="emacs-launcher"),
-
 # Most of our keybindings are in sxhkd file - except these
+
+
+Key([mod], "F1",  lazy.widget["keyboardlayout"].next_keyboard()),
+
 # SUPER + FUNCTION KEYS
 
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
-# language switch
-Key([mod], "F1", lazy.widget["keyboardlayout"].next_keyboard()),
 
 
-# SUPER + SHIFT KEYSr
+# SUPER + SHIFT KEYS
 
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
@@ -255,21 +246,24 @@ layouts = [
 ]
 
 # COLORS FOR THE BAR
-#Theme name : ArcoLinux Nord
+#Theme name : ArcoLinux Default
 def init_colors():
-    return [["#3B4252", "#3B4252"], # color 0
-            ["#2e3440", "#2e3440"], # color 1
-            ["#A3BE8C", "#A3BE8C"], # color 2
-            ["#EBCB8B", "#EBCB8B"], # color 3
-            ["#81A1C1", "#81A1C1"], # color 4
-            ["#D8DEE9", "#D8DEE9"], # color 5
-            ["#88C0D0", "#88C0D0"], # color 6
-            ["#E5E9F0", "#E5E9F0"], # color 7
-            ["#4C566A", "#4C566A"], # color 8
-            ["#BF616A", "#BF616A"]] # color 9
+    return [["#2F343F", "#2F343F"], # color 0
+            ["#2F343F", "#2F343F"], # color 1
+            ["#c0c5ce", "#c0c5ce"], # color 2
+            ["#fba922", "#fba922"], # color 3
+            ["#3384d0", "#3384d0"], # color 4
+            ["#f3f4f5", "#f3f4f5"], # color 5
+            ["#cd1f3f", "#cd1f3f"], # color 6
+            ["#62FF00", "#62FF00"], # color 7
+            ["#6790eb", "#6790eb"], # color 8
+            ["#a9a9a9", "#a9a9a9"]] # color 9
 
 
-colors = init_colors()# WIDGETS FOR THE BAR
+colors = init_colors()
+
+
+# WIDGETS FOR THE BAR
 
 def init_widgets_defaults():
     return dict(font="Noto Sans",
@@ -282,13 +276,6 @@ widget_defaults = init_widgets_defaults()
 def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
-               widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
-
                widget.GroupBox(font="FontAwesome",
                         fontsize = 16,
                         margin_y = -1,
@@ -300,7 +287,7 @@ def init_widgets_list():
                         active = colors[9],
                         inactive = colors[5],
                         rounded = False,
-                        highlight_method = "block",
+                        highlight_method = "text",
                         this_current_screen_border = colors[8],
                         foreground = colors[2],
                         background = colors[1]
@@ -312,10 +299,9 @@ def init_widgets_list():
                         background = colors[1]
                         ),
                widget.CurrentLayout(
-                        font = "JetBrainsMono Nerd Font Propo bold",
-                        fontsize = 14,
-                        foreground = colors[1],
-                        background = colors[3]
+                        font = "Noto Sans Bold",
+                        foreground = colors[5],
+                        background = colors[1]
                         ),
                widget.Sep(
                         linewidth = 1,
@@ -326,23 +312,16 @@ def init_widgets_list():
                widget.WindowName(font="Noto Sans",
                         fontsize = 12,
                         foreground = colors[5],
-                       # background = colors[4],
+                        background = colors[1],
                         ),
-         widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
-
-               widget.Net(
-                        font="Noto Sans bold",
+                widget.Net(
+                         font="Noto Sans",
                          fontsize=12,
-                         #interface="enp0s31f6",
-                         foreground=colors[1],
-                         background=colors[9],
+                #         interface="enp0s31f6",
+                         foreground=colors[2],
+                         background=colors[1],
                          padding = 0,
-                         ),
+                        ),
                # widget.Sep(
                #          linewidth = 1,
                #          padding = 10,
@@ -385,7 +364,7 @@ def init_widgets_list():
                #          foreground = colors[2],
                #          background = colors[1]
                #          ),
-                arcobattery.BatteryIcon(
+               arcobattery.BatteryIcon(
                          padding=0,
                          scale=0.7,
                          y_poss=2,
@@ -453,46 +432,30 @@ def init_widgets_list():
                #          foreground = colors[2],
                #          background = colors[1]
                #          ),
- widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
+               widget.TextBox(
+                        font="FontAwesome",
+                        text="  ",
+                        foreground=colors[3],
+                        background=colors[1],
+                        padding = 0,
+                        fontsize=16
                         ),
-
-              # widget.TextBox(
-               #         font="FontAwesome",
-                #        text="  ",
-                 #       foreground=colors[1],
-                  #      background=colors[2],
-                   #     padding = 0,
-                    #    fontsize=16
-                     #   ),
                widget.Clock(
-                         font="Noto Sans bold",
-                        foreground = colors[1],
-                        background = colors[2],
+                        foreground = colors[5],
+                        background = colors[1],
                         fontsize = 12,
-                        format = "⏱  %a, %b %d - %H:%M",
-
+                        format="%Y-%m-%d %H:%M"
                         ),
-                widget.Sep(
-                         linewidth = 1,
-                         padding = 10,
-                         foreground = colors[2],
-                         background = colors[1]
-                         ),
-
+               # widget.Sep(
+               #          linewidth = 1,
+               #          padding = 10,
+               #          foreground = colors[2],
+               #          background = colors[1]
+               #          ),
                widget.Systray(
-                        background=colors[8],
+                        background=colors[1],
                         icon_size=20,
                         padding = 4
-                        ),
-         widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
                         ),
 
 
