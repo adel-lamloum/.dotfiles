@@ -10,9 +10,9 @@
 super + F1
 	vivaldi-stable
 
-# Atom
+# Code
 super + F2
-	atom
+	code
 
 #Inkscape
 super + F3
@@ -52,35 +52,26 @@ super + F11
 
 #Rofi
 super + F12
-    rofi -show drun
 
 #################################################################
 # SUPER + ... KEYS
 #################################################################
 
-#lutris
-super + g
-    lutris
-
-#emacs
+#Code
 super + e
     emacs
 
-#telegram
-super + m
-    flatpak run org.telegram.desktop
-
-#Browser-brave
-super + b
+#Browser
+super + w
     brave
 
-#Conky-toggle
+#flameshot
 super + c
-    conky-toggle
-
+    flameshot
+    
 #Htop
 super + h
-    urxvt 'htop task manager' -e htop
+    urxvt 'btop task manager' -e btop++
 
 #archlinux-logout
 super + x
@@ -93,30 +84,31 @@ super + shift + x
 #Rofi theme selector
 super + r
     rofi-theme-selector
-    
-# rofi-launcher
-super + d
-    rofi -show drun
 
-#Thunar 
+#Thunar
 super + t
     thunar
 
-#Pavucontrol
+#Vim
 super + v
-    pavucontrol
+    vim
 
-#Audio player
+#Massenger
 super + m
     lollypop
 
-#kitty
+#Kitty
 super + Return
     kitty
 
 #Xkill
 super + Escape
     xkill
+
+#rofi
+super + d
+    rofi -show drun
+   # ~/.config/bspwm/launcher/launcher.sh
 
 #Keyboard dependent
 #alacritty
@@ -140,9 +132,6 @@ super + shift + Return
 super + shift + d
 	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
 
-#rofi
-super + d
-    ~/.config/bspwm/launcher/launcher.sh
 
 #reload sxhkd:
 super + shift + s

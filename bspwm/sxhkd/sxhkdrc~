@@ -98,9 +98,9 @@ super + v
 super + m
     lollypop
 
-#alacritty
+#kitty
 super + Return
-    alacritty
+    kitty
 
 #Xkill
 super + Escape
@@ -140,7 +140,8 @@ super + shift + s
 #super + shift + KP_Enter
 #	thunar
 
-
+super + {_,shift + }{1-9,0}
+  bspc {desktop -f, node -d} '^{1-9,10}'
 #################################################################
 # CONTROL + ALT KEYS
 #################################################################
@@ -581,14 +582,14 @@ ctrl + alt + Down
 
 #Switch here between qwerty and azerty or make new one
 #Focus selected desktop FOR QWERTY KEYBOARDS
-#super + {1-9,0}
-#	bspc desktop -f '^{1-9,10}'1323&
+super + {1-9,0}
+	bspc desktop -f '^{1-9,10}'
 
-#Focus selected desktop	FOR BELIGIAN AZERTY KEYBOARDS
-super + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
-    bspc desktop -f '^{1-9,10}'
+#Focus selected desktop	FOR BELGIAN AZERTY KEYBOARDS
+#super + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
+#    bspc desktop -f '^{1-9,10}'
 
-#Focus selected desktop	FOR FRNECH AZERTY KEYBOARDS
+#Focus selected desktop	FOR FRENCH AZERTY KEYBOARDS
 #super + {ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccedilla,agrave}
 #    bspc desktop -f '^{1-9,10}'
 
@@ -596,12 +597,12 @@ super + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,cc
 
 #Switch here between qwerty and azerty or make new one
 #Move window to selected desktop FOR QWERTY KEYBOARDS
-#super + shift + {1-9,0}
-#    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
+super + shift + {1-9,0}
+    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
 
 #Move window to selected desktop FOR AZERTY KEYBOARDS
-super + shift + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
-    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
+#super + shift + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
+#    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
 
 #################################################################
 
