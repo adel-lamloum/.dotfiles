@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 
 echo "##########################################"
@@ -20,7 +20,7 @@ flatpak install -y com.github.arminstraub.krop
 #flatpak install -y flathub com.discordapp.Discord
 #flatpak install -y flathub it.mijorus.gearlever
 #flatpak install -y flathub us.zoom.Zoom
-flatpak install -y flathub org.gnome.gitlab.YaLTeR.VideoTrimmer
+#flatpak install -y flathub org.gnome.gitlab.YaLTeR.VideoTrimmer
 flatpak install -y flathub dev.geopjr.Calligraphy
 flatpak install -y flathub dev.bragefuglseth.Keypunch
 flatpak install -y flathub org.gaphor.Gaphor
