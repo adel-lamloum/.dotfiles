@@ -28,6 +28,7 @@ sudo pacman -S --noconfirm --needed fzf
 sudo pacman -S --noconfirm --needed font-manager
 sudo pacman -S --noconfirm --needed ffmpeg
 sudo pacman -S --noconfirm --needed flameshot
+sudo pacman -S --noconfirm --needed fish 
 sudo pacman -S --noconfirm --needed flatpak
 sudo pacman -S --noconfirm --needed gitfiend
 sudo pacman -S --noconfirm --needed galculator
@@ -44,7 +45,7 @@ sudo pacman -S --noconfirm --needed inkscape
 sudo pacman -S --noconfirm --needed krita
 sudo pacman -S --noconfirm --needed kdenlive
 sudo pacman -S --noconfirm --needed korganizer
-#sudo pacman -S --noconfirm --needed lollypop
+sudo pacman -S --noconfirm --needed kitty
 sudo pacman -S --noconfirm --needed lolcat
 sudo pacman -S --noconfirm --needed libreoffice-fresh
 sudo pacman -S --noconfirm --needed meld
@@ -53,6 +54,7 @@ sudo pacman -S --noconfirm --needed man-pages
 sudo pacman -S --noconfirm --needed neovim
 sudo pacman -S --noconfirm --needed nomacs
 sudo pacman -S --noconfirm --needed neofetch
+sudo pacman -S --noconfirm --needed nodejs
 #sudo pacman -S --noconfirm --needed nitrogen # wallpaper app
 sudo pacman -S --noconfirm --needed oh-my-zsh-git
 sudo pacman -S --noconfirm --needed obs-studio
@@ -62,32 +64,36 @@ sudo pacman -S --noconfirm --needed paru-git
 sudo pacman -S --noconfirm --needed pycharm-community-edition
 sudo pacman -S --noconfirm --needed pamac
 sudo pacman -S --noconfirm --needed pdfarranger
+sudo pacman -S --noconfirm --needed qutebrowser
 sudo pacman -S --noconfirm --needed qbittorrent
 sudo pacman -S --noconfirm --needed ripgrep # search tool
 sudo pacman -S --noconfirm --needed rnote
 sudo pacman -S --noconfirm --needed remmina
 sudo pacman -S --noconfirm --needed syncthing
+#sudo pacman -S --noconfirm --needed strawberry
 sudo pacman -S --noconfirm --needed spotify
 sudo pacman -S --noconfirm --needed timeshift
+sudo pacman -S --noconfirm --needed thunderbird
+sudo pacman -S --noconfirm --needed tauon-music-box
+sudo pacman -S --noconfirm --needed tumbler #to creat thumbnail for thunar
 sudo pacman -S --noconfirm --needed telegram-desktop
 sudo pacman -S --noconfirm --needed visual-studio-code-bin
 sudo pacman -S --noconfirm --needed vlc
 sudo pacman -S --noconfirm --needed variety
-sudo pacman -S --noconfirm --needed wget
-sudo pacman -S --noconfirm --needed zsh
-sudo pacman -S --noconfirm --needed zsh-completions
-sudo pacman -S --noconfirm --needed zsh-syntax-highlighting
-sudo pacman -S --noconfirm --needed simplescreenrecorder
-sudo pacman -S --noconfirm --needed tumbler #to creat thumbnail for thunar
-#sudo pacman -S --noconfirm --needed strawberry
-sudo pacman -S --noconfirm --needed thunderbird
-sudo pacman -S --noconfirm --needed tauon-music-box
 sudo pacman -S --noconfirm --needed video-trimmer
+sudo pacman -S --noconfirm --needed wget
 sudo pacman -S --noconfirm --needed xournalpp
 sudo pacman -S --noconfirm --needed xcolor
 sudo pacman -S --noconfirm --needed xorg-xkill
 sudo pacman -S --noconfirm --needed zoom
-
+sudo pacman -S --noconfirm --needed zsh
+sudo pacman -S --noconfirm --needed zathura
+sudo pacman -S --noconfirm --needed zathura-pdf-mupdf
+sudo pacman -S --noconfirm --needed zathura-ps
+sudo pacman -S --noconfirm --needed zathura-djvu
+sudo pacman -S --noconfirm --needed zsh-completions
+sudo pacman -S --noconfirm --needed zsh-syntax-highlighting
+sudo pacman -S --noconfirm --needed simplescreenrecorder
 # Fonts
 sudo pacman -S --noconfirm --needed ttf-bitstream-vera
 sudo pacman -S --noconfirm --needed ttf-dejavu
