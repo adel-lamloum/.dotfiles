@@ -20,6 +20,7 @@ sudo pacman -S --noconfirm --needed bat
 sudo pacman -S --noconfirm --needed bash-completion
 sudo pacman -S --noconfirm --needed calibre
 sudo pacman -S --noconfirm --needed discord
+sudo pacman -S --noconfirm --needed ddgr # search from terminal duck duck go engine 
 sudo pacman -S --noconfirm --needed dconf-editor
 sudo pacman -S --noconfirm --needed emacs
 sudo pacman -S --noconfirm --needed fd
@@ -71,9 +72,11 @@ sudo pacman -S --noconfirm --needed rnote
 sudo pacman -S --noconfirm --needed remmina
 sudo pacman -S --noconfirm --needed syncthing
 #sudo pacman -S --noconfirm --needed strawberry
+sudo pacman -S --noconfirm --needed simplescreenrecorder
 sudo pacman -S --noconfirm --needed spotify
 sudo pacman -S --noconfirm --needed timeshift
 sudo pacman -S --noconfirm --needed thunderbird
+sudo pacman -S --noconfirm --needed thefuck
 sudo pacman -S --noconfirm --needed tauon-music-box
 sudo pacman -S --noconfirm --needed tumbler #to creat thumbnail for thunar
 sudo pacman -S --noconfirm --needed telegram-desktop
@@ -85,6 +88,7 @@ sudo pacman -S --noconfirm --needed wget
 sudo pacman -S --noconfirm --needed xournalpp
 sudo pacman -S --noconfirm --needed xcolor
 sudo pacman -S --noconfirm --needed xorg-xkill
+sudo pacman -S --noconfirm --needed yt-dlp 
 sudo pacman -S --noconfirm --needed zoom
 sudo pacman -S --noconfirm --needed zsh
 sudo pacman -S --noconfirm --needed zathura
@@ -93,7 +97,6 @@ sudo pacman -S --noconfirm --needed zathura-ps
 sudo pacman -S --noconfirm --needed zathura-djvu
 sudo pacman -S --noconfirm --needed zsh-completions
 sudo pacman -S --noconfirm --needed zsh-syntax-highlighting
-sudo pacman -S --noconfirm --needed simplescreenrecorder
 # Fonts
 sudo pacman -S --noconfirm --needed ttf-bitstream-vera
 sudo pacman -S --noconfirm --needed ttf-dejavu
@@ -156,6 +159,8 @@ sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng lib
   ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt lib32-libxslt libva lib32-libva gtk3 \
   lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
 sudo pacman -S --noconfirm --needed lutris
+##AUR PACKAGES TO INSTALL
+#googler "app to search in terminal"
 
 echo "###################INSTALLING PACKAGES DONE###################"
 sleep 2
