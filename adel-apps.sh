@@ -27,7 +27,9 @@ sudo pacman -S --noconfirm --needed fd
 sudo pacman -S --noconfirm --needed filezilla
 sudo pacman -S --noconfirm --needed fzf
 sudo pacman -S --noconfirm --needed font-manager
+sudo pacman -S --noconfirm --needed figlet
 sudo pacman -S --noconfirm --needed ffmpeg
+sudo pacman -S --noconfirm --needed fribidi # arabic support
 sudo pacman -S --noconfirm --needed flameshot
 sudo pacman -S --noconfirm --needed fish 
 sudo pacman -S --noconfirm --needed flatpak
@@ -40,6 +42,7 @@ sudo pacman -S --noconfirm --needed geany
 sudo pacman -S --noconfirm --needed gnome-disk-utility
 sudo pacman -S --noconfirm --needed hardcode-fixer-git
 sudo pacman -S --noconfirm --needed handbrake
+sudo pacman -S --noconfirm --needed harfbuzz # arabic support
 sudo pacman -S --noconfirm --needed hardinfo2
 sudo pacman -S --noconfirm --needed imagemagick
 sudo pacman -S --noconfirm --needed inkscape
@@ -77,6 +80,7 @@ sudo pacman -S --noconfirm --needed spotify
 sudo pacman -S --noconfirm --needed timeshift
 sudo pacman -S --noconfirm --needed thunderbird
 sudo pacman -S --noconfirm --needed thefuck
+sudo pacman -S --noconfirm --needed toilet
 sudo pacman -S --noconfirm --needed tauon-music-box
 sudo pacman -S --noconfirm --needed tumbler #to creat thumbnail for thunar
 sudo pacman -S --noconfirm --needed telegram-desktop

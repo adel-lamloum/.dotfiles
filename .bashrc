@@ -28,6 +28,8 @@ fi
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
 
+## adding arabic language
+#setxkbmap -layout us,ara -variant ,digits -option grp:alt_shift_toggle &
 ### ALIASES ###
 
 #list
@@ -445,6 +447,4 @@ alias personal='cp -Rf /personal/* ~'
 #cpufetch
 #colorscript random
 #hyfetch
-
-## adding arabic language
-setxkbmap -layout us,ara -variant ,digits -option grp:alt_shift_toggle &
+eval "$(starship init bash)"
