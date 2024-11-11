@@ -66,9 +66,9 @@ super + e
 super + w
     brave
 
-#vscode
+#Conky-toggle
 super + c
-    code
+    flameshot
 
 #Htop
 super + shift + h
@@ -90,6 +90,10 @@ super + m
 super + Escape
     xkill
 
+#Keyboard dependent
+#urxvt
+super + KP_Enter
+	urxvt
 
 #powermenu
 super + shift + x
@@ -103,6 +107,11 @@ super + shift + x
 super + shift + Return
 	thunar
 
+#Keyboard dependent
+#File-Manager
+#super + shift + KP_Enter
+#	thunar
+
 #dmenu
 super + shift + d
 	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
@@ -115,6 +124,9 @@ super + d
 super + shift + s
 	pkill -USR1 -x sxhkd
 
+#Keyboard dependent
+#super + shift + KP_Enter
+#	thunar
 
 
 #################################################################
@@ -192,6 +204,13 @@ ctrl + alt + v
 #Xfce4-appfinder
 ctrl + alt + a
     xfce4-appfinder
+
+
+#Keyboard dependent
+#urxvt
+#ctrl + alt + KP_Enter
+#     urxvt
+
 
 #################################################################
 # ALT + ... KEYS

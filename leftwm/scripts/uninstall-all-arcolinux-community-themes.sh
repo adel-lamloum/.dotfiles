@@ -20,11 +20,12 @@ echo "Installing themes"
 echo "###############################################################################"
 echo
 
-leftwm-theme apply candy
+#leftwm-theme apply candy
 
 leftwm-theme uninstall kittycafe-sm --noconfirm
 leftwm-theme uninstall kittycafe-dm --noconfirm
 
+leftwm-theme uninstall BloodMoon --noconfirm
 leftwm-theme update
 
 echo "###############################################################################"

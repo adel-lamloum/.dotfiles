@@ -74,6 +74,7 @@ sudo pacman -S --noconfirm --needed ripgrep # search tool
 sudo pacman -S --noconfirm --needed rnote
 sudo pacman -S --noconfirm --needed remmina
 sudo pacman -S --noconfirm --needed syncthing
+sudo pacman -S --noconfirm --needed screenkey
 #sudo pacman -S --noconfirm --needed strawberry
 sudo pacman -S --noconfirm --needed simplescreenrecorder
 sudo pacman -S --noconfirm --needed spotify
@@ -141,14 +142,25 @@ sudo pacman -S --noconfirm --needed system-config-printer
 sudo pacman -S --noconfirm --needed sane
 sudo pacman -S --noconfirm --needed simple-scan
 
-sudo systemctl enable --now cups.service
 # Enable bluetooth
+sudo systemctl enable --now cups.service
 #sudo pacman -S --noconfirm --needed bluez
 #sudo pacman -S --noconfirm --needed bluez-libs
 #sudo pacman -S --noconfirm --needed bluez-utils
-
 #sudo systemctl enable bluetooth.service
 #sudo systemctl start bluetooth.service
+
+## mount mobile storages
+sudo pacman -S --noconfirm --needed android-file-transfer
+sudo pacman -S --noconfirm --needed gvfs-mtp
+
+# network tools for wm
+# # this app run over the bar you can select any wifi or edit it
+sudo pacman -S --noconfirm --needed networkmanager-dmenu-git 
+
+# zsh plugins
+sudo pacman -S --noconfirm --needed zsh-syntax-highlighting
+echo "source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 
 echo "##################ARCH BASED APPS INSTALLED##################"
