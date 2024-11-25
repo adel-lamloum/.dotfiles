@@ -1,0 +1,10 @@
+image {
+    monitor =
+    path = /home/adel/.config/hypr/notif_action_sel.png
+    size = 150
+    rounding = 0 # no rounding
+
+    position = 0, 200
+    halign = center
+    valign = center
+}
