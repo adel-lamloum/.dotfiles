@@ -1,0 +1,47 @@
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 40, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    "include": "/home/adel/.config/waybar/modules/modules",
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "tray",
+        "hyprland/window",
+        "clock"
+    ],
+    "modules-right": [
+        "network",
+        "cpu",
+        "custom/updater",
+        "custom/hyprpicker",
+        "custom/swaync",
+        "memory",
+        "battery",
+        "custom/file_manager",
+        "custom/tty",
+        "custom/power"
+    ],
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{name}: {icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    }
+}
