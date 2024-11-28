@@ -19,7 +19,7 @@ sudo pacman -S --noconfirm --needed bitwarden
 sudo pacman -S --noconfirm --needed bat
 sudo pacman -S --noconfirm --needed bash-completion
 sudo pacman -S --noconfirm --needed calibre
-sudo pacman -S --noconfirm --needed discord
+#sudo pacman -S --noconfirm --needed discord
 sudo pacman -S --noconfirm --needed ddgr # search from terminal duck duck go engine 
 sudo pacman -S --noconfirm --needed dconf-editor
 sudo pacman -S --noconfirm --needed emacs
@@ -134,12 +134,12 @@ sudo pacman -S --noconfirm --needed simple-scan
 
 
 ## mount mobile storages
-sudo pacman -S --noconfirm --needed android-file-transfer
+#sudo pacman -S --noconfirm --needed android-file-transfer
 sudo pacman -S --noconfirm --needed gvfs-mtp
 
 # network tools for wm
 # # this app run over the bar you can select any wifi or edit it
-sudo pacman -S --noconfirm --needed networkmanager-dmenu-git 
+#sudo pacman -S --noconfirm --needed networkmanager-dmenu-git 
 
 # zsh plugins
 sudo pacman -S --noconfirm --needed zsh-syntax-highlighting
