@@ -16,12 +16,20 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  #services.xserver.inputMethod = "ibus";  # Enable ibus input method
+  # enable Hyprland
+
+
+  programs.hyprland.enable = true; 
   # Set your time zone.
   time.timeZone = "Africa/Cairo";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -168,6 +176,7 @@
     aria2
     gparted
     handbrake
+    neovim
   ];
 
   #----=[ Fonts ]=----#
@@ -175,6 +184,7 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "JetBrainsMono" "UbuntuSans" "UbuntuMono" "DroidSansMono" ]; })  
+
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -192,8 +202,8 @@
     fontconfig = {
       defaultFonts = {
         serif = [  "Liberation Serif" "amiri" ];
-        sansSerif = [ "UbuntuSans Nerd Font" "amiri" ];
-        monospace = [ "UbuntuMono Nerd Font" "amiri" ];
+        sansSerif = [ "UbuntuSans Nerd Font" "Noto Naskh Arabic" ];
+        monospace = [ "UbuntuMono Nerd Font" "Noto Naskh Arabic"];
       };
     };
   };
