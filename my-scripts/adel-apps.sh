@@ -11,11 +11,11 @@ echo "##########################################"
 echo "####### INSTALL SELECTED ADEL'S APPS #####"
 sleep 3
 sudo pacman -Syu
-sudo pacman -S --noconfirm --needed arcolinux-meta-fun
+#sudo pacman -S --noconfirm --needed arcolinux-meta-fun
 sudo pacman -S --noconfirm --needed audacity
-sudo pacman -S --noconfirm --needed brave
+#sudo pacman -S --noconfirm --needed brave
 sudo pacman -S --noconfirm --needed blanket
-sudo pacman -S --noconfirm --needed bitwarden
+#sudo pacman -S --noconfirm --needed bitwarden
 sudo pacman -S --noconfirm --needed bat
 sudo pacman -S --noconfirm --needed bash-completion
 sudo pacman -S --noconfirm --needed calibre
@@ -74,16 +74,16 @@ sudo pacman -S --noconfirm --needed ripgrep # search tool
 sudo pacman -S --noconfirm --needed rnote
 sudo pacman -S --noconfirm --needed remmina
 sudo pacman -S --noconfirm --needed syncthing
-sudo pacman -S --noconfirm --needed screenkey
+#sudo pacman -S --noconfirm --needed screenkey
 #sudo pacman -S --noconfirm --needed strawberry
 sudo pacman -S --noconfirm --needed simplescreenrecorder
 sudo pacman -S --noconfirm --needed spotify
-sudo pacman -S --noconfirm --needed timeshift
+#sudo pacman -S --noconfirm --needed timeshift
 sudo pacman -S --noconfirm --needed thunderbird
 sudo pacman -S --noconfirm --needed thefuck
 sudo pacman -S --noconfirm --needed toilet
 sudo pacman -S --noconfirm --needed tauon-music-box
-sudo pacman -S --noconfirm --needed tumbler #to creat thumbnail for thunar
+#sudo pacman -S --noconfirm --needed tumbler #to creat thumbnail for thunar
 sudo pacman -S --noconfirm --needed telegram-desktop
 sudo pacman -S --noconfirm --needed visual-studio-code-bin
 sudo pacman -S --noconfirm --needed vlc
@@ -112,9 +112,9 @@ sudo pacman -S --noconfirm --needed unzip
 sudo pacman -S --noconfirm --needed thunar-archive-plugin
 
 # INSTALLING virt-manager
-sudo pacman -S --noconfirm --needed virt-manager
-sudo systemctl start libvirtd.service
-sudo systemctl enable libvirtd.service
+#sudo pacman -S --noconfirm --needed virt-manager
+#sudo systemctl start libvirtd.service
+#sudo systemctl enable libvirtd.service
 
 # install and enable tlp
 sudo pacman -S --noconfirm --needed tlp
