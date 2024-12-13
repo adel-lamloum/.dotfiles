@@ -7,7 +7,13 @@ alias ll='ls -alFh'
 alias l='ls'
 alias l.="ls -A | egrep '^\.'"
 alias listdir="ls -d */ > list"
-
+alias ..="cd ../"
+alias ...="cd ../../"
+alias ....="cd ../../../"
+alias .....="cd ../../../../"
+alias home="cd ~"
+alias desk="cd ~/Desktop"
+alias docs="cd ~/Documents"
 #pacman
 alias sps='sudo pacman -S'
 alias spr='sudo pacman -R'

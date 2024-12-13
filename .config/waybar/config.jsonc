@@ -1,9 +1,11 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 40, // Waybar height (to be removed for auto height)
+    //"height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
+    "margin-right": 5,
+    "margin-left": 5,
     "include": "/home/adel/.config/waybar/modules/modules",
     // Choose the order of the modules
     "modules-left": [
@@ -16,14 +18,12 @@
     ],
     "modules-right": [
         "network",
-        "cpu",
         "custom/updater",
         "custom/hyprpicker",
-        "custom/swaync",
-        "memory",
-        "battery",
+        "custom/dunst",
         "custom/file_manager",
         "custom/tty",
+	"group/hardware",
         "custom/power"
     ],
     "hyprland/workspaces": {

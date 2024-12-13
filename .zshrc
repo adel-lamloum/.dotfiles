@@ -18,7 +18,9 @@ setopt HIST_IGNORE_DUPS
 setopt EXTENDED_HISTORY
 #command correction
 setopt correctall
-
+#enable ctrl arrow complation
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[[1;5D' emacs-backward-word
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
