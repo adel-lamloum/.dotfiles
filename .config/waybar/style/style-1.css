@@ -5,7 +5,7 @@
 }
 
 window#waybar {
-	background: rgba(0,0,0,5);
+	background: rgba(0,0,0,0.5);
 }
 
 #custom-right-arrow-dark,
@@ -21,6 +21,7 @@ window#waybar {
 #group-hardware
 #custom-hyprpicker
 #custom-tty
+#custom-clipse
 #custom-swaync
 #custom-dunst
 #custom-power
@@ -77,16 +78,16 @@ window#waybar {
 	margin-right: 5px;
 }
 #memory {
-	color: #2aa198;
+	color: #f5e0dc;
 	padding: 5px;
 }
 #cpu {
-	color: #6c71c4;
+	color: #f2cdcd;
 	padding: 5px;
 	margin-right: 5px;
 }
 #battery {
-	color: #859900;
+	color: #b58900;
 	padding: 5px;
 }
 #disk {
@@ -95,13 +96,13 @@ window#waybar {
 	margin-right: 5px;
 }
 #custom-hyprpicker {
-        color: #859900;
+        color: #89dceb;
 	padding: 5px;
 	margin-right: 5px;
 }
 
 #custom-tty {
-        color: #6c71c4;
+        color: #6c7086;
 	padding: 5px;
 	margin-right: 5px;
 }
@@ -118,23 +119,23 @@ border-bottom: 2px solid red;
 	padding: 5px;
 	margin-right: 5px;
 }
-#custom-swaynac {
-	color: gold;
-	padding: 5px;
-	margin-right: 5px;
-
-}
 #custom-updater{
 	color: steelblue;
 	padding: 5px;
 	margin-right: 5px;
 }
-#custom-dunst{
+#custom-swaync{
 	color: steelblue;
 	padding: 5px;
 	margin-right: 5px;
 }
 
+#custom-clipse{
+	color: pink;
+	padding: 5px;
+	margin-right: 5px;
+
+}
 #network{
 	color: pink;
 	padding: 5px;

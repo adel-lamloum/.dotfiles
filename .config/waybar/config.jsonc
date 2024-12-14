@@ -1,7 +1,7 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    //"height": 40, // Waybar height (to be removed for auto height)
+    // "height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     "margin-right": 5,
@@ -20,28 +20,37 @@
         "network",
         "custom/updater",
         "custom/hyprpicker",
-        "custom/dunst",
         "custom/file_manager",
         "custom/tty",
-	"group/hardware",
+        "group/hardware",
+        "custom/swaync",
+	"pulseaudio",
         "custom/power"
     ],
-    "hyprland/workspaces": {
-        "disable-scroll": true,
+
+    // PACMAN Style
+    "hyprland/workspaces#pacman": {
+        "active-only": false,
         "all-outputs": true,
-        "warp-on-scroll": false,
-        "format": "{name}: {icon}",
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "show-special": false,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        },
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "6": "",
-            "7": "",
-            "urgent": "",
-            "focused": "",
-            "default": ""
+            "active": "󰮯",
+            "default": "󰊠",
+            "persistent": "󰊠"
         }
-    }
+    },
+        "font": "FiraCode Nerd Font, 10",
+	    "height": 40
+
 }

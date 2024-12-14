@@ -1,4 +1,26 @@
 {
+
+
+
+"custom/dunst": {
+    "format": "{}",
+
+    //"exec": "~/.config/waybar/scripts/dunst_notifications.sh",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "dunstctl close",
+    "on-click-right": "dunstctl close-all"
+  },
+  "custom/clipse": {
+        "format": " {}",  // Icon followed by script output
+        "exec": "~/.config/waybar/scripts/clipse-waybar.sh",
+        "on-click": "hyprctl dispatch exec 'clipse'",
+        "on-click-right": "pkill -USR1 clipse",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+
     "group/hardware": {
         "orientation": "horizontal",
         "modules": [
@@ -7,6 +29,26 @@
             "memory"
         ]
     },
+
+"pulseaudio": {
+  "format": "{icon} {volume}%",
+  "format-bluetooth": "{icon} {volume}%",
+  "format-bluetooth-muted": " {icon}",
+  "format-muted": "󰸈",
+  "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+  "on-click": "pamixer --toggle-mute",
+  "on-click-right": "pavucontrol",
+  "tooltip": false
+},
+
     "custom/file_manager": {
         "format": " ",
         "on-click": "nautilus",
@@ -25,27 +67,27 @@
         "tooltip": true,
         "tooltip-format": "Launch Browser"
     },
-    "custom/swaync": {
-        "tooltip": true,
-        "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
-        "format": "{} {icon} ",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-inhibited-none": ""
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "sleep 0.1 && swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
+  "custom/swaync": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
     },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
     "custom/updater": {
         "format": " {}",
         "exec": "checkupdates | wc -l",
@@ -60,15 +102,40 @@
         "on-click": "hyprpicker -a -f hex",
         "on-click-right": "hyprpicker -a -f rgb"
     },
-    "network": {
-        "format-wifi": "",
-        "format-ethernet": " {ifname}: Aesthetic",
-        "format-linked": " {ifname} (No IP)",
-        "format-disconnected": "󰤭",
-        "format-alt": " {ifname}: {ipaddr}/{cidr}",
-        "tooltip-format": "{essid}",
-        "on-click-right": "nm-connection-editor"
-    },
+
+"network": {
+    "interval": 1,
+    "format": "{ifname}",
+    "format-wifi": "{icon}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+    "format-ethernet": "󰌘   {bandwidthUpBytes}  {bandwidthDownBytes}",
+    "format-disconnected": "󰌙", 
+    "tooltip-format": "{ipaddr}",
+    "format-linked": "󰈁 {ifname} (No IP)",
+    "tooltip-format-wifi": "{essid} {icon} {signalStrength}%",
+    "tooltip-format-ethernet": "{ifname} 󰌘",
+    "tooltip-format-disconnected": "󰌙 Disconnected",
+    "max-length": 50,
+    "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
+},
+
+"bluetooth": {
+    "format": "",
+    "format-disabled": "󰂳",
+    "format-connected": "󰂱 {num_connections}",
+    "tooltip-format": " {device_alias}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": " {device_alias} 󰂄{device_battery_percentage}%",
+    "tooltip": true,
+    "on-click": "blueman-manager",
+},
+
+"hyprland/language": {
+    "format": "Lang: {}",
+    "format-en": "US",
+    "format-tr": "ara",
+    "keyboard-name": "at-translated-set-2-keyboard",
+    "on-click": "hyprctl switchxkblayout $SET_KB next"
+},
     "custom/mpd": {
         "format": "♪ {}",
         "interval": 10,
@@ -136,7 +203,7 @@
     },
     "clock": {
         "format": "{:%H:%M}  ",
-        "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+        "format-alt": "{:%A, %B %d, %Y (%R)} 󰃯 ",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "year",
@@ -159,20 +226,4 @@
             "on-scroll-down": "shift_down"
         }
     },
-    "custom/dunst": {
-        "format": "{icon} {}",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": ""
-        },
-        "return-type": "json",
-        "exec-if": "which dunstctl",
-        "exec": "~/.config/waybar/modules/dunst.py",
-        "on-click": "sleep 0.1 && dunstctl history-pop",
-        "on-click-middle": "dunstctl history-clear",
-        "on-click-right": "dunstctl close-all",
-        "interval": 1,
-        "tooltip": true,
-        "escape": true
-    }
 }
