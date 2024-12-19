@@ -1,17 +1,76 @@
 (scroll-bar-mode -1) ; disable visible scrollbar
-  (tool-bar-mode -1) ; disable tool bar
-  (tooltip-mode -1) ; disable tooltips
-  (set-fringe-mode 10) ; give some breathing room
-  (menu-bar-mode -1) ;disable menu bar
-(setq inhibit-startup-message t)
+        (tool-bar-mode -1) ; disable tool bar
+        (tooltip-mode -1) ; disable tooltips
+        (set-fringe-mode 10) ; give some breathing room
+        (menu-bar-mode -1) ;disable menu bar
+      (setq inhibit-startup-message t)
 
-  ;; setup visible bell
-  (setq visible-bell t)
+  ;; Enable bidi (bidirectional) text support in Emacs
+(setq-default bidi-display-reordering t)
 
- (set-face-attribute 'default nil :font "JetBrains Mono NL" :height 105) ;set font
+;; Set default text direction to left-to-right (LTR) globally
+(setq-default bidi-paragraph-direction 'left-to-right)
 
-  ;; set line numbers
-  (add-hook 'org-mode-hook #'display-line-numbers-mode)
+;; Ensure LTR direction in Org-mode (for titles, paragraphs, etc.)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq-local bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR in Org-mode
+
+;; Define a shortcut for toggling bidi visual mode (useful if you switch between Arabic and English)
+(global-set-key (kbd "C-c t") 'bidi-visual-mode)  ;; Toggle bidi visual mode with C-c t
+
+;; Force Org-mode files to start with LTR direction (especially for titles like #+TITLE)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (if (not (looking-at "\\s-*$"))
+                (setq bidi-paragraph-direction 'left-to-right))))  ;; Force LTR in Org-mode
+
+;; Force LTR in all buffers
+(setq-default bidi-paragraph-direction 'left-to-right)  ;; Set default direction globally to LTR
+
+;; Set the default input method to TeX (LTR, English) on startup
+(setq default-input-method "TeX")  ;; Default input method is English (LTR)
+
+;; Set Arabic as a secondary input method for easy switching
+(setq default-input-method "arabic")
+
+;; Enable the ability to toggle between input methods with C-\
+(global-set-key (kbd "C-\\") 'toggle-input-method)
+
+;; Ensure proper Arabic font rendering (change this to your preferred Arabic font)
+(set-fontset-font t 'arabic "Amiri" nil 'prepend)  ;; Set Arabic font (Amiri is an example)
+
+;; Ensure LTR by default when typing in Arabic (no automatic switch to RTL)
+(setq-default bidi-paragraph-direction 'left-to-right) ;; Always use LTR even with Arabic input
+
+;; Enable visible bell (disable sound bell)
+(setq visible-bell t)
+
+;; Set the default font for Emacs (adjust to your preferred font)
+(set-face-attribute 'default nil :font "JetBrains Mono NL" :height 105)  ;; Set font
+
+;; Enable line numbers in Org-mode
+(add-hook 'org-mode-hook #'display-line-numbers-mode)
+
+;; Enable visual line mode (helps with soft wrapping in text-based modes)
+(add-hook 'text-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'markdown-mode-hook 'visual-line-mode)
+
+;; Optional: Set preferred text width (80 characters) for text wrapping
+(setq-default fill-column 80)
+
+;; Ensure that all buffers start with LTR paragraph direction (not RTL)
+(add-hook 'after-init-hook
+          (lambda ()
+            (setq bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR globally after init
+
+  ; Optional: Set preferred text width (80 characters) for text wrapping
+  (setq-default fill-column 80)
+
+
+        ;; set line numbers
+        (add-hook 'org-mode-hook #'display-line-numbers-mode)
 
 (use-package dashboard
 :ensure t
@@ -189,3 +248,8 @@
                  (setq word-wrap nil)
                  (make-local-variable 'auto-hscroll-mode)
                  (setq auto-hscroll-mode nil)))))
+
+(use-package sudo-edit
+  :ensure t
+  :bind (("C-x x f" . sudo-edit-find-file)
+	 ("C-x x e" . sudo-edit)))

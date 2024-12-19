@@ -12,6 +12,8 @@
         (set-fringe-mode 10) ; give some breathing room
         (menu-bar-mode -1) ;disable menu bar
       (setq inhibit-startup-message t)
+        ;; setup visible bell
+        (setq visible-bell t)
 
   ;; Enable bidi (bidirectional) text support in Emacs
 (setq-default bidi-display-reordering t)
@@ -338,6 +340,17 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 
 #+end_src
 
+** Olivetti
+A configurable minor mode that automatically centers the content and balances window margins, with adjustable workspace width.
+
+It's particularly useful for writers, as it solves the problem of 'floating' text.
+
+Read more: https://github.com/rnkn/olivetti
+#+BEGIN_SRC emacs-lisp
+(use-package olivetti
+  :ensure t)
+  #+END_SRC
+  
 ** Sudo-Edit
 This package allows you to edit files as a root user. For example, quick modification /etc/resolv.conf
 
@@ -348,4 +361,3 @@ Read more: https://melpa.org/#/sudo-edit
   :bind (("C-x x f" . sudo-edit-find-file)
 	 ("C-x x e" . sudo-edit)))
   #+END_SRC
-  

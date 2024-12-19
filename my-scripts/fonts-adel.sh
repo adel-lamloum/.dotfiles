@@ -14,5 +14,6 @@ sudo pacman -S --noconfirm --needed awesome-terminal-fonts
 sudo pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd
 sudo pacman -S --noconfirm --needed ttf-jetbrains-mono
 sudo pacman -S --noconfirm --needed otf-hermit
+sudo pacman -S --noconfirm --needed ttf-firacode-nerd 
 
 

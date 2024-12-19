@@ -6,17 +6,9 @@
 
 window#waybar {
 	background: rgba(0,0,0,0.5);
+	color: pink;
 }
 
-#custom-right-arrow-dark,
-#custom-left-arrow-dark {
-	color: #1a1a1a;
-}
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	color: #292b2e;
-	background: #1a1a1a;
-}
 
 #group-hardware
 #custom-hyprpicker
