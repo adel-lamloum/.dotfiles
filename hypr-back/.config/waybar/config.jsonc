@@ -1,0 +1,56 @@
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    // "height": 40, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    "margin-right": 5,
+    "margin-left": 5,
+    "include": "/home/adel/.config/waybar/modules/modules",
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "tray",
+        "hyprland/window",
+        "clock"
+    ],
+    "modules-right": [
+        "network",
+        "custom/updater",
+        "custom/hyprpicker",
+        "custom/file_manager",
+        "custom/tty",
+        "group/hardware",
+        "custom/swaync",
+	"pulseaudio",
+        "custom/power"
+    ],
+
+    // PACMAN Style
+    "hyprland/workspaces#pacman": {
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "show-special": false,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        },
+        "format-icons": {
+            "active": "󰮯",
+            "default": "󰊠",
+            "persistent": "󰊠"
+        }
+    },
+        "font": "FiraCode Nerd Font, 10",
+	    "height": 40
+
+}

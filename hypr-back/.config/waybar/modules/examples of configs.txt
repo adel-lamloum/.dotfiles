@@ -1,0 +1,14 @@
+{
+	"modules-right": ["group/hardware", "clock"],
+
+	"group/hardware": {
+		"orientation": "vertical",
+		"modules": [
+			"cpu",
+			"memory",
+			"battery"
+		]
+	},
+
+	...
+}

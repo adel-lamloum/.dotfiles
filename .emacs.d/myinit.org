@@ -2,148 +2,128 @@
 #+AUTHOR: Adel Lamloum
 #+STARTUP: fold
 
-* customize emacs screen
-
+* Customize Emacs Screen
 #+BEGIN_SRC emacs-lisp
+  (scroll-bar-mode -1) ; disable visible scrollbar
+  (tool-bar-mode -1) ; disable tool bar
+  (tooltip-mode -1) ; disable tooltips
+  (set-fringe-mode 10) ; give some breathing room
+  (menu-bar-mode -1) ; disable menu bar
+  (setq inhibit-startup-message t)
+  (global-hl-line-mode) ; enable line highlighting
+ ;; Customize the highlight color for the active line
+  ;;(set-face-attribute 'hl-line nil :background "#ffcccb")
 
-        (scroll-bar-mode -1) ; disable visible scrollbar
-        (tool-bar-mode -1) ; disable tool bar
-        (tooltip-mode -1) ; disable tooltips
-        (set-fringe-mode 10) ; give some breathing room
-        (menu-bar-mode -1) ;disable menu bar
-      (setq inhibit-startup-message t)
 
   ;; Enable bidi (bidirectional) text support in Emacs
-(setq-default bidi-display-reordering t)
+  (setq-default bidi-display-reordering t)
 
-;; Set default text direction to left-to-right (LTR) globally
-(setq-default bidi-paragraph-direction 'left-to-right)
+  ;; Set default text direction to left-to-right (LTR) globally
+  (setq-default bidi-paragraph-direction 'left-to-right)
 
-;; Ensure LTR direction in Org-mode (for titles, paragraphs, etc.)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (setq-local bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR in Org-mode
+  ;; Ensure LTR direction in Org-mode (for titles, paragraphs, etc.)
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (setq-local bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR in Org-mode
 
-;; Define a shortcut for toggling bidi visual mode (useful if you switch between Arabic and English)
-(global-set-key (kbd "C-c t") 'bidi-visual-mode)  ;; Toggle bidi visual mode with C-c t
+  ;; Define a shortcut for toggling bidi visual mode (useful if you switch between Arabic and English)
+  (global-set-key (kbd "C-c t") 'bidi-visual-mode)  ;; Toggle bidi visual mode with C-c t
 
-;; Force Org-mode files to start with LTR direction (especially for titles like #+TITLE)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (if (not (looking-at "\\s-*$"))
-                (setq bidi-paragraph-direction 'left-to-right))))  ;; Force LTR in Org-mode
+  ;; Force Org-mode files to start with LTR direction (especially for titles like #+TITLE)
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (if (not (looking-at "\\s-*$"))
+		  (setq bidi-paragraph-direction 'left-to-right))))  ;; Force LTR in Org-mode
 
-;; Force LTR in all buffers
-(setq-default bidi-paragraph-direction 'left-to-right)  ;; Set default direction globally to LTR
+  ;; Force LTR in all buffers
+  (setq-default bidi-paragraph-direction 'left-to-right)  ;; Set default direction globally to LTR
 
-;; Set the default input method to TeX (LTR, English) on startup
-(setq default-input-method "TeX")  ;; Default input method is English (LTR)
+  ;; Set the default input method to TeX (LTR, English) on startup
+  (setq default-input-method "TeX")  ;; Default input method is English (LTR)
 
-;; Set Arabic as a secondary input method for easy switching
-(setq default-input-method "arabic")
+  ;; Set Arabic as a secondary input method for easy switching
+  (setq default-input-method "arabic")
 
-;; Enable the ability to toggle between input methods with C-\
-(global-set-key (kbd "C-\\") 'toggle-input-method)
+  ;; Enable the ability to toggle between input methods with C-\
+  (global-set-key (kbd "C-\\") 'toggle-input-method)
 
-;; Ensure proper Arabic font rendering (change this to your preferred Arabic font)
-(set-fontset-font t 'arabic "Amiri" nil 'prepend)  ;; Set Arabic font (Amiri is an example)
+  ;; Ensure proper Arabic font rendering (change this to your preferred Arabic font)
+  (set-fontset-font t 'arabic "Amiri" nil 'prepend)  ;; Set Arabic font (Amiri is an example)
 
-;; Ensure LTR by default when typing in Arabic (no automatic switch to RTL)
-(setq-default bidi-paragraph-direction 'left-to-right) ;; Always use LTR even with Arabic input
+  ;; Ensure LTR by default when typing in Arabic (no automatic switch to RTL)
+  (setq-default bidi-paragraph-direction 'left-to-right) ;; Always use LTR even with Arabic input
 
-;; Enable visible bell (disable sound bell)
-(setq visible-bell t)
+  ;; Enable visible bell (disable sound bell)
+  (setq visible-bell t)
 
-;; Set the default font for Emacs (adjust to your preferred font)
-(set-face-attribute 'default nil :font "JetBrains Mono NL" :height 105)  ;; Set font
+  ;; Set the default font for Emacs (adjust to your preferred font)
+  (set-face-attribute 'default nil :font "FiraCode Nerd Font") ; Set your preferred font
+  (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font"))
+  ;; Customize the highlight color for the active line
+  ;;(set-face-attribute 'hl-line nil :background "#ffcccb")
 
-;; Enable line numbers in Org-mode
-(add-hook 'org-mode-hook #'display-line-numbers-mode)
+  #+END_SRC
 
-;; Enable visual line mode (helps with soft wrapping in text-based modes)
-(add-hook 'text-mode-hook 'visual-line-mode)
-(add-hook 'org-mode-hook 'visual-line-mode)
-(add-hook 'markdown-mode-hook 'visual-line-mode)
-
-;; Optional: Set preferred text width (80 characters) for text wrapping
-(setq-default fill-column 80)
-
-;; Ensure that all buffers start with LTR paragraph direction (not RTL)
-(add-hook 'after-init-hook
-          (lambda ()
-            (setq bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR globally after init
-
-  ; Optional: Set preferred text width (80 characters) for text wrapping
-  (setq-default fill-column 80)
-
-
-        ;; set line numbers
-        (add-hook 'org-mode-hook #'display-line-numbers-mode)
-
-#+END_SRC
-
-* install packages
-** install emacs Dashboard
-#+begin_src emacs-lisp
-  (use-package dashboard
+* Install Packages
+** Install Emacs Dashboard
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
   :ensure t
   :init
-  ;;set dashboard banner title
-  (setq dashboard-banner-logo-title "This Adel`s Lamloum Emacs")
-  (setq dashboard-set-file-icons t) ;show files icons
-  (setq dasshboard-set-heading-icons t)
-  ;; set your image in emacs startup
+  ;; Set dashboard banner title
+  (setq dashboard-banner-logo-title "This Adel's Lamloum Emacs")
+  (setq dashboard-set-file-icons t) ; Show files icons
+  (setq dashboard-set-heading-icons t)
+  ;; Set your image in Emacs startup
   (setq dashboard-startup-banner "/home/adel/.emacs.d/me.png")
-  ;; to set items you want to show in start up .
+  ;; Set items you want to show in startup
   (setq dashboard-items '((recents   . 5)
-			(bookmarks . 5)
-			(projects  . 5)
-			(agenda    . 5)))
+                          (bookmarks . 5)
+                          (projects  . 5)
+                          (agenda    . 5)))
   :config
   (dashboard-setup-startup-hook))
-#+end_src
-** Vim Bindings evil-mode
+#+END_SRC
 
+** Vim Bindings (evil-mode)
 #+BEGIN_SRC emacs-lisp
   (use-package evil
     :demand t
     :bind (("<escape>" . keyboard-escape-quit))
     :init
-    ;; allows for using cgn
-    ;; (setq evil-search-module 'evil-search)
-    (setq evil-want-keybinding nil)
-    ;; no vim insert bindings
+    (setq evil-want-keybinding nil) ; Allow Emacs keybindings alongside Vim keybindings
+    (setq evil-disable-insert-state-bindings t) ; Allow Emacs keybindings in Insert Mode
     (setq evil-undo-system 'undo-fu)
     :config
-
     (evil-mode 1))
 
   ;; evil-tutor
   (use-package evil-tutor)
 
+  ;; Vim Bindings Everywhere Else
+  (use-package evil-collection
+    :after evil
+    :config
+    (setq evil-want-integration t)
+    (evil-collection-init))
 #+END_SRC
-** MINIBUFFER ESCAPE
-By default, Emacs requires you to hit ESC three times to escape quit the minibuffer.  
 
-#+begin_src emacs-lisp
+** Minibuffer Escape
+#+BEGIN_SRC emacs-lisp
 (global-set-key [escape] 'keyboard-escape-quit)
-#+end_src
-** IVY (COUNSEL)
-+ Ivy, a generic completion mechanism for Emacs.
-+ Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
-+ Ivy-rich allows us to add descriptions alongside the commands in M-x.
+#+END_SRC
 
-#+begin_src emacs-lisp
+** Ivy (Counsel)
+#+BEGIN_SRC emacs-lisp
 (use-package counsel
   :after ivy
   :diminish
-  :config 
-    (counsel-mode)
-    (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
+  :config
+  (counsel-mode)
+  (setq ivy-initial-inputs-alist nil)) ;; Removes starting ^ regex in M-x
 
 (use-package ivy
   :bind
-  ;; ivy-resumes the last Ivy-based completion.
   (("C-c C-r" . ivy-resume)
    ("C-x B" . ivy-switch-buffer-other-window))
   :diminish
@@ -161,7 +141,7 @@ By default, Emacs requires you to hit ESC three times to escape quit the minibuf
 (use-package ivy-rich
   :after ivy
   :ensure t
-  :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
+  :init (ivy-rich-mode 1) ;; This gets us descriptions in M-x.
   :custom
   (ivy-virtual-abbreviate 'full
    ivy-rich-switch-buffer-align-virtual-buffer t
@@ -169,60 +149,107 @@ By default, Emacs requires you to hit ESC three times to escape quit the minibuf
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
+#+END_SRC
 
-#+end_src
-
-** LANGUAGE SUPPORT
-Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM, AWK, C, C++, Fortran, Icon, IDL (CORBA), IDLWAVE, Java, Javascript, M4, Makefiles, Metafont, Modula2, Object Pascal, Objective-C, Octave, Pascal, Perl, Pike, PostScript, Prolog, Python, Ruby, Simula, SQL, Tcl, Verilog, and VHDL.  Other languages will require you to install additional modes.
-
-#+begin_src emacs-lisp
+** Language Support
+#+BEGIN_SRC emacs-lisp
 (use-package haskell-mode)
 (use-package lua-mode)
 (use-package php-mode)
 (use-package yaml-mode
   :commands yaml-mode)
 
-
-#+end_src
-
-** Vim Bindings Everywhere else
-#+BEGIN_SRC emacs-lisp
-(use-package evil-collection
-  :after evil
+;; Frontend Development
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.css\\'" . web-mode)
+         ("\\.js\\'" . web-mode))
   :config
-  (setq evil-want-integration t)
-  (evil-collection-init))
-  #+END_SRC
-** set new theme
-#+BEGIN_SRC emacs-lisp
- 
-(use-package gruvbox-theme
- :config
- (load-theme 'gruvbox t))
- #+END_src
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
 
-** enable vertico mode to show sugestions
-#+BEGIN_SRC emacs-lisp
+(use-package css-mode
+  :ensure t
+  :mode ("\\.css\\'" . css-mode))
 
+(use-package scss-mode
+  :ensure t
+  :mode ("\\.scss\\'" . scss-mode))
+
+(use-package js2-mode
+  :ensure t
+  :mode ("\\.js\\'" . js2-mode)
+  :config
+  (setq js2-basic-offset 2))
+
+(use-package typescript-mode
+  :ensure t
+  :mode ("\\.ts\\'" . typescript-mode)
+  :config
+  (setq typescript-indent-level 2))
+
+;; Python Development
+(use-package python-mode
+  :ensure t
+  :mode ("\\.py\\'" . python-mode)
+  :config
+  (setq python-indent-offset 4))
+
+(use-package lsp-mode
+  :ensure t
+  :hook ((python-mode . lsp))
+  :commands lsp)
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
+
+;; Bash Scripting
+(add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
+(setq sh-basic-offset 2)
+
+(use-package company-shell
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-shell))
+#+END_SRC
+
+** Set New Theme
+#+BEGIN_SRC emacs-lisp
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   (setq doom-themes-enable-bold t
+;;         doom-themes-enable-italic t)
+;;   (load-theme 'doom-gruvbox t)
+;;   (doom-themes-visual-bell-config)
+;;   (doom-themes-neotree-config)
+;;   (doom-themes-org-config))
+#+END_SRC
+
+** Enable Vertico Mode
+#+BEGIN_SRC emacs-lisp
 (use-package vertico
   :config
   (vertico-mode))
-#+END_src
+#+END_SRC
 
-** enable org modern
+** Enable Org Modern
 #+BEGIN_SRC emacs-lisp
 ;; Option 1: Per buffer
-;;(add-hook 'org-mode-hook #'org-modern-mode)
-;;(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+;; (add-hook 'org-mode-hook #'org-modern-mode)
+;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
 ;; Option 2: Globally
-;;(with-eval-after-load 'org (global-org-modern-mode))
-
+;; (with-eval-after-load 'org (global-org-modern-mode))
 #+END_SRC
-** HIGHLIGHT TODO
-Adding highlights to TODO and related words.
 
-#+begin_src emacs-lisp
+** Highlight TODO
+#+BEGIN_SRC emacs-lisp
 (use-package hl-todo
   :hook ((org-mode . hl-todo-mode)
          (prog-mode . hl-todo-mode))
@@ -235,117 +262,252 @@ Adding highlights to TODO and related words.
           ("REVIEW"     font-lock-keyword-face bold)
           ("NOTE"       success bold)
           ("DEPRECATED" font-lock-doc-face bold))))
+#+END_SRC
 
-#+end_src
-
-** install which-key
+** Install Which-Key
 #+BEGIN_SRC emacs-lisp
-  (use-package which-key
+(use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.3))
- #+END_SRC
-** corfu auto complete
-#+BEGIN_SRC emacs-lisp
-(use-package corfu)
-
-(global-corfu-mode)
-
-(setq completion-cycle-threshold 3)
-(setq read-extended-command-predicate #'command-completion-default-include-p)
-(setq corfu-auto t)
-(setq corfu-quit-no-match 'separator)
 #+END_SRC
-** install colorful-mode
-#+BEGIN_SRC emacs-lisp
- (use-package colorful-mode
-  :ensure t ; Optional
-  :hook (prog-mode text-mode)
-  ...)
 
-#+END_SRC
-** babel language
+** Corfu Auto Complete
 #+BEGIN_SRC emacs-lisp
-;; active Babel languages
+(use-package corfu
+  :ensure t
+  :config
+  (global-corfu-mode)
+  (setq completion-cycle-threshold 3)
+  (setq read-extended-command-predicate #'command-completion-default-include-p)
+  (setq corfu-auto t)
+  (setq corfu-quit-no-match 'separator))
+#+END_SRC
+
+** Install Colorful-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package colorful-mode
+  :ensure t
+  :hook (prog-mode text-mode))
+#+END_SRC
+
+** Babel Language
+#+BEGIN_SRC emacs-lisp
 (org-babel-do-load-languages
-'org-babel-load-languages
-'((shell . t)))
+ 'org-babel-load-languages
+ '((shell . t)
+   (python . t)))
 #+END_SRC
+
 ** Htmlize
-Needed for syntax highlighting in HTML exports.
 #+BEGIN_SRC emacs-lisp
 (use-package htmlize)
 #+END_SRC
+
+** Markdown Support
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "markdown"))
+(use-package markdown-preview-mode
+  :ensure t)
+#+END_SRC
+
 ** Download
-Support for dragging and dropping images and pasting from the clipboard into an org document (via org-download-clipboard).
 #+BEGIN_SRC emacs-lisp
 (use-package org-download)
 #+END_SRC
-** org bullets
+
+** Org Bullets
 #+BEGIN_SRC emacs-lisp
 (add-hook 'org-mode-hook 'org-indent-mode)
 (use-package org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+END_SRC
-** nerd-icons
+
+** Nerd Icons
 #+BEGIN_SRC emacs-lisp
 (use-package nerd-icons
-  ;; :custom
-  ;; The Nerd Font you want to use in GUI
-  ;; "Symbols Nerd Font Mono" is the default and is recommended
-  ;; but you can use any other Nerd Font if you want
-  ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
-  )
-  #+END_SRC
-** doom-modeline
-#+begin_src emacs-lisp
-;; make sure to run {package-refresh-contents} in emacs to update packges.
-  (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode 1))
-  #+END_SRC
-** all-the-icons
-#+BEGIN_SRC emacs-lisp
-(use-package all-the-icons
-  :if (display-graphic-p))
+  :ensure t
+  :custom
+  (nerd-icons-font-family "FiraCode Nerd Font"))
 #+END_SRC
-** NEOTREE
-Neotree is a file tree viewer.  When you open neotree, it jumps to the current file thanks to neo-smart-open.  The neo-window-fixed-size setting makes the neotree width be adjustable.  NeoTree provides following themes: classic, ascii, arrow, icons, and nerd.  Theme can be config'd by setting "two" themes for neo-theme: one for the GUI and one for the terminal.  I like to use 'SPC t' for 'toggle' keybindings, so I have used 'SPC t n' for toggle-neotree.
 
-| COMMAND        | DESCRIPTION               | KEYBINDING |
-|----------------+---------------------------+------------|
-| neotree-toggle | /Toggle neotree/            | SPC t n    |
-| neotree- dir   | /Open directory in neotree/ | SPC d n    |
+** Doom Modeline
+#+BEGIN_SRC emacs-lisp
+      (use-package doom-modeline
+        :ensure t
+        :init (doom-modeline-mode 1)
+;; Customize the mark color for the region
+  (set-face-attribute 'region nil :background "#add8e6")
 
+  )
+
+#+END_SRC
+
+** All-the-Icons
+#+BEGIN_SRC emacs-lisp
+;; (use-package all-the-icons
+;;   :if (display-graphic-p))
+#+END_SRC
+
+** NeoTree
 #+BEGIN_SRC emacs-lisp
 (use-package neotree
+  :after general
   :config
   (setq neo-smart-open t
         neo-show-hidden-files t
         neo-window-width 55
         neo-window-fixed-size nil
         inhibit-compacting-font-caches t
-        projectile-switch-project-action 'neotree-projectile-action) 
-        ;; truncate long file names in neotree
-        (add-hook 'neo-after-create-hook
-           #'(lambda (_)
-               (with-current-buffer (get-buffer neo-buffer-name)
-                 (setq truncate-lines t)
-                 (setq word-wrap nil)
-                 (make-local-variable 'auto-hscroll-mode)
-                 (setq auto-hscroll-mode nil)))))
+        projectile-switch-project-action 'neotree-projectile-action)
 
-#+end_src
+  ;; Truncate long file names in NeoTree
+  (add-hook 'neo-after-create-hook
+            #'(lambda (_)
+                (with-current-buffer (get-buffer neo-buffer-name)
+                  (setq truncate-lines t)
+                  (setq word-wrap nil)
+                  (make-local-variable 'auto-hscroll-mode)
+                  (setq auto-hscroll-mode nil)))))
+
+;; Define keybindings using general.el
+(general-define-key
+ :prefix "C-c" ;; Use the leader key defined above
+ "t" 'neotree-toggle ;; Toggle NeoTree with "C-c t"
+ "p" 'neotree-projectile-toggle ;; Toggle NeoTree with Projectile integration using "C-c p"
+ "r" 'neotree-refresh) ;; Refresh NeoTree with "C-c r"
+#+END_SRC
 
 ** Sudo-Edit
-This package allows you to edit files as a root user. For example, quick modification /etc/resolv.conf
-
-Read more: https://melpa.org/#/sudo-edit
 #+BEGIN_SRC emacs-lisp
 (use-package sudo-edit
   :ensure t
   :bind (("C-x x f" . sudo-edit-find-file)
-	 ("C-x x e" . sudo-edit)))
-  #+END_SRC
+         ("C-x x e" . sudo-edit)))
+#+END_SRC
+
+** Org Roam
+#+BEGIN_SRC emacs-lisp
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/adel-notes/org-roams/")
+  (org-roam-completion-everywhere t)
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+     ("l" "programming language" plain
+      "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+     ("b" "book notes" plain (file "~/adel-notes/org-roams/NoteTemplate.org")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
+#+END_SRC
+
+** Centaur Tabs
+#+BEGIN_SRC emacs-lisp
+(use-package centaur-tabs
+  :ensure t
+  :config
+  (centaur-tabs-mode t)
+
+  (defun my-centaur-tabs-buffer-mode-icon (buffer)
+    "Return the icon for BUFFER based on its major mode using nerd-icons."
+    (with-current-buffer buffer
+      (let ((icon (nerd-icons-icon-for-mode major-mode)))
+        (if (symbolp icon)
+            (nerd-icons-icon-for-file (buffer-name))
+          icon))))
+
+  (setq centaur-tabs-buffer-groups-function #'my-centaur-tabs-buffer-groups)
+
+  (defun my-centaur-tabs-buffer-groups ()
+    "Return the list of group names BUFFER belongs to."
+    (list (my-centaur-tabs-buffer-mode-icon (current-buffer))))
+
+  (setq centaur-tabs-style "bar"
+        centaur-tabs-height 32
+        centaur-tabs-set-modified-marker t))
+#+END_SRC
+
+** General Enhancements
+#+BEGIN_SRC emacs-lisp
+      (use-package highlight-indent-guides
+        :ensure t
+        :hook ((prog-mode . highlight-indent-guides-mode)))
+
+      (use-package editorconfig
+        :ensure t
+        :config
+        (editorconfig-mode 1))
+
+      (use-package magit
+        :ensure t
+        :bind ("C-x g" . magit-status))
+  
+      (use-package projectile
+        :ensure t
+        :config
+        (projectile-mode +1)
+        (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+        ;; Add C-c p f to the projectile-command-map
+        (define-key projectile-command-map (kbd "f") 'projectile-find-file))
+
+      (use-package modus-themes
+        :ensure t
+        :config
+        (load-theme 'modus-vivendi t)
+  ;; Customize the mark color for the region
+  (set-face-attribute 'region nil :background "#add8e6")
+
+  )
+#+END_SRC
+** Install General Package
+#+BEGIN_SRC emacs-lisp
+(use-package general
+  :ensure t
+  :config
+  (general-create-definer my/leader-keys
+    :prefix "C-c" ;; Define a leader key for your custom keybindings
+    :prefix-command 'my/leader-keys-map))
+#+END_SRC
+** smartparens
+Smartparens is a minor mode for dealing with pairs in Emacs.
+It can automatically insert pairs:
+#+BEGIN_SRC emacs-lisp
+
+  (use-package smartparens
+  :ensure smartparens  ;; install the package
+  :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
+  :config
+  ;; load default config
+  (require 'smartparens-config))
+#+END_SRC
+** Flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  :config
+  ;; Set the default Python checker to flake8
+  (setq-default flycheck-python-flake8-executable "flake8")
+  ;; Show errors in the left fringe
+  (setq flycheck-indication-mode 'left-fringe))
+  #+end_src
   

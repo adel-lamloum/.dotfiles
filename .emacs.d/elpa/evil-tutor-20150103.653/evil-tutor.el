@@ -5,7 +5,8 @@
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; Keywords: convenience editing evil
 ;; Created: 1 Jan 2015
-;; Version: 0.1
+;; Package-Version: 20150103.653
+;; Package-Revision: 909273bac88b
 ;; Package-Requires: ((evil "1.0.9"))
 ;; URL: https://github.com/syl20bnr/evil-tutor
 

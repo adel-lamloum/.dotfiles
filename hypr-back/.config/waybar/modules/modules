@@ -1,0 +1,229 @@
+{
+
+
+
+"custom/dunst": {
+    "format": "{}",
+
+    //"exec": "~/.config/waybar/scripts/dunst_notifications.sh",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "dunstctl close",
+    "on-click-right": "dunstctl close-all"
+  },
+  "custom/clipse": {
+        "format": " {}",  // Icon followed by script output
+        "exec": "~/.config/waybar/scripts/clipse-waybar.sh",
+        "on-click": "hyprctl dispatch exec 'clipse'",
+        "on-click-right": "pkill -USR1 clipse",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "cpu",
+            "battery",
+            "memory"
+        ]
+    },
+
+"pulseaudio": {
+  "format": "{icon} {volume}%",
+  "format-bluetooth": "{icon} {volume}%",
+  "format-bluetooth-muted": " {icon}",
+  "format-muted": "󰸈",
+  "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+  "on-click": "pamixer --toggle-mute",
+  "on-click-right": "pavucontrol",
+  "tooltip": false
+},
+
+    "custom/file_manager": {
+        "format": " ",
+        "on-click": "nautilus",
+        "tooltip": true,
+        "tooltip-format": "File Manager"
+    },
+    "custom/tty": {
+        "format": " ",
+        "on-click": "kitty",
+        "tooltip": true,
+        "tooltip-format": "Launch Terminal"
+    },
+    "custom/browser": {
+        "format": "",
+        "on-click": "brave",
+        "tooltip": true,
+        "tooltip-format": "Launch Browser"
+    },
+  "custom/swaync": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+    "custom/updater": {
+        "format": " {}",
+        "exec": "checkupdates | wc -l",
+        "exec-if": "[[ $(checkupdates | wc -l) -gt 0 ]]",
+        "interval": 15,
+        "on-click": "if command -v paru &> /dev/null; then kitty -T update paru -Syu; else kitty -T update yay -Syu; fi && notify-send 'The system has been updated'",
+        "tooltip": true,
+        "tooltip-format": "Left Click: Update System\nArch Linux Only"
+    },
+    "custom/hyprpicker": {
+        "format": "󰈋",
+        "on-click": "hyprpicker -a -f hex",
+        "on-click-right": "hyprpicker -a -f rgb"
+    },
+
+"network": {
+    "interval": 1,
+    "format": "{ifname}",
+    "format-wifi": "{icon}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+    "format-ethernet": "󰌘   {bandwidthUpBytes}  {bandwidthDownBytes}",
+    "format-disconnected": "󰌙", 
+    "tooltip-format": "{ipaddr}",
+    "format-linked": "󰈁 {ifname} (No IP)",
+    "tooltip-format-wifi": "{essid} {icon} {signalStrength}%",
+    "tooltip-format-ethernet": "{ifname} 󰌘",
+    "tooltip-format-disconnected": "󰌙 Disconnected",
+    "max-length": 50,
+    "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
+},
+
+"bluetooth": {
+    "format": "",
+    "format-disabled": "󰂳",
+    "format-connected": "󰂱 {num_connections}",
+    "tooltip-format": " {device_alias}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": " {device_alias} 󰂄{device_battery_percentage}%",
+    "tooltip": true,
+    "on-click": "blueman-manager",
+},
+
+"hyprland/language": {
+    "format": "Lang: {}",
+    "format-en": "US",
+    "format-tr": "ara",
+    "keyboard-name": "at-translated-set-2-keyboard",
+    "on-click": "hyprctl switchxkblayout $SET_KB next"
+},
+    "custom/mpd": {
+        "format": "♪ {}",
+        "interval": 10,
+        "exec": "mpc current",
+        "exec-if": "pgrep mpd",
+        "on-click": "mpc toggle",
+        "on-click-right": "sonata"
+    },
+    "custom/separator#dot": {
+        "format": "",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/separator#dot-line": {
+        "format": "",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/separator#line": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/separator#blank": {
+        "format": "",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/separator#blank_2": {
+        "format": "  ",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/separator#blank_3": {
+        "format": "   ",
+        "interval": "once",
+        "tooltip": false
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "custom/power": {
+        "format": "⏻ ",
+        "tooltip": false,
+        "on-click": "archlinux-logout"
+    },
+    "clock": {
+        "format": "{:%H:%M}  ",
+        "format-alt": "{:%A, %B %d, %Y (%R)} 󰃯 ",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+}
