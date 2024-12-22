@@ -1,8 +1,5 @@
-#+TITLE: AD'S Personal Emacs Config
-#+AUTHOR: Adel Lamloum
-#+STARTUP: fold
 
-* Customize Emacs Screen
+ * Customize Emacs Screen
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1) ; disable visible scrollbar
   (tool-bar-mode -1) ; disable tool bar
@@ -11,9 +8,6 @@
   (menu-bar-mode -1) ; disable menu bar
   (setq inhibit-startup-message t)
   (global-hl-line-mode) ; enable line highlighting
- ;; Customize the highlight color for the active line
-  ;;(set-face-attribute 'hl-line nil :background "#ffcccb")
-
 
   ;; Enable bidi (bidirectional) text support in Emacs
   (setq-default bidi-display-reordering t)
@@ -48,7 +42,7 @@
   (global-set-key (kbd "C-\\") 'toggle-input-method)
 
   ;; Ensure proper Arabic font rendering (change this to your preferred Arabic font)
-  (set-fontset-font t 'arabic "Amiri" nil 'prepend)  ;; Set Arabic font (Amiri is an example)
+  (set-fontset-font t 'arabic "Noto Sans Arabic UI")
 
   ;; Ensure LTR by default when typing in Arabic (no automatic switch to RTL)
   (setq-default bidi-paragraph-direction 'left-to-right) ;; Always use LTR even with Arabic input
@@ -59,10 +53,20 @@
   ;; Set the default font for Emacs (adjust to your preferred font)
   (set-face-attribute 'default nil :font "FiraCode Nerd Font") ; Set your preferred font
   (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font"))
-  ;; Customize the highlight color for the active line
-  ;;(set-face-attribute 'hl-line nil :background "#ffcccb")
 
-  #+END_SRC
+  ;; Function to toggle text direction between LTR and RTL
+  (defun toggle-text-direction ()
+    "Toggle the text direction between LTR and RTL."
+    (interactive)
+    (if (eq bidi-paragraph-direction 'left-to-right)
+        (setq-local bidi-paragraph-direction 'right-to-left)
+      (setq-local bidi-paragraph-direction 'left-to-right))
+    (message "Text direction set to %s" bidi-paragraph-direction))
+
+  ;; Bind the function to a key, e.g., C-c d
+  (global-set-key (kbd "C-c d") 'toggle-text-direction)
+#+END_SRC
+  
 
 * Install Packages
 ** Install Emacs Dashboard

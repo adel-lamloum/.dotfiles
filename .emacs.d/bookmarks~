@@ -2,13 +2,7 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("myinit.org"
- (filename . "~/.emacs.d/myinit.org")
- (front-context-string . "tomize Emacs Scr")
- (rear-context-string . "TUP: fold\n\n* Cus")
- (position . 82)
- (last-modified 26471 46030 775987 39000))
-("frist mark"
+(("frist mark"
  (filename . "~/adel-notes/bakery.org")
  (front-context-string . "    ;; sdssdsة\n#")
  (rear-context-string . "SRC emacs-lisp\n\n")

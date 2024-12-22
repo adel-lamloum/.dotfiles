@@ -14,8 +14,6 @@
  ;; Customize the highlight color for the active line
   ;;(set-face-attribute 'hl-line nil :background "#ffcccb")
 
-  ;; Customize the mark color for the region
-  ;;(set-face-attribute 'region nil :background "#add8e6")
 
   ;; Enable bidi (bidirectional) text support in Emacs
   (setq-default bidi-display-reordering t)
@@ -449,32 +447,36 @@
 
 ** General Enhancements
 #+BEGIN_SRC emacs-lisp
-  (use-package highlight-indent-guides
-    :ensure t
-    :hook ((prog-mode . highlight-indent-guides-mode)))
+      (use-package highlight-indent-guides
+        :ensure t
+        :hook ((prog-mode . highlight-indent-guides-mode)))
 
-  (use-package editorconfig
-    :ensure t
-    :config
-    (editorconfig-mode 1))
+      (use-package editorconfig
+        :ensure t
+        :config
+        (editorconfig-mode 1))
 
-  (use-package magit
-    :ensure t
-    :bind ("C-x g" . magit-status))
+      (use-package magit
+        :ensure t
+        :bind ("C-x g" . magit-status))
   
-  (use-package projectile
-    :ensure t
-    :config
-    (projectile-mode +1)
-    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+      (use-package projectile
+        :ensure t
+        :config
+        (projectile-mode +1)
+        (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-    ;; Add C-c p f to the projectile-command-map
-    (define-key projectile-command-map (kbd "f") 'projectile-find-file))
+        ;; Add C-c p f to the projectile-command-map
+        (define-key projectile-command-map (kbd "f") 'projectile-find-file))
 
-  (use-package modus-themes
-    :ensure t
-    :config
-    (load-theme 'modus-vivendi t))
+      (use-package modus-themes
+        :ensure t
+        :config
+        (load-theme 'modus-vivendi t)
+  ;; Customize the mark color for the region
+  (set-face-attribute 'region nil :background "#add8e6")
+
+  )
 #+END_SRC
 ** Install General Package
 #+BEGIN_SRC emacs-lisp
@@ -508,3 +510,4 @@ It can automatically insert pairs:
   ;; Show errors in the left fringe
   (setq flycheck-indication-mode 'left-fringe))
   #+end_src
+  
