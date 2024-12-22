@@ -67,7 +67,7 @@
     (message "Text direction set to %s" bidi-paragraph-direction))
 
   ;; Bind the function to a key, e.g., C-c d
-  (global-set-key (kbd "C-c d") 'toggle-text-direction)
+ ;; (global-set-key (kbd "C-c d") 'toggle-text-direction)
 #+END_SRC
   
 * Install Packages
@@ -549,7 +549,8 @@
       "tt" 'toggle-truncate-lines ;; Toggle line truncation
       "tb" 'toggle-buffer-line-numbers ;; Toggle line numbers in the buffer
       "tm" 'toggle-modeline ;; Toggle the mode-line
-
+     ;; Add the toggle-text-direction keybinding
+      "d" 'toggle-text-direction ;; Bind "C-c d" to toggle-text-direction
       "n" '(:ignore t :which-key "notes/org") ;; Submenu for notes/org-mode
       "nn" 'org-capture ;; Capture a new note
       "nj" 'org-agenda ;; Open the Org agenda

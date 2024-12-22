@@ -390,28 +390,28 @@
         centaur-tabs-set-modified-marker t))
 
 (use-package highlight-indent-guides
-      :ensure t
-      :hook ((prog-mode . highlight-indent-guides-mode)))
+  :ensure t
+  :hook ((prog-mode . highlight-indent-guides-mode)))
 
-    (use-package editorconfig
-      :ensure t
-      :config
-      (editorconfig-mode 1))
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
-    (use-package magit
-      :ensure t
-      :bind ("C-x g" . magit-status))
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
 
-    (use-package projectile
-      :ensure t
-      :config
-      (projectile-mode +1)
-      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-      ;; Add C-c p f to the projectile-command-map
-      (define-key projectile-command-map (kbd "f") 'projectile-find-file))
+  ;; Add C-c p f to the projectile-command-map
+  (define-key projectile-command-map (kbd "f") 'projectile-find-file))
 
-    (use-package modus-themes
+(use-package modus-themes
       :ensure t
       :config
       (load-theme 'modus-vivendi t)

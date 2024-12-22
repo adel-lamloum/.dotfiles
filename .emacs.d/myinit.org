@@ -473,21 +473,36 @@
         centaur-tabs-set-modified-marker t))
 #+END_SRC
 
-** General Enhancements
+** higlight indint guide
 #+BEGIN_SRC emacs-lisp
       (use-package highlight-indent-guides
         :ensure t
         :hook ((prog-mode . highlight-indent-guides-mode)))
+
+#+END_SRC
+
+** editorconfig
+#+BEGIN_SRC emacs-lisp
 
       (use-package editorconfig
         :ensure t
         :config
         (editorconfig-mode 1))
 
+#+END_SRC
+
+** magit
+#+BEGIN_SRC emacs-lisp
+
       (use-package magit
         :ensure t
         :bind ("C-x g" . magit-status))
   
+#+END_SRC
+
+** projectile
+#+BEGIN_SRC emacs-lisp
+
       (use-package projectile
         :ensure t
         :config
@@ -496,6 +511,11 @@
 
         ;; Add C-c p f to the projectile-command-map
         (define-key projectile-command-map (kbd "f") 'projectile-find-file))
+
+#+END_SRC
+
+**  mouds themes
+#+BEGIN_SRC emacs-lisp
 
       (use-package modus-themes
         :ensure t
@@ -551,7 +571,6 @@
       "tm" 'toggle-modeline ;; Toggle the mode-line
      ;; Add the toggle-text-direction keybinding
       "d" 'toggle-text-direction ;; Bind "C-c d" to toggle-text-direction
-  
       "n" '(:ignore t :which-key "notes/org") ;; Submenu for notes/org-mode
       "nn" 'org-capture ;; Capture a new note
       "nj" 'org-agenda ;; Open the Org agenda
@@ -594,5 +613,4 @@ It can automatically insert pairs:
   ;; Show errors in the left fringe
   (setq flycheck-indication-mode 'left-fringe))
   #+end_src
-  
   
