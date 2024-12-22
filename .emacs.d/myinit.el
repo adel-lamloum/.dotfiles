@@ -1,67 +1,67 @@
 (scroll-bar-mode -1) ; disable visible scrollbar
-(tool-bar-mode -1) ; disable tool bar
-(tooltip-mode -1) ; disable tooltips
-(set-fringe-mode 10) ; give some breathing room
-(menu-bar-mode -1) ; disable menu bar
-(setq inhibit-startup-message t)
-(global-hl-line-mode) ; enable line highlighting
+ (tool-bar-mode -1) ; disable tool bar
+ (tooltip-mode -1) ; disable tooltips
+ (set-fringe-mode 10) ; give some breathing room
+ (menu-bar-mode -1) ; disable menu bar
+ (setq inhibit-startup-message t)
+ (global-hl-line-mode) ; enable line highlighting
 
-;; Enable bidi (bidirectional) text support in Emacs
-(setq-default bidi-display-reordering t)
+ ;; Enable bidi (bidirectional) text support in Emacs
+ (setq-default bidi-display-reordering t)
 
-;; Set default text direction to left-to-right (LTR) globally
-(setq-default bidi-paragraph-direction 'left-to-right)
+ ;; Set default text direction to left-to-right (LTR) globally
+ (setq-default bidi-paragraph-direction 'left-to-right)
 
-;; Ensure LTR direction in Org-mode (for titles, paragraphs, etc.)
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (setq-local bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR in Org-mode
+ ;; Ensure LTR direction in Org-mode (for titles, paragraphs, etc.)
+ (add-hook 'org-mode-hook
+	   (lambda ()
+	     (setq-local bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR in Org-mode
 
-;; Define a shortcut for toggling bidi visual mode (useful if you switch between Arabic and English)
-(global-set-key (kbd "C-c t") 'bidi-visual-mode)  ;; Toggle bidi visual mode with C-c t
+ ;; Define a shortcut for toggling bidi visual mode (useful if you switch between Arabic and English)
+ (global-set-key (kbd "C-c t") 'bidi-visual-mode)  ;; Toggle bidi visual mode with C-c t
 
-;; Force Org-mode files to start with LTR direction (especially for titles like #+TITLE)
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (if (not (looking-at "\\s-*$"))
-		(setq bidi-paragraph-direction 'left-to-right))))  ;; Force LTR in Org-mode
+ ;; Force Org-mode files to start with LTR direction (especially for titles like #+TITLE)
+ (add-hook 'org-mode-hook
+	   (lambda ()
+	     (if (not (looking-at "\\s-*$"))
+		 (setq bidi-paragraph-direction 'left-to-right))))  ;; Force LTR in Org-mode
 
-;; Force LTR in all buffers
-(setq-default bidi-paragraph-direction 'left-to-right)  ;; Set default direction globally to LTR
+ ;; Force LTR in all buffers
+ (setq-default bidi-paragraph-direction 'left-to-right)  ;; Set default direction globally to LTR
 
-;; Set the default input method to TeX (LTR, English) on startup
-(setq default-input-method "TeX")  ;; Default input method is English (LTR)
+ ;; Set the default input method to TeX (LTR, English) on startup
+ (setq default-input-method "TeX")  ;; Default input method is English (LTR)
 
-;; Set Arabic as a secondary input method for easy switching
-(setq default-input-method "arabic")
+ ;; Set Arabic as a secondary input method for easy switching
+ (setq default-input-method "arabic")
 
-;; Enable the ability to toggle between input methods with C-\
-(global-set-key (kbd "C-\\") 'toggle-input-method)
+ ;; Enable the ability to toggle between input methods with C-\
+ (global-set-key (kbd "C-\\") 'toggle-input-method)
 
-;; Ensure proper Arabic font rendering (change this to your preferred Arabic font)
-(set-fontset-font t 'arabic "Noto Sans Arabic UI")
+ ;; Ensure proper Arabic font rendering (change this to your preferred Arabic font)
+ (set-fontset-font t 'arabic "Noto Sans Arabic UI")
 
-;; Ensure LTR by default when typing in Arabic (no automatic switch to RTL)
-(setq-default bidi-paragraph-direction 'left-to-right) ;; Always use LTR even with Arabic input
+ ;; Ensure LTR by default when typing in Arabic (no automatic switch to RTL)
+ (setq-default bidi-paragraph-direction 'left-to-right) ;; Always use LTR even with Arabic input
 
-;; Enable visible bell (disable sound bell)
-(setq visible-bell t)
+ ;; Enable visible bell (disable sound bell)
+ (setq visible-bell t)
 
-;; Set the default font for Emacs (adjust to your preferred font)
-(set-face-attribute 'default nil :font "FiraCode Nerd Font") ; Set your preferred font
-(add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font"))
+ ;; Set the default font for Emacs (adjust to your preferred font)
+ (set-face-attribute 'default nil :font "FiraCode Nerd Font") ; Set your preferred font
+ (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font"))
 
-;; Function to toggle text direction between LTR and RTL
-(defun toggle-text-direction ()
-  "Toggle the text direction between LTR and RTL."
-  (interactive)
-  (if (eq bidi-paragraph-direction 'left-to-right)
-      (setq-local bidi-paragraph-direction 'right-to-left)
-    (setq-local bidi-paragraph-direction 'left-to-right))
-  (message "Text direction set to %s" bidi-paragraph-direction))
+ ;; Function to toggle text direction between LTR and RTL
+ (defun toggle-text-direction ()
+   "Toggle the text direction between LTR and RTL."
+   (interactive)
+   (if (eq bidi-paragraph-direction 'left-to-right)
+       (setq-local bidi-paragraph-direction 'right-to-left)
+     (setq-local bidi-paragraph-direction 'left-to-right))
+   (message "Text direction set to %s" bidi-paragraph-direction))
 
-;; Bind the function to a key, e.g., C-c d
-(global-set-key (kbd "C-c d") 'toggle-text-direction)
+ ;; Bind the function to a key, e.g., C-c d
+;; (global-set-key (kbd "C-c d") 'toggle-text-direction)
 
 (use-package dashboard
   :ensure t
@@ -79,6 +79,25 @@
                           (agenda    . 5)))
   :config
   (dashboard-setup-startup-hook))
+
+;; Using garbage magic hack.
+ (use-package gcmh
+   :config
+   (gcmh-mode 1))
+;; Setting garbage collection threshold
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
+;; Profile emacs startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "*** Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+
+;; Silence compiler warnings as they can be pretty disruptive (setq comp-async-report-warnings-errors nil)
 
 (use-package evil
   :demand t
@@ -402,11 +421,66 @@
 )
 
 (use-package general
-  :ensure t
-  :config
-  (general-create-definer my/leader-keys
-    :prefix "C-c" ;; Define a leader key for your custom keybindings
-    :prefix-command 'my/leader-keys-map))
+            :ensure t
+            :config
+            (general-create-definer my/leader-keys
+              :prefix "C-c" ;; Define a leader key for your custom keybindings
+              :prefix-command 'my/leader-keys-map)
+
+;; Define keybindings for common actions
+  (my/leader-keys
+    "f" '(:ignore t :which-key "files") ;; Submenu for file-related commands
+    "ff" 'find-file ;; Open a file
+    "fr" 'recentf-open-files ;; Open recently used files
+    "fd" 'dired ;; Open Dired (file manager)
+    "fD" 'delete-file ;; Delete a file
+
+    "b" '(:ignore t :which-key "buffers") ;; Submenu for buffer-related commands
+    "bb" 'switch-to-buffer ;; Switch to a buffer
+    "bk" 'kill-buffer ;; Kill a buffer
+    "bR" 'revert-buffer ;; Revert buffer to saved state
+
+    "p" '(:ignore t :which-key "projects") ;; Submenu for project-related commands
+    "pp" 'projectile-switch-project ;; Switch to a project
+    "pf" 'projectile-find-file ;; Find a file in the project
+    "ps" 'projectile-ag ;; Search in the project
+
+    "g" '(:ignore t :which-key "git/magit") ;; Submenu for Git/Magit commands
+    "gs" 'magit-status ;; Open Magit status
+    "gc" 'magit-commit ;; Commit changes
+    "gp" 'magit-push ;; Push changes
+
+    "w" '(:ignore t :which-key "windows") ;; Submenu for window-related commands
+
+    "ww" 'other-window ;; Switch to another window
+    "wd" 'delete-window ;; Delete the current window
+    "w-" 'split-window-below ;; Split window horizontally
+    "w/" 'split-window-right ;; Split window vertically
+
+    "t" '(:ignore t :which-key "toggle") ;; Submenu for toggling modes
+    "tt" 'toggle-truncate-lines ;; Toggle line truncation
+    "tb" 'toggle-buffer-line-numbers ;; Toggle line numbers in the buffer
+    "tm" 'toggle-modeline ;; Toggle the mode-line
+   ;; Add the toggle-text-direction keybinding
+    "d" 'toggle-text-direction ;; Bind "C-c d" to toggle-text-direction
+    "n" '(:ignore t :which-key "notes/org") ;; Submenu for notes/org-mode
+    "nn" 'org-capture ;; Capture a new note
+    "nj" 'org-agenda ;; Open the Org agenda
+    "nr" 'org-roam-node-find ;; Find an Org-roam node
+    )
+
+  ;; Define keybindings for specific modes (e.g., evil-mode)
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "C-c"
+   :prefix-command 'my/evil-leader-keys
+   "e" '(:ignore t :which-key "evil") ;; Submenu for evil-mode commands
+   "ee" 'evil-ex ;; Open the evil ex command line
+   "en" 'evil-next-line ;; Move to the next line
+   "ep" 'evil-previous-line ;; Move to the previous line
+
+
+  ))
 
 (use-package smartparens
 :ensure smartparens  ;; install the package
