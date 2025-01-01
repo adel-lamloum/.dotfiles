@@ -1,0 +1,629 @@
+
+#+TITLE:Emacs config
+#+AUTHOR: Adel Alamloum
+#+STARTUP: content
+*  emacs screen
+#+BEGIN_SRC emacs-lisp
+    (scroll-bar-mode -1) ; disable visible scrollbar
+    (tool-bar-mode -1) ; disable tool bar
+    (tooltip-mode -1) ; disable tooltips
+    (set-fringe-mode 10) ; give some breathing room
+    (menu-bar-mode -1) ; disable menu bar
+    (setq inhibit-startup-message t)
+    (global-hl-line-mode) ; enable line highlighting
+
+    ;; Enable bidi (bidirectional) text support in Emacs
+    (setq-default bidi-display-reordering t)
+
+    ;; Set default text direction to left-to-right (LTR) globally
+    (setq-default bidi-paragraph-direction 'left-to-right)
+
+    ;; Ensure LTR direction in Org-mode (for titles, paragraphs, etc.)
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (setq-local bidi-paragraph-direction 'left-to-right)))  ;; Enforce LTR in Org-mode
+
+    ;; Define a shortcut for toggling bidi visual mode (useful if you switch between Arabic and English)
+    (global-set-key (kbd "C-c t") 'bidi-visual-mode)  ;; Toggle bidi visual mode with C-c t
+
+    ;; Force Org-mode files to start with LTR direction (especially for titles like #+TITLE)
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (if (not (looking-at "\\s-*$"))
+                    (setq bidi-paragraph-direction 'left-to-right))))  ;; Force LTR in Org-mode
+
+    ;; Force LTR in all buffers
+    (setq-default bidi-paragraph-direction 'left-to-right)  ;; Set default direction globally to LTR
+
+    ;; Set the default input method to TeX (LTR, English) on startup
+    (setq default-input-method "TeX")  ;; Default input method is English (LTR)
+
+    ;; Set Arabic as a secondary input method for easy switching
+    (setq default-input-method "arabic")
+
+    ;; Enable the ability to toggle between input methods with C-\
+    (global-set-key (kbd "C-\\") 'toggle-input-method)
+
+    ;; Ensure proper Arabic font rendering (change this to your preferred Arabic font)
+    (set-fontset-font t 'arabic "Noto Sans Arabic UI")
+
+    ;; Ensure LTR by default when typing in Arabic (no automatic switch to RTL)
+    (setq-default bidi-paragraph-direction 'left-to-right) ;; Always use LTR even with Arabic input
+
+    ;; Enable visible bell (disable sound bell)
+    (setq visible-bell t)
+
+    ;; Set the default font for Emacs (adjust to your preferred font)
+    (set-face-attribute 'default nil :font "FiraCode Nerd Font") ; Set your preferred font
+    (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font"))
+
+    ;; Function to toggle text direction between LTR and RTL
+    (defun toggle-text-direction ()
+      "Toggle the text direction between LTR and RTL."
+      (interactive)
+      (if (eq bidi-paragraph-direction 'left-to-right)
+          (setq-local bidi-paragraph-direction 'right-to-left)
+        (setq-local bidi-paragraph-direction 'left-to-right))
+      (message "Text direction set to %s" bidi-paragraph-direction))
+   ;; org heading
+   (custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :height 1.7))))
+  '(org-level-2 ((t (:inherit outline-2 :height 1.6))))
+  '(org-level-3 ((t (:inherit outline-3 :height 1.5))))
+  '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+  '(org-level-5 ((t (:inherit outline-5 :height 1.3))))
+  '(org-level-6 ((t (:inherit outline-5 :height 1.2))))
+  '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
+  ;; zooming
+  (global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+
+
+    ;; Bind the function to a key, e.g., C-c d
+   ;; (global-set-key (kbd "C-c d") 'toggle-text-direction)
+#+END_SRC
+
+* Install Packages
+** Install Emacs Dashboard
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+  :ensure t
+  :init
+  ;; Set dashboard banner title
+  (setq dashboard-banner-logo-title "This Adel's Lamloum Emacs")
+  (setq dashboard-set-file-icons t) ; Show files icons
+  (setq dashboard-set-heading-icons t)
+  ;; Set your image in Emacs startup
+  (setq dashboard-startup-banner "/home/adel/.emacs.d/me.png")
+  ;; Set items you want to show in startup
+  (setq dashboard-items '((recents   . 5)
+                          (bookmarks . 5)
+                          (projects  . 5)
+                          (agenda    . 5)))
+  :config
+  (dashboard-setup-startup-hook))
+#+END_SRC
+** DIMINISH
+#+BEGIN_SRC emacs-lisp
+(use-package diminish)
+#+END_SRC
+** DRAG-STAFF
+#+begin_src emacs-lisp
+  (use-package drag-stuff
+    :init
+    (drag-stuff-global-mode 1)
+    ;;(drag-stuff-define-keys)
+    )
+  #+END_SRC
+** ORG TEMPO
+#+BEGIN_SRC emacs-lisp
+(require 'org-tempo)
+#+END_SRC
+** ORG TOC
+#+begin_src emacs-lisp
+(use-package toc-org
+    :commands toc-org-enable
+    :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+
+#+end_src
+** Garbage Collection
+   
+#+begin_src emacs-lisp
+;; Using garbage magic hack.
+ (use-package gcmh
+   :config
+   (gcmh-mode 1))
+;; Setting garbage collection threshold
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
+;; Profile emacs startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "*** Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+
+;; Silence compiler warnings as they can be pretty disruptive (setq comp-async-report-warnings-errors nil)
+#+END_SRC
+
+** Vim Bindings (evil-mode)
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :demand t
+    :bind (("<escape>" . keyboard-escape-quit))
+    :init
+    (setq evil-want-keybinding nil) ; Allow Emacs keybindings alongside Vim keybindings
+    (setq evil-disable-insert-state-bindings t) ; Allow Emacs keybindings in Insert Mode
+    (setq evil-undo-system 'undo-fu)
+    :config
+    (evil-mode 1))
+
+  ;; evil-tutor
+  (use-package evil-tutor)
+
+  ;; Vim Bindings Everywhere Else
+  (use-package evil-collection
+    :after evil
+    :config
+    (setq evil-want-integration t)
+    (evil-collection-init))
+#+END_SRC
+
+** Minibuffer Escape
+#+BEGIN_SRC emacs-lisp
+(global-set-key [escape] 'keyboard-escape-quit)
+#+END_SRC
+
+** Ivy (Counsel)
+#+BEGIN_SRC emacs-lisp
+(use-package counsel
+  :after ivy
+  :diminish
+  :config
+  (counsel-mode)
+  (setq ivy-initial-inputs-alist nil)) ;; Removes starting ^ regex in M-x
+
+(use-package ivy
+  :bind
+  (("C-c C-r" . ivy-resume)
+   ("C-x B" . ivy-switch-buffer-other-window))
+  :diminish
+  :custom
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t)
+  :config
+  (ivy-mode))
+
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
+(use-package ivy-rich
+  :after ivy
+  :ensure t
+  :init (ivy-rich-mode 1) ;; This gets us descriptions in M-x.
+  :custom
+  (ivy-virtual-abbreviate 'full
+   ivy-rich-switch-buffer-align-virtual-buffer t
+   ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer))
+#+END_SRC
+
+** Language Support
+#+BEGIN_SRC emacs-lisp
+(use-package haskell-mode)
+(use-package lua-mode)
+(use-package php-mode)
+(use-package yaml-mode
+  :commands yaml-mode)
+
+;; Frontend Development
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.css\\'" . web-mode)
+         ("\\.js\\'" . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+
+(use-package css-mode
+  :ensure t
+  :mode ("\\.css\\'" . css-mode))
+
+(use-package scss-mode
+  :ensure t
+  :mode ("\\.scss\\'" . scss-mode))
+
+(use-package js2-mode
+  :ensure t
+  :mode ("\\.js\\'" . js2-mode)
+  :config
+  (setq js2-basic-offset 2))
+
+(use-package typescript-mode
+  :ensure t
+  :mode ("\\.ts\\'" . typescript-mode)
+  :config
+  (setq typescript-indent-level 2))
+
+;; Python Development
+(use-package python-mode
+  :ensure t
+  :mode ("\\.py\\'" . python-mode)
+  :config
+  (setq python-indent-offset 4))
+
+(use-package lsp-mode
+  :ensure t
+  :hook ((python-mode . lsp))
+  :commands lsp)
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
+
+;; Bash Scripting
+(add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
+(setq sh-basic-offset 2)
+
+(use-package company-shell
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-shell))
+#+END_SRC
+
+** Enable Vertico Mode
+#+BEGIN_SRC emacs-lisp
+(use-package vertico
+  :config
+  (vertico-mode))
+#+END_SRC
+
+** Highlight TODO
+#+BEGIN_SRC emacs-lisp
+(use-package hl-todo
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(("TODO"       warning bold)
+          ("FIXME"      error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
+#+END_SRC
+
+** Install Which-Key
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+#+END_SRC
+
+** Corfu Auto Complete
+#+BEGIN_SRC emacs-lisp
+(use-package corfu
+  :ensure t
+  :config
+  (global-corfu-mode)
+  (setq completion-cycle-threshold 3)
+  (setq read-extended-command-predicate #'command-completion-default-include-p)
+  (setq corfu-auto t)
+  (setq corfu-quit-no-match 'separator))
+#+END_SRC
+
+** Install Colorful-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package colorful-mode
+  :ensure t
+  :hook (prog-mode text-mode))
+#+END_SRC
+
+** Babel Language
+#+BEGIN_SRC emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((shell . t)
+   (python . t)))
+#+END_SRC
+
+** Htmlize
+#+BEGIN_SRC emacs-lisp
+(use-package htmlize)
+#+END_SRC
+
+** Markdown Support
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "markdown"))
+(use-package markdown-preview-mode
+  :ensure t)
+#+END_SRC
+
+** Download
+#+BEGIN_SRC emacs-lisp
+(use-package org-download)
+#+END_SRC
+
+** Org Bullets
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook 'org-indent-mode)
+(use-package org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+END_SRC
+
+** Doom Modeline
+#+BEGIN_SRC emacs-lisp
+      (use-package doom-modeline
+        :ensure t
+        :init (doom-modeline-mode 1)
+;; Customize the mark color for the region
+  (set-face-attribute 'region nil :background "#add8e6")
+
+  )
+
+#+END_SRC
+
+** All-the-Icons
+#+BEGIN_SRC emacs-lisp
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+#+END_SRC
+
+** NeoTree
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :after general
+  :config
+  (setq neo-smart-open t
+        neo-show-hidden-files t
+        neo-window-width 55
+        neo-window-fixed-size nil
+        inhibit-compacting-font-caches t
+        projectile-switch-project-action 'neotree-projectile-action)
+
+  ;; Truncate long file names in NeoTree
+  (add-hook 'neo-after-create-hook
+            #'(lambda (_)
+                (with-current-buffer (get-buffer neo-buffer-name)
+                  (setq truncate-lines t)
+                  (setq word-wrap nil)
+                  (make-local-variable 'auto-hscroll-mode)
+                  (setq auto-hscroll-mode nil)))))
+
+;; Define keybindings using general.el
+(general-define-key
+ :prefix "C-c" ;; Use the leader key defined above
+ "t" 'neotree-toggle ;; Toggle NeoTree with "C-c t"
+ "p" 'neotree-projectile-toggle ;; Toggle NeoTree with Projectile integration using "C-c p"
+ "r" 'neotree-refresh) ;; Refresh NeoTree with "C-c r"
+#+END_SRC
+
+** Sudo-Edit
+#+BEGIN_SRC emacs-lisp
+(use-package sudo-edit
+  :ensure t
+  :bind (("C-x x f" . sudo-edit-find-file)
+         ("C-x x e" . sudo-edit)))
+#+END_SRC
+
+** Org Roam
+#+BEGIN_SRC emacs-lisp
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/adel-notes/org-roams/")
+  (org-roam-completion-everywhere t)
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+     ("l" "programming language" plain
+      "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+     ("b" "book notes" plain (file "~/adel-notes/org-roams/NoteTemplate.org")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
+#+END_SRC
+
+** Centaur Tabs
+#+BEGIN_SRC emacs-lisp
+(use-package centaur-tabs
+  :ensure t
+  :config
+  (centaur-tabs-mode t)
+
+  (defun my-centaur-tabs-buffer-mode-icon (buffer)
+    "Return the icon for BUFFER based on its major mode using nerd-icons."
+    (with-current-buffer buffer
+      (let ((icon (nerd-icons-icon-for-mode major-mode)))
+        (if (symbolp icon)
+            (nerd-icons-icon-for-file (buffer-name))
+          icon))))
+
+  (setq centaur-tabs-buffer-groups-function #'my-centaur-tabs-buffer-groups)
+
+  (defun my-centaur-tabs-buffer-groups ()
+    "Return the list of group names BUFFER belongs to."
+    (list (my-centaur-tabs-buffer-mode-icon (current-buffer))))
+
+  (setq centaur-tabs-style "bar"
+        centaur-tabs-height 32
+        centaur-tabs-set-modified-marker t))
+#+END_SRC
+
+** higlight indint guide
+#+BEGIN_SRC emacs-lisp
+      (use-package highlight-indent-guides
+        :ensure t
+        :hook ((prog-mode . highlight-indent-guides-mode)))
+
+#+END_SRC
+
+** editorconfig
+#+BEGIN_SRC emacs-lisp
+
+      (use-package editorconfig
+        :ensure t
+        :config
+        (editorconfig-mode 1))
+
+#+END_SRC
+
+** magit
+#+BEGIN_SRC emacs-lisp
+
+      (use-package magit
+        :ensure t
+        :bind ("C-x g" . magit-status))
+  
+#+END_SRC
+
+** projectile
+#+BEGIN_SRC emacs-lisp
+
+      (use-package projectile
+        :ensure t
+        :config
+        (projectile-mode +1)
+        (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+        ;; Add C-c p f to the projectile-command-map
+        (define-key projectile-command-map (kbd "f") 'projectile-find-file))
+
+#+END_SRC
+
+** mouds themes
+#+BEGIN_SRC emacs-lisp
+
+      (use-package modus-themes
+        :ensure t
+        :config
+        (load-theme 'modus-vivendi t)
+  ;; Customize the mark color for the region
+  (set-face-attribute 'region nil :background "#add8e6")
+
+  )
+#+END_SRC
+** General Package
+#+BEGIN_SRC emacs-lisp
+            (use-package general
+              :ensure t
+              :config
+              (general-create-definer my/leader-keys
+                :prefix "C-c" ;; Define a leader key for your custom keybindings
+                :prefix-command 'my/leader-keys-map)
+
+  ;; Define keybindings for common actions
+    (my/leader-keys
+      "f" '(:ignore t :which-key "files") ;; Submenu for file-related commands
+      "ff" 'find-file ;; Open a file
+      "fr" 'recentf-open-files ;; Open recently used files
+      "fd" 'dired ;; Open Dired (file manager)
+      "fD" 'delete-file ;; Delete a file
+
+      "b" '(:ignore t :which-key "buffers") ;; Submenu for buffer-related commands
+      "bb" 'switch-to-buffer ;; Switch to a buffer
+      "bk" 'kill-buffer ;; Kill a buffer
+      "bR" 'revert-buffer ;; Revert buffer to saved state
+
+      "p" '(:ignore t :which-key "projects") ;; Submenu for project-related commands
+      "pp" 'projectile-switch-project ;; Switch to a project
+      "pf" 'projectile-find-file ;; Find a file in the project
+      "ps" 'projectile-ag ;; Search in the project
+
+      "g" '(:ignore t :which-key "git/magit") ;; Submenu for Git/Magit commands
+      "gs" 'magit-status ;; Open Magit status
+      "gc" 'magit-commit ;; Commit changes
+      "gp" 'magit-push ;; Push changes
+
+      "w" '(:ignore t :which-key "windows") ;; Submenu for window-related commands
+
+      "ww" 'other-window ;; Switch to another window
+      "wd" 'delete-window ;; Delete the current window
+      "w-" 'split-window-below ;; Split window horizontally
+      "w/" 'split-window-right ;; Split window vertically
+
+      "t" '(:ignore t :which-key "toggle") ;; Submenu for toggling modes
+      "tt" 'toggle-truncate-lines ;; Toggle line truncation
+      "tb" 'toggle-buffer-line-numbers ;; Toggle line numbers in the buffer
+      "tm" 'toggle-modeline ;; Toggle the mode-line
+     ;; Add the toggle-text-direction keybinding
+      "d" 'toggle-text-direction ;; Bind "C-c d" to toggle-text-direction
+      "n" '(:ignore t :which-key "notes/org") ;; Submenu for notes/org-mode
+      "nn" 'org-capture ;; Capture a new note
+      "nj" 'org-agenda ;; Open the Org agenda
+      "nr" 'org-roam-node-find ;; Find an Org-roam node
+      )
+
+    ;; Define keybindings for specific modes (e.g., evil-mode)
+    (general-define-key
+     :states '(normal visual insert emacs)
+     :prefix "C-c"
+     :prefix-command 'my/evil-leader-keys
+     "e" '(:ignore t :which-key "evil") ;; Submenu for evil-mode commands
+     "ee" 'evil-ex ;; Open the evil ex command line
+     "en" 'evil-next-line ;; Move to the next line
+     "ep" 'evil-previous-line ;; Move to the previous line
+
+
+    ))
+#+END_SRC
+** smartparens
+Smartparens is a minor mode for dealing with pairs in Emacs.
+It can automatically insert pairs:
+#+BEGIN_SRC emacs-lisp
+
+  (use-package smartparens
+  :ensure smartparens  ;; install the package
+  :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
+  :config
+  ;; load default config
+  (require 'smartparens-config))
+#+END_SRC
+** Flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  :config
+  ;; Set the default Python checker to flake8
+  (setq-default flycheck-python-flake8-executable "flake8")
+  ;; Show errors in the left fringe
+  (setq flycheck-indication-mode 'left-fringe))
+  #+end_src
+  

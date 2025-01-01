@@ -538,8 +538,6 @@ evaluate `haskell-indentation-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{haskell-indentation-mode-map}
-
 (fn &optional ARG)" t)
 (autoload 'turn-on-haskell-indentation "haskell-indentation" "\
 Turn on the haskell-indentation minor mode." t)

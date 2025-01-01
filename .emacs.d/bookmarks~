@@ -2,10 +2,34 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("frist mark"
- (filename . "~/adel-notes/bakery.org")
- (front-context-string . "    ;; sdssdsة\n#")
- (rear-context-string . "SRC emacs-lisp\n\n")
- (position . 679)
- (last-modified 26470 42534 708204 361000))
+(("org-capture-last-stored"
+ (filename . "~/.notes")
+ (front-context-string . "** TODO \n  [2024")
+ (rear-context-string . "y file for test\n")
+ (position . 402)
+ (last-modified 26482 18836 697124 294000))
+("bakery cookies showpeices"
+ (filename . "~/adel-notes/work/bakery-recipes.org")
+ (front-context-string . "#+TITLE: Bakery,")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 26479 47699 407172 438000))
+("adel recipe book"
+ (filename . "~/adel-notes/work/Adel-recipe-book.org")
+ (front-context-string . "#+TITLE: My Pers")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 26479 47449 652760 998000))
+("rush recipes"
+ (filename . "~/adel-notes/work/recipes-for-rush.org")
+ (front-context-string . "#+TITLE: rush re")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 26479 47316 572027 105000))
+("myinit.org"
+ (filename . "~/.emacs.d/myinit.org")
+ (front-context-string . "tomize Emacs Scr")
+ (rear-context-string . "TUP: fold\n\n* Cus")
+ (position . 82)
+ (last-modified 26471 46030 775987 39000))
 )

@@ -28,8 +28,6 @@ evaluate `hl-todo-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{hl-todo-mode-map}
-
 (fn &optional ARG)" t)
 (put 'global-hl-todo-mode 'globalized-minor-mode t)
 (defvar global-hl-todo-mode nil "\
@@ -42,15 +40,15 @@ or call the function `global-hl-todo-mode'.")
 (custom-autoload 'global-hl-todo-mode "hl-todo" nil)
 (autoload 'global-hl-todo-mode "hl-todo" "\
 Toggle Hl-Todo mode in all buffers.
-With prefix ARG, enable Global Hl-Todo mode if ARG is positive; otherwise,
-disable it.
+With prefix ARG, enable Global Hl-Todo mode if ARG is positive;
+otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Hl-Todo mode is enabled in all buffers where `hl-todo--turn-on-mode-if-desired'
-would do it.
+Hl-Todo mode is enabled in all buffers where
+`hl-todo--turn-on-mode-if-desired' would do it.
 
 See `hl-todo-mode' for more information on Hl-Todo mode.
 

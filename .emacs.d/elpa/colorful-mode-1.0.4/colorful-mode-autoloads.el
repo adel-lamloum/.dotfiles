@@ -49,8 +49,6 @@ evaluate `colorful-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{colorful-mode-map}
-
 (fn &optional ARG)" t)
 (autoload 'turn-on-colorful-mode "colorful-mode" "\
 Turn on `colorful-mode' mode if the current buffer.")
@@ -65,20 +63,20 @@ or call the function `global-colorful-mode'.")
 (custom-autoload 'global-colorful-mode "colorful-mode" nil)
 (autoload 'global-colorful-mode "colorful-mode" "\
 Toggle Colorful mode in all buffers.
-With prefix ARG, enable Global Colorful mode if ARG is positive; otherwise,
-disable it.
+With prefix ARG, enable Global Colorful mode if ARG is positive;
+otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Colorful mode is enabled in all buffers where `turn-on-colorful-mode' would do
-it.
+Colorful mode is enabled in all buffers where `turn-on-colorful-mode'
+would do it.
 
 See `colorful-mode' for more information on Colorful mode.
 
-`global-colorful-modes' is used to control which modes this minor mode is used
-in.
+`global-colorful-modes' is used to control which modes this minor mode
+is used in.
 
 (fn &optional ARG)" t)
 (defvar global-colorful-modes '(mhtml-mode html-ts-mode latex-mode prog-mode) "\
