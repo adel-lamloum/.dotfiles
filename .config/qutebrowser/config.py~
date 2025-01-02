@@ -1,0 +1,77 @@
+# ~/.config/qutebrowser/config.py
+
+# Load the default settings
+config.load_autoconfig()
+
+# Set the default page to open when starting qutebrowser
+c.url.start_pages = ["https://www.google.com"]
+
+# Set the default search engine
+c.url.searchengines = {
+    "DEFAULT": "https://www.google.com/search?q={}",
+    "ddg": "https://duckduckgo.com/?q={}",
+    "yt": "https://www.youtube.com/results?search_query={}",
+}
+
+# Set the default font size
+c.fonts.web.size.default = 16
+
+# Enable dark mode
+c.colors.webpage.darkmode.enabled = True
+
+# Set the download location
+c.downloads.location.directory = "~/Downloads"
+
+# Enable smooth scrolling
+c.scrolling.smooth = True
+
+# Set the UI font
+c.fonts.hints = "14px monospace"
+
+# Enable ad blocking using built-in content blocking
+c.content.blocking.method = "both"  # Use both hosts-based and adblock-style blocking
+
+# Add ad-blocking lists (e.g., EasyList, EasyPrivacy, etc.)
+c.content.blocking.adblock.lists = [
+    "https://easylist.to/easylist/easylist.txt",
+    "https://easylist.to/easylist/easyprivacy.txt",
+    "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
+    "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext",
+]
+
+# Set the keybinding for opening a new tab
+config.bind("t", "set-cmd-text -s :open -t")
+config.bind("T", "set-cmd-text -s :open -t {url:pretty}")
+
+# Set the keybinding for closing the current tab
+config.bind("x", "tab-close")
+
+# Set the keybinding for reopening the last closed tab
+config.bind("X", "undo")
+
+# Set the keybinding for switching to the next tab
+config.bind("J", "tab-next")
+
+# Set the keybinding for switching to the previous tab
+config.bind("K", "tab-prev")
+
+# Set the keybinding for searching selected text
+config.bind("sg", "set-cmd-text /")
+
+# Set the keybinding for opening the download page
+config.bind("gd", "download-open")
+
+# Set the keybinding for opening the settings page
+config.bind(",s", "open qute://settings")
+
+# Set the keybinding for opening the history page
+config.bind(",h", "open qute://history")
+
+# Set the keybinding for opening the bookmarks page
+config.bind(",b", "open qute://bookmarks")
+
+# Set the keybinding for opening the quickmarks page
+config.bind(",q", "open qute://quickmarks")
+
+# Set the keybinding for opening the help page
+config.bind(",?", "open qute://help")
