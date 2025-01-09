@@ -2,7 +2,7 @@
 (define-package "lua-mode" "20231023.947"
   "A major-mode for editing Lua scripts."
   '((emacs "24.3"))
-  :url "https://github.com/immerrr/lua-mode"
+  :url "https://immerrr.github.io/lua-mode"
   :commit "d074e4134b1beae9ed4c9b512af741ca0d852ba3"
   :revdesc "d074e4134b1b"
   :keywords '("languages" "processes" "tools")

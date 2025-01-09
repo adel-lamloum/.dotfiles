@@ -3,7 +3,7 @@
   "Improved JavaScript editing mode."
   '((emacs  "24.1")
     (cl-lib "0.5"))
-  :url "https://github.com/mooz/js2-mode"
+  :url "https://github.com/mooz/js2-mode/"
   :commit "e0c302872de4d26a9c1614fac8d6b94112b96307"
   :revdesc "e0c302872de4"
   :keywords '("languages" "javascript")

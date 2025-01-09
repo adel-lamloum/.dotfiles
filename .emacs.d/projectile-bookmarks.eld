@@ -1,1 +1,1 @@
-("~/adel-notes/" "~/.dotfiles/")
+("~/adel-notes/" "~/linuxcast/startpage/" "~/.dotfiles/" "~/wallpapers/")

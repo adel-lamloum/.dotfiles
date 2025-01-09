@@ -1,8 +1,9 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("emacs" "Emacs" nil :count 0)
-    ("i" "I" nil :count 0)
+    ("Ana" "Adel Lamloum" nil :count 0)
+    ("adel" "Adel" nil :count 0)
+    ("lamloum" "Lamloum" nil :count 0)
     ("linux" "Linux" nil :count 0)
    ))
 

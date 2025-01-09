@@ -14,7 +14,7 @@ function main() {
 
   # Loop through each monitor and set a random wallpaper
   for monitor in $monitors; do
-    wallpaper=$(fd ".png|.jpg|.jpeg|.webp" ~/wallpapers/ | shuf -n1)
+    wallpaper=$(fd ".png|.jpg|.jpeg|.webp" /home/adel/wallpapers/favourite | shuf -n1)
     if [ -z "$wallpaper" ]; then
       echo "No wallpaper found for monitor $monitor. Skipping."
       continue

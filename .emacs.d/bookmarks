@@ -2,12 +2,30 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-capture-last-stored"
- (filename . "~/adel-notes/org-roams/20241230085545-work.org")
- (front-context-string . "* Characteristic")
- (rear-context-string . ":\n#+title: work\n")
- (position . 82)
- (last-modified 26482 17419 92652 610000))
+(("qute browser config"
+ (filename . "~/.config/qutebrowser/config.py")
+ (front-context-string . "# Or uncomment t")
+ (rear-context-string . "ad_autoconfig()\n")
+ (position . 483)
+ (last-modified 26491 32950 119518 290000))
+("nyxt browser config"
+ (filename . "~/.config/nyxt/init.lisp")
+ (front-context-string . ";;; init.lisp - ")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 26490 16487 555339 450000))
+("my tasks"
+ (filename . "~/adel-notes/myTasks.org")
+ (front-context-string . "ا\n** TODO صلاة ا")
+ (rear-context-string . "loum\n\n\n\n* مهم جد")
+ (position . 72)
+ (last-modified 26490 16422 765899 601000))
+("org-capture-last-stored"
+ (filename . "~/adel-notes/org/gtd.org")
+ (front-context-string . "** Todo today wo")
+ (rear-context-string . "zation]]\nGjjjkb\n")
+ (position . 110)
+ (last-modified 26493 5210 538012 258000))
 ("bakery cookies showpeices"
  (filename . "~/adel-notes/work/bakery-recipes.org")
  (front-context-string . "#+TITLE: Bakery,")

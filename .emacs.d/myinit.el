@@ -7,20 +7,29 @@
 (global-hl-line-mode) ; Enable line highlighting
 (setq visible-bell t) ; Enable visible bell (disable sound bell)
 
-(set-face-attribute 'default nil :font "FiraCode Nerd Font") ; Set default font
-(add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font"))
+(set-face-attribute 'default nil :font "FiraCode Nerd Font-13") ; Set default font
+(add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font-13"))
 
 ;; Enable bidi (bidirectional) text support in Emacs
 (setq-default bidi-display-reordering t)
 (setq-default bidi-paragraph-direction 'left-to-right) ; Set default text direction to LTR
 
+;; Function to toggle text direction between LTR and RTL
+(defun toggle-text-direction ()
+  "Toggle text direction between left-to-right (LTR) and right-to-left (RTL)."
+  (interactive)
+  (if (eq bidi-paragraph-direction 'left-to-right)
+      (setq bidi-paragraph-direction 'right-to-left)
+    (setq bidi-paragraph-direction 'left-to-right))
+  (message "Text direction set to %s" bidi-paragraph-direction))
+
+;; Bind the function to a key (e.g., C-c d)
+;;(global-set-key (kbd "C-c d") 'toggle-text-direction)
+
 ;; Ensure LTR direction in Org-mode
 (add-hook 'org-mode-hook
           (lambda ()
             (setq-local bidi-paragraph-direction 'left-to-right)))
-
-;; Define a shortcut for toggling bidi visual mode
-(global-set-key (kbd "C-c t") 'bidi-visual-mode)
 
 ;; Set default input method to TeX (LTR, English)
 (setq default-input-method "TeX")
@@ -30,41 +39,147 @@
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 
 ;; Ensure proper Arabic font rendering
-(set-fontset-font t 'arabic "Noto Sans Arabic UI")
+(set-fontset-font t 'arabic "Noto Naskh Arabic")
+
+;; Enable line numbers in Org-mode
+(add-hook 'org-mode-hook #'display-line-numbers-mode)
+
+;; Enable visual line mode (helps with soft wrapping in text-based modes)
+(add-hook 'text-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'markdown-mode-hook 'visual-line-mode)
+
+;; Optional: Set preferred text width (80 characters) for text wrapping
+(setq-default fill-column 80)
 
 (global-set-key (kbd "C-=") 'text-scale-increase) ; Increase text size
 (global-set-key (kbd "C--") 'text-scale-decrease) ; Decrease text size
 (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase) ; Increase text size with mouse wheel
 (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease) ; Decrease text size with mouse wheel
 
-(custom-set-faces
- '(org-level-1 ((t (:inherit outline-1 :height 1.7)))) ; Customize Org level 1 heading
- '(org-level-2 ((t (:inherit outline-2 :height 1.6)))) ; Customize Org level 2 heading
- '(org-level-3 ((t (:inherit outline-3 :height 1.5)))) ; Customize Org level 3 heading
- '(org-level-4 ((t (:inherit outline-4 :height 1.4)))) ; Customize Org level 4 heading
- '(org-level-5 ((t (:inherit outline-5 :height 1.3)))) ; Customize Org level 5 heading
- '(org-level-6 ((t (:inherit outline-5 :height 1.2)))) ; Customize Org level 6 heading
- '(org-level-7 ((t (:inherit outline-5 :height 1.1))))) ; Customize Org level 7 heading
+;; Set default notes file
+(setq org-default-notes-file "~/adel-notes/org/index.org")
 
-(add-hook 'org-mode-hook 'org-indent-mode) ; Enable indentation in Org mode
+;; Org capture templates
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/adel-notes/org/gtd.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/adel-notes/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+
+;; Enable indentation in Org mode
+(add-hook 'org-mode-hook 'org-indent-mode)
+
+;; Add bullets to Org headings
 (use-package org-bullets
-  :hook (org-mode . (lambda () (org-bullets-mode 1)))) ; Add bullets to Org headings
+  :ensure t
+  :hook (org-mode . (lambda () (org-bullets-mode 1))))
 
-;;; Aligning Text
-(use-package align
-  :ensure nil
-  :defer t
-  :bind ("C-x a a" . align-regexp)
+;; Org Agenda Configuration
+(setq org-agenda-deadline-leaders '("" "" "%2d d. ago: ")
+      org-deadline-warning-days 0
+      org-agenda-span 7
+      org-agenda-start-day "-0d"
+      org-agenda-skip-function-global '(org-agenda-skip-entry-if 'todo 'done)
+      org-log-done 'time)
+
+;; Custom agenda commands
+(setq org-agenda-custom-commands
+      '(("d" "Daily Agenda"
+         ((agenda "" ((org-agenda-span 1)
+                      (org-agenda-overriding-header "Today's Agenda"))))
+         ((org-agenda-files '("~/adel-notes/org/gtd.org"))))
+        ("w" "Weekly Agenda"
+         ((agenda "" ((org-agenda-span 7)
+                      (org-agenda-overriding-header "This Week's Agenda"))))
+         ((org-agenda-files '("~/adel-notes/org/gtd.org"))))
+        ("t" "Todo List"
+         ((todo "TODO"
+                ((org-agenda-overriding-header "Pending Tasks"))))
+         ((org-agenda-files '("~/adel-notes/org/gtd.org"))))))
+
+;; Highlight deadlines and scheduled tasks
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo . " %i %-12:c")
+        (tags . " %i %-12:c")
+        (search . " %i %-12:c")))
+
+;; Enable agenda logging
+(setq org-agenda-log-mode-items '(closed state))
+
+;; Add tags and priorities
+(setq org-tag-alist '(("work" . ?w) ("personal" . ?p) ("urgent" . ?u)))
+(setq org-priority-highest ?A
+      org-priority-lowest ?C
+      org-priority-default ?B)
+
+;; Enable time grid
+(setq org-agenda-time-grid
+      '((daily today require-timed)
+        (800 1000 1200 1400 1600 1800 2000)
+        "......" "----------------"))
+
+;; Integrate with calendar
+(setq org-agenda-include-diary t)
+
+;; Use org-super-agenda for better grouping
+(use-package org-super-agenda
+  :ensure t
+  :after org-agenda
   :config
-  ;; Align using spaces
-  (defadvice align-regexp (around align-regexp-with-spaces activate)
-    (let ((indent-tabs-mode nil))
-      ad-do-it)))
+  (org-super-agenda-mode 1)
+  (setq org-super-agenda-groups
+        '((:name "Today"
+                 :time-grid t
+                 :scheduled today)
+          (:name "Overdue"
+                 :deadline past)
+          (:name "Work"
+                 :tag "work")
+          (:name "Personal"
+                 :tag "personal")
+          (:name "Urgent"
+                 :priority "A"))))
+
+;; Add refile targets
+(setq org-refile-targets
+      '(("~/adel-notes/org/gtd.org" :maxlevel . 3)
+        ("~/adel-notes/org/someday.org" :level . 1)
+        ("~/adel-notes/org/notes.org" :maxlevel . 2)))
+
+;; Enable habit tracking
+(require 'org-habit)
+(add-to-list 'org-modules 'org-habit)
+(setq org-habit-graph-column 60)
+
+(use-package org-roam
+:ensure t
+:init
+(setq org-roam-v2-ack t)
+:custom
+(org-roam-directory "~/adel-notes/RoamNotes")
+(org-roam-completion-everywhere t)
+(org-roam-dailies-capture-templates
+  '(("d" "default" entry "* %<%I:%M %p>: %?"
+     :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+:bind (
+       :map org-mode-map
+       ("C-M-i" . completion-at-point)
+       :map org-roam-dailies-map
+       ("Y" . org-roam-dailies-capture-yesterday)
+       ("T" . org-roam-dailies-capture-tomorrow))
+:bind-keymap
+("C-c n d" . org-roam-dailies-map)
+:config
+(require 'org-roam-dailies) ;; Ensure the keymap is available
+(org-roam-db-autosync-mode))
 
 (use-package gcmh
+  :ensure t
   :config (gcmh-mode 1)) ; Enable garbage collection magic hack
-(setq gc-cons-threshold 402653184
-      gc-cons-percentage 0.6) ; Set garbage collection threshold
+(setq gc-cons-threshold 16777216
+      gc-cons-percentage 0.1) ; Set garbage collection threshold
 
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -82,13 +197,13 @@
   (setq dashboard-set-heading-icons t) ; Show heading icons
   (setq dashboard-startup-banner "/home/adel/.emacs.d/me.png") ; Set startup banner
   (setq dashboard-items '((recents   . 5)
-                          (bookmarks . 5)
+                          (bookmarks . 10)
                           (projects  . 5)
                           (agenda    . 5))) ; Set dashboard items
   :config
   (dashboard-setup-startup-hook)) ; Enable dashboard on startup
 
-(use-package diminish) ; Diminish mode lines to reduce clutter
+(use-package diminish :ensure t) ; Diminish mode lines to reduce clutter
 
 (use-package drag-stuff
   :init (drag-stuff-global-mode 1)) ; Enable drag-and-drop for text
@@ -104,11 +219,100 @@
   :commands (org-ai-mode
              org-ai-global-mode)
   :init
-  (add-hook 'org-mode-hook #'org-ai-mode) ; enable org-ai in org-mode
-  (org-ai-global-mode) ; installs global keybindings on C-c M-a
+  (add-hook 'org-mode-hook #'org-ai-mode) ; Enable org-ai in org-mode
+  (org-ai-global-mode) ; Install global keybindings on C-c M-a
   :config
-  (setq org-ai-default-chat-model "gpt-4") ; if you are on the gpt-4 beta:
-  (org-ai-install-yasnippets)) ; if you are using yasnippet and want `ai` snippets
+  (setq org-ai-default-chat-model "gpt-4") ; Use GPT-4
+  (org-ai-install-yasnippets)) ; Install AI snippets
+
+(use-package general
+:ensure t
+:config
+;; Define a leader key prefix
+(general-create-definer my/leader-keys
+  :prefix "C-c"
+  :prefix-command 'my/leader-keys-map)
+
+;; Define named functions for agenda keybindings
+(defun my/org-agenda-daily ()
+  "Open the daily agenda."
+  (interactive)
+  (org-agenda nil "d"))
+
+(defun my/org-agenda-weekly ()
+  "Open the weekly agenda."
+  (interactive)
+  (org-agenda nil "w"))
+
+(defun my/org-agenda-todo ()
+  "Open the TODO list."
+  (interactive)
+  (org-agenda nil "t"))
+
+;; Define keybindings
+(my/leader-keys
+ ;; Files
+ "f" '(:ignore t :which-key "files")
+ "ff" 'find-file
+ "fr" 'recentf-open-files
+ "fd" 'dired
+ "fD" 'delete-file
+
+ ;; Buffers
+ "b" '(:ignore t :which-key "buffers")
+ "bb" 'switch-to-buffer
+ "bk" 'kill-buffer
+ "bR" 'revert-buffer
+
+ ;; Projects
+ "p" '(:ignore t :which-key "projects")
+ "pp" 'projectile-switch-project
+ "pf" 'projectile-find-file
+ "ps" 'projectile-ag
+
+ ;; Git/Magit
+ "g" '(:ignore t :which-key "git/magit")
+ "gs" 'magit-status
+ "gc" 'magit-commit
+ "gp" 'magit-push
+
+ ;; Windows
+ "w" '(:ignore t :which-key "windows")
+ "ww" 'other-window
+ "wd" 'delete-window
+ "w-" 'split-window-below
+ "w/" 'split-window-right
+
+ ;; Toggle
+ "t" '(:ignore t :which-key "toggle")
+ "tt" 'toggle-truncate-lines
+ "tb" 'toggle-buffer-line-numbers
+ "tm" 'toggle-modeline
+ "td" 'toggle-text-direction
+
+ ;; Notes/Org
+ "n" '(:ignore t :which-key "notes/org")
+ "nn" 'org-capture
+ "nl" 'org-roam-buffer-toggle
+ "nf" 'org-roam-node-find
+ "ni" 'org-roam-node-insert
+ "nd" 'org-roam-dailies-map
+ "ny" 'org-roam-dailies-capture-yesterday
+ "nt" 'org-roam-dailies-capture-today
+ "ng" 'org-roam-dailies-goto-date
+
+ ;; Agenda
+ "a" '(:ignore t :which-key "agenda")
+ "aa" 'org-agenda
+ "ad" 'my/org-agenda-daily
+ "aw" 'my/org-agenda-weekly
+ "at" 'my/org-agenda-todo
+
+ ;; Jinx (spell checking)
+ "s" '(:ignore t :which-key "spell checking (jinx)")
+ "sc" 'jinx-correct    ; C-c s c for correcting word at point
+ "sl" 'jinx-languages) ; C-c s l for changing languages
+)
 
 (use-package evil
   :demand t
@@ -180,92 +384,33 @@
   (setq which-key-idle-delay 0.3)) ; Set delay for which-key popup
 
 (use-package corfu
-:ensure t
-;; Optional customizations
-:custom
-(corfu-cycle t)                 ; Allows cycling through candidates
-(corfu-auto t)                  ; Enable auto completion
-(corfu-auto-prefix 2)
-(corfu-auto-delay 0.1)
-(corfu-popupinfo-delay '(0.5 . 0.2))
-(corfu-preview-current 'insert) ; insert previewed candidate
-(corfu-preselect 'prompt)
-(corfu-on-exact-match nil)      ; Don't auto expand tempel snippets
-;; Optionally use TAB for cycling, default is `corfu-complete'.
-:bind (:map corfu-map
-            ("M-SPC"      . corfu-insert-separator)
-            ("TAB"        . corfu-next)
-            ([tab]        . corfu-next)
-            ("S-TAB"      . corfu-previous)
-            ([backtab]    . corfu-previous)
-            ("S-<return>" . corfu-insert)
-            ("RET"        . nil))
-
-:init
-(global-corfu-mode)
-(corfu-history-mode)
-(corfu-popupinfo-mode)) ; Popup completion info
-
-(use-package general
   :ensure t
-  :config
-  (general-create-definer my/leader-keys
-    :prefix "C-c"
-    :prefix-command 'my/leader-keys-map) ; Define leader key for custom keybindings
-
-  (my/leader-keys
-    "f" '(:ignore t :which-key "files") ; File-related commands
-    "ff" 'find-file ; Open a file
-    "fr" 'recentf-open-files ; Open recently used files
-    "fd" 'dired ; Open Dired (file manager)
-    "fD" 'delete-file ; Delete a file
-
-    "b" '(:ignore t :which-key "buffers") ; Buffer-related commands
-    "bb" 'switch-to-buffer ; Switch to a buffer
-    "bk" 'kill-buffer ; Kill a buffer
-    "bR" 'revert-buffer ; Revert buffer to saved state
-
-    "p" '(:ignore t :which-key "projects") ; Project-related commands
-    "pp" 'projectile-switch-project ; Switch to a project
-    "pf" 'projectile-find-file ; Find a file in the project
-    "ps" 'projectile-ag ; Search in the project
-
-    "g" '(:ignore t :which-key "git/magit") ; Git/Magit commands
-    "gs" 'magit-status ; Open Magit status
-    "gc" 'magit-commit ; Commit changes
-    "gp" 'magit-push ; Push changes
-
-    "w" '(:ignore t :which-key "windows") ; Window-related commands
-    "ww" 'other-window ; Switch to another window
-    "wd" 'delete-window ; Delete the current window
-    "w-" 'split-window-below ; Split window horizontally
-    "w/" 'split-window-right ; Split window vertically
-
-    "t" '(:ignore t :which-key "toggle") ; Toggle-related commands
-    "tt" 'toggle-truncate-lines ; Toggle line truncation
-    "tb" 'toggle-buffer-line-numbers ; Toggle line numbers in the buffer
-    "tm" 'toggle-modeline ; Toggle the mode-line
-    "d" 'toggle-text-direction ; Toggle text direction
-
-    "n" '(:ignore t :which-key "notes/org") ; Notes/Org-mode commands
-    "nn" 'org-capture ; Capture a new note
-    "nj" 'org-agenda ; Open the Org agenda
-    "nr" 'org-roam-node-find)) ; Find an Org-roam node
-
-  (general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "C-c"
-   :prefix-command 'my/evil-leader-keys
-   "e" '(:ignore t :which-key "evil") ; Evil-mode commands
-   "ee" 'evil-ex ; Open the evil ex command line
-   "en" 'evil-next-line ; Move to the next line
-   "ep" 'evil-previous-line) ; Move to the previous line
+  :custom
+  (corfu-cycle t) ; Allows cycling through candidates
+  (corfu-auto t) ; Enable auto completion
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.1)
+  (corfu-popupinfo-delay '(0.5 . 0.2))
+  (corfu-preview-current 'insert) ; Insert previewed candidate
+  (corfu-preselect 'prompt)
+  (corfu-on-exact-match nil) ; Don't auto expand tempel snippets
+  :bind (:map corfu-map
+              ("M-SPC" . corfu-insert-separator)
+              ("TAB" . corfu-next)
+              ([tab] . corfu-next)
+              ("S-TAB" . corfu-previous)
+              ([backtab] . corfu-previous)
+              ("S-<return>" . corfu-insert)
+              ("RET" . nil))
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  (corfu-popupinfo-mode)) ; Popup completion info
 
 (use-package beacon
   :ensure t
   :config
   (beacon-mode 1) ; Enable beacon globally
-  ;; Customize beacon appearance and behavior
   (setq beacon-color "#ff0000") ; Set the beacon color to red
   (setq beacon-size 20) ; Set the size of the beacon
   (setq beacon-blink-when-point-moves t) ; Blink when the cursor moves
@@ -276,19 +421,17 @@
   :ensure t
   :config
   (ace-popup-menu-mode 1) ; Enable ace-popup-menu globally
-  ;; Customize ace-popup-menu appearance and behavior
   (setq ace-popup-menu-show-pane-header t) ; Show a header for the popup menu
   (setq ace-popup-menu-style 'full) ; Use the full style for the popup menu
   (setq ace-popup-menu-max-items 10)) ; Set the maximum number of items to display
 
-(use-package haskell-mode) ; Haskell language support
+(use-package haskell-mode :ensure t) ; Haskell language support
 
-(use-package lua-mode) ; Lua language support
+(use-package lua-mode :ensure t) ; Lua language support
 
-(use-package php-mode) ; PHP language support
+(use-package php-mode :ensure t) ; PHP language support
 
-(use-package yaml-mode
-  :commands yaml-mode) ; YAML language support
+(use-package yaml-mode :ensure t) ; YAML language support
 
 (use-package web-mode
   :ensure t
@@ -300,62 +443,28 @@
   (setq web-mode-css-indent-offset 2) ; Set CSS indent offset
   (setq web-mode-code-indent-offset 2)) ; Set JS indent offset
 
-(use-package css-mode
-  :ensure t
-  :mode ("\\.css\\'" . css-mode)) ; CSS language support
+(use-package css-mode :ensure t) ; CSS language support
+(use-package scss-mode :ensure t) ; SCSS language support
+(use-package js2-mode :ensure t) ; JavaScript language support
+(use-package typescript-mode :ensure t) ; TypeScript language support
 
-(use-package scss-mode
-  :ensure t
-  :mode ("\\.scss\\'" . scss-mode)) ; SCSS language support
-
-(use-package js2-mode
-  :ensure t
-  :mode ("\\.js\\'" . js2-mode) ; JavaScript language support
-  :config
-  (setq js2-basic-offset 2)) ; Set JS indent offset
-
-(use-package typescript-mode
-  :ensure t
-  :mode ("\\.ts\\'" . typescript-mode) ; TypeScript language support
-  :config
-  (setq typescript-indent-level 2)) ; Set TypeScript indent level
-
-(use-package python-mode
-  :ensure t
-  :mode ("\\.py\\'" . python-mode) ; Python language support
-  :config
-  (setq python-indent-offset 4)) ; Set Python indent offset
-
-(use-package lsp-mode
-  :ensure t
-  :hook ((python-mode . lsp)) ; Enable LSP for Python
-  :commands lsp) ; Language Server Protocol support
-
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp)))) ; Pyright LSP for Python
+(use-package python-mode :ensure t) ; Python language support
+(use-package lsp-mode :ensure t) ; Language Server Protocol support
+(use-package lsp-pyright :ensure t) ; Pyright LSP for Python
 
 (add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode)) ; Bash scripting support
 (setq sh-basic-offset 2) ; Set Bash indent offset
-
-(use-package company-shell
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'company-shell)) ; Shell auto-completion
+(use-package company-shell :ensure t) ; Shell auto-completion
 
 ;; Enable abbrev-mode globally
 (setq-default abbrev-mode t)
-
-;; Save abbreviations between sessions
-(setq save-abbrevs 'silently)
+(setq save-abbrevs 'silently) ; Save abbreviations between sessions
 
 ;; Define global abbreviations
-(define-abbrev global-abbrev-table "i" "I")
-(define-abbrev global-abbrev-table "emacs" "Emacs")
+(define-abbrev global-abbrev-table "adel" "Adel")
+(define-abbrev global-abbrev-table "lamloum" "Lamloum")
 (define-abbrev global-abbrev-table "linux" "Linux")
-
+(define-abbrev global-abbrev-table "Ana" "Adel Lamloum")
 ;; Disable abbrev-mode in programming modes
 (add-hook 'prog-mode-hook (lambda () (abbrev-mode -1)))
 
@@ -382,6 +491,7 @@
           (lambda () (add-hook 'post-self-insert-hook 'capitalize-first-letter-of-line nil t)))
 
 (use-package hl-todo
+  :ensure t
   :hook ((org-mode . hl-todo-mode)
          (prog-mode . hl-todo-mode)) ; Highlight TODO keywords
   :config
@@ -394,31 +504,21 @@
           ("NOTE"       success bold)
           ("DEPRECATED" font-lock-doc-face bold))))
 
-(use-package colorful-mode
-  :ensure t
-  :hook (prog-mode text-mode)) ; Add colors to programming and text modes
+(use-package colorful-mode :ensure t) ; Add colors to programming and text modes
 
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((shell . t)
    (python . t))) ; Enable Org Babel for shell and Python
 
-(use-package htmlize) ; HTML export for code snippets
+(use-package htmlize :ensure t) ; HTML export for code snippets
 
-(use-package markdown-mode
-  :ensure t
-  :mode (("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode)) ; Markdown language support
-  :init (setq markdown-command "markdown")) ; Set Markdown command
+(use-package markdown-mode :ensure t) ; Markdown language support
+(use-package markdown-preview-mode :ensure t) ; Markdown preview support
 
-(use-package markdown-preview-mode
-  :ensure t) ; Markdown preview support
+(use-package org-download :ensure t) ; Drag-and-drop images into Org mode
 
-(use-package org-download) ; Drag-and-drop images into Org mode
-
-(add-hook 'org-mode-hook 'org-indent-mode) ; Enable indentation in Org mode
-(use-package org-bullets
-  :hook (org-mode . (lambda () (org-bullets-mode 1)))) ; Add bullets to Org headings
+(use-package org-bullets :ensure t) ; Add bullets to Org headings
 
 (use-package doom-modeline
   :ensure t
@@ -426,67 +526,18 @@
   :config
   (set-face-attribute 'region nil :background "#add8e6")) ; Customize region highlight color
 
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p)) ; Add icons for graphical Emacs
-
-(use-package all-the-icons-dired
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t)))) ; Add icons to Dired
-
-(use-package neotree
-  :after general
-  :config
-  (setq neo-smart-open t
-        neo-show-hidden-files t
-        neo-window-width 55
-        neo-window-fixed-size nil
-        inhibit-compacting-font-caches t
-        projectile-switch-project-action 'neotree-projectile-action) ; NeoTree configuration
-
-  ;; Truncate long file names in NeoTree
-  (add-hook 'neo-after-create-hook
-            #'(lambda (_)
-                (with-current-buffer (get-buffer neo-buffer-name)
-                  (setq truncate-lines t)
-                  (setq word-wrap nil)
-                  (make-local-variable 'auto-hscroll-mode)
-                  (setq auto-hscroll-mode nil)))))
-
-;; Define keybindings using general.el
-(general-define-key
- :prefix "C-c" ;; Use the leader key defined above
- "t" 'neotree-toggle ;; Toggle NeoTree with "C-c t"
- "p" 'neotree-projectile-toggle ;; Toggle NeoTree with Projectile integration using "C-c p"
- "r" 'neotree-refresh) ;; Refresh NeoTree with "C-c r"
+(use-package all-the-icons :ensure t) ; Add icons for graphical Emacs
+(use-package all-the-icons-dired :ensure t) ; Add icons to Dired
 
 (use-package sudo-edit
   :ensure t
   :bind (("C-x x f" . sudo-edit-find-file)
          ("C-x x e" . sudo-edit))) ; Edit files with sudo
 
-(use-package fountain-mode
-  :ensure t
-  :mode ("\\.fountain\\'" . fountain-mode))
-
 (use-package centaur-tabs
   :ensure t
   :config
   (centaur-tabs-mode t) ; Enable centaur-tabs
-
-  (defun my-centaur-tabs-buffer-mode-icon (buffer)
-    "Return the icon for BUFFER based on its major mode using nerd-icons."
-    (with-current-buffer buffer
-      (let ((icon (nerd-icons-icon-for-mode major-mode)))
-        (if (symbolp icon)
-            (nerd-icons-icon-for-file (buffer-name))
-          icon))))
-
-  (setq centaur-tabs-buffer-groups-function #'my-centaur-tabs-buffer-groups)
-
-  (defun my-centaur-tabs-buffer-groups ()
-    "Return the list of group names BUFFER belongs to."
-    (list (my-centaur-tabs-buffer-mode-icon (current-buffer))))
-
   (setq centaur-tabs-style "bar"
         centaur-tabs-height 32
         centaur-tabs-set-modified-marker t)) ; Customize centaur-tabs appearance
@@ -509,40 +560,60 @@
   :config
   (projectile-mode +1) ; Enable Projectile
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map) ; Define Projectile keybindings
-
-  ;; Add C-c p f to the projectile-command-map
   (define-key projectile-command-map (kbd "f") 'projectile-find-file)) ; Find file in project
 
-(use-package leuven-theme
-:ensure t
-:config
-(load-theme 'leuven t) ; Load the leuven theme
-;; Customize background and foreground colors
-(set-face-background 'default "#fbf0d9") ; Sepia background
-(set-face-foreground 'default "#3a3a3a") ; Dark gray text
-;; Customize mode-line
-(set-face-background 'mode-line "#e0d5c0") ; Sepia-like mode-line background
-(set-face-foreground 'mode-line "#3a3a3a") ; Dark gray mode-line text
-;; Customize fringe
-(set-face-background 'fringe "#fbf0d9") ; Match fringe background to default
-;; Customize line numbers
-(set-face-foreground 'line-number "#6a6a6a") ; Light gray line numbers
-;; Customize cursor
-(set-face-background 'cursor "#6a6a6a") ; Gray cursor
-;; Customize highlight
-(set-face-background 'highlight "#e0d5c0") ; Sepia-like highlight
-;; Customize region (selection)
-(set-face-background 'region "#d0c5b0")) ; Light sepia region
+;; Set Brave as the default browser
+(setq browse-url-browser-function 'browse-url-default-browser)
+(setq browse-url-generic-program "/usr/bin/brave")
+
+;; Set XDG_SESSION_TYPE for Wayland
+(setenv "XDG_SESSION_TYPE" "wayland")
+
+(use-package flycheck
+  :ensure t
+  :init
+  (require 'flycheck) ; Ensure flycheck is loaded
+  (global-flycheck-mode 1) ; Enable Flycheck globally
+  :config
+  ;; Show errors in the left fringe
+  (setq flycheck-indication-mode 'left-fringe)
+  ;; Enable real-time checking
+  (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled))
+  ;; Enable debugging
+  (setq flycheck-log-level 3)
+
+  ;; Python configuration
+  (setq-default flycheck-python-flake8-executable "flake8")
+  (add-hook 'python-mode-hook 'flycheck-mode)
+
+  ;; Bash configuration
+  (add-hook 'sh-mode-hook 'flycheck-mode)
+
+  ;; JavaScript configuration
+  (setq flycheck-javascript-eslint-executable "eslint")
+  (add-hook 'js-mode-hook 'flycheck-mode)
+  (add-hook 'js2-mode-hook 'flycheck-mode)) ; If you use js2-mode
+
+(use-package jinx
+  :ensure t
+  :hook ((text-mode . jinx-mode) ; Enable in text modes
+         (org-mode . jinx-mode)  ; Enable in Org mode
+         (markdown-mode . jinx-mode)) ; Enable in Markdown mode
+  :config
+  ;; Set the default language
+  (setq jinx-languages "en_US")
+  ;; Enable Jinx globally (optional)
+  (global-jinx-mode))
 
 (use-package smartparens
-  :ensure smartparens ; Install smartparens
+  :ensure t
   :hook (prog-mode text-mode markdown-mode) ; Enable smartparens in these modes
   :config
   (require 'smartparens-config)) ; Load default smartparens configuration
 
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode) ; Enable Flycheck for syntax checking
-  :config
-  (setq-default flycheck-python-flake8-executable "flake8") ; Set Python checker to flake8
-  (setq flycheck-indication-mode 'left-fringe)) ; Show errors in the left fringe
+(use-package solarized-theme
+:ensure t
+:config
+;; Load the Solarized Dark theme by default
+(load-theme 'solarized-dark t);; if you want light theme change dark to light
+)
