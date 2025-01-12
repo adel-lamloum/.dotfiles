@@ -13,6 +13,7 @@
     ],
     "modules-center": [
         "tray",
+        "hyprland/window",
         "clock"
     ],
     "modules-right": [
