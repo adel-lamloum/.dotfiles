@@ -20,57 +20,18 @@ setopt EXTENDED_HISTORY
 # Automatically cd into typed directory
 setopt autocd
 
-# Enable Vi mode
-bindkey -v
-export KEYTIMEOUT=1
+# Enable Emacs keybindings
+bindkey -e
 
-# Custom keybindings
-bindkey -M viins '^A' beginning-of-line  # Move to beginning of line
-bindkey -M viins '^E' end-of-line        # Move to end of line
-bindkey -M viins '^K' kill-line          # Delete entire line
-bindkey -M viins '^U' undo               # Undo
-bindkey -M viins '^R' redo               # Redo
-bindkey -M viins '^P' up-history         # Previous command
-bindkey -M viins '^N' down-history       # Next command
-bindkey -M viins '^W' backward-kill-word # Delete word under cursor
-
-# Character-wise movement in Vi mode
-bindkey -M vicmd 'h' vi-backward-char  # Move left
-bindkey -M vicmd 'j' vi-down-line      # Move down
-bindkey -M vicmd 'k' vi-up-line        # Move up
-bindkey -M vicmd 'l' vi-forward-char   # Move right
-
-# Word-wise movement in Vi mode
-bindkey -M vicmd 'w' vi-forward-word   # Move forward by word
-bindkey -M vicmd 'b' vi-backward-word  # Move backward by word
-bindkey -M vicmd 'e' vi-forward-word-end  # Move to end of word
-
-# Delete word
-bindkey -M vicmd 'dw' vi-backward-kill-word  # Delete word backward
-
-# Cursor shape for Vi modes
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'  # Block cursor for normal mode
-  elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'  # Beam cursor for insert mode
-  fi
-}
-zle -N zle-keymap-select
-
-function zle-line-init {
-  echo -ne '\e[5 q'  # Initialize beam cursor for insert mode
-}
-zle -N zle-line-init
-
-# Vi mode indicator in prompt
-function zle-line-init zle-keymap-select {
-  VIM_PROMPT="%F{yellow}<<< NORMAL >>>%f"
-  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
-  zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
+# Custom Emacs-style keybindings
+bindkey '^A' beginning-of-line        # Move to beginning of line
+bindkey '^E' end-of-line              # Move to end of line
+bindkey '^K' kill-line                # Delete entire line
+bindkey '^U' undo                     # Undo
+bindkey '^R' history-incremental-search-backward  # Search history
+bindkey '^P' up-history               # Previous command
+bindkey '^N' down-history             # Next command
+bindkey '^W' backward-kill-word       # Delete word under cursor
 
 # Enhance tab completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
