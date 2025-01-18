@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Define the source directories as an array
+CONFIG_DIRS=(
+    "$HOME/.config/hypr"
+    "$HOME/.config/wofi"
+    "$HOME/.config/zathura"
+    "$HOME/.config/mpv/"
+    "$HOME/.config/kitty"
+    "$HOME/.config/starship.toml"
+
+)
+CONFIG_HOME=(
+    "$HOME/.emacs.d/"
+    "$HOME/.vim/"
+    "$HOME/.vimrc"
+)
+# Define the destination directory in your .dotfiles repo
+DOTFILES_DIR="$HOME/.dotfiles"
+DOTFILES_CONFIG_DIR="$HOME/.dotfiles/.config/"
+# Loop through each configuration directory
+for CONFIG_DIR in "${CONFIG_DIRS[@]}"; do
+    # Get the base name of the config directory (e.g., "hypr", "wofi", "zathura")
+    CONFIG_NAME=$(basename "$CONFIG_DIR")
+
+    # Create the destination directory if it doesn't exist
+    mkdir -p "$DOTFILES_DIR/$CONFIG_NAME"
+
+    # Copy the configuration files
+    cp -r "$CONFIG_DIR"/* "$DOTFILES_DIR/$CONFIG_NAME/"
+done
+
+# Navigate to the .dotfiles directory
+cd "$DOTFILES_DIR"
+
+# Add the changes to git
+git add .
+
+# Commit the changes
+git commit -m "Update configuration files: hypr, wofi, zathura"
+
+# Push the changes to GitHub
+git push origin main
+
+echo "Configuration files copied and pushed to .dotfiles repository."

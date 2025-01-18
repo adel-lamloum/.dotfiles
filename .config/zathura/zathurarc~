@@ -1,0 +1,66 @@
+
+# Enable Vim-like keybindings
+set selection-clipboard clipboard
+
+# Navigation
+map h scroll left
+map j scroll down
+map k scroll up
+map l scroll right
+map <C-b> scroll full-up
+map <C-f> scroll full-down
+map <C-u> scroll half-up
+map <C-d> scroll half-down
+map gg scroll to-top
+map G scroll to-bottom
+map H navigate previous
+map L navigate next
+
+# Zooming
+map + zoom in
+map - zoom out
+map = zoom normal
+
+# Searching
+map / search
+map n search next
+map N search previous
+
+# Page Navigation
+map <C-n> navigate next
+map <C-p> navigate previous
+map J navigate next
+map K navigate previous
+
+# Miscellaneous
+map q quit
+map r reload
+map f toggle fullscreen
+map i recolor
+map b toggle statusbar
+map u undo
+map <C-r> redo
+
+# Fix for black block at the top of every page
+# Option 1: Disable the status bar (recommended)
+set statusbar-enabled false
+
+# Option 2: Customize the status bar (uncomment and adjust as needed)
+# set statusbar-bg "#2E3440"  # Background color (Nord theme example)
+# set statusbar-fg "#D8DEE9"  # Foreground (text) color
+# set statusbar-h-padding 5   # Horizontal padding
+# set statusbar-v-padding 2   # Vertical padding
+# set statusbar-font "monospace normal 10"
+# set statusbar-basename false
+# set statusbar-enabled true
+
+# Recolor the document (optional, if you want inverted colors)
+# set recolor true
+
+# Additional settings for better appearance
+set font "monospace normal 10"
+set default-bg "#FFFFFF"  # Default background color (white)
+set default-fg "#000000"  # Default foreground color (black)
+set render-loading true
+set adjust-open "best-fit"
+set window-title-basename true

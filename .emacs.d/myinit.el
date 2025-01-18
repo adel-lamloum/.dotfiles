@@ -8,49 +8,49 @@
 (setq visible-bell t) ; Enable visible bell (disable sound bell)
 
 (set-face-attribute 'default nil :font "FiraCode Nerd Font-13") ; Set default font
-(add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font-13"))
+  (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font-13"))
 
-;; Enable bidi (bidirectional) text support in Emacs
-(setq-default bidi-display-reordering t)
-(setq-default bidi-paragraph-direction 'left-to-right) ; Set default text direction to LTR
+  ;; Enable bidi (bidirectional) text support in Emacs
+  (setq-default bidi-display-reordering t)
+  (setq-default bidi-paragraph-direction 'left-to-right) ; Set default text direction to LTR
 
-;; Function to toggle text direction between LTR and RTL
-(defun toggle-text-direction ()
-  "Toggle text direction between left-to-right (LTR) and right-to-left (RTL)."
-  (interactive)
-  (if (eq bidi-paragraph-direction 'left-to-right)
-      (setq bidi-paragraph-direction 'right-to-left)
-    (setq bidi-paragraph-direction 'left-to-right))
-  (message "Text direction set to %s" bidi-paragraph-direction))
+  ;; Function to toggle text direction between LTR and RTL
+  (defun toggle-text-direction ()
+    "Toggle text direction between left-to-right (LTR) and right-to-left (RTL)."
+    (interactive)
+    (if (eq bidi-paragraph-direction 'left-to-right)
+        (setq bidi-paragraph-direction 'right-to-left)
+      (setq bidi-paragraph-direction 'left-to-right))
+    (message "Text direction set to %s" bidi-paragraph-direction))
 
-;; Bind the function to a key (e.g., C-c d)
-;;(global-set-key (kbd "C-c d") 'toggle-text-direction)
+  ;; Bind the function to a key (e.g., C-c d)
+  ;;(global-set-key (kbd "C-c d") 'toggle-text-direction)
 
-;; Ensure LTR direction in Org-mode
-(add-hook 'org-mode-hook
-          (lambda ()
-            (setq-local bidi-paragraph-direction 'left-to-right)))
+  ;; Ensure LTR direction in Org-mode
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq-local bidi-paragraph-direction 'left-to-right)))
 
-;; Set default input method to TeX (LTR, English)
-(setq default-input-method "TeX")
+  ;; Set default input method to TeX (LTR, English)
+  (setq default-input-method "TeX")
 
-;; Set Arabic as a secondary input method
-(setq default-input-method "arabic")
-(global-set-key (kbd "C-\\") 'toggle-input-method)
+  ;; Set Arabic as a secondary input method
+  (setq default-input-method "arabic")
+  (global-set-key (kbd "C-\\") 'toggle-input-method)
 
-;; Ensure proper Arabic font rendering
-(set-fontset-font t 'arabic "Noto Naskh Arabic")
+  ;; Ensure proper Arabic font rendering
+  (set-fontset-font t 'arabic "Noto Naskh Arabic")
 
-;; Enable line numbers in Org-mode
-(add-hook 'org-mode-hook #'display-line-numbers-mode)
+  ;; Enable line numbers in Org-mode
+  (add-hook 'org-mode-hook #'display-line-numbers-mode)
+(global-display-line-numbers-mode 1)
+  ;; Enable visual line mode (helps with soft wrapping in text-based modes)
+  (add-hook 'text-mode-hook 'visual-line-mode)
+  (add-hook 'org-mode-hook 'visual-line-mode)
+  (add-hook 'markdown-mode-hook 'visual-line-mode)
 
-;; Enable visual line mode (helps with soft wrapping in text-based modes)
-(add-hook 'text-mode-hook 'visual-line-mode)
-(add-hook 'org-mode-hook 'visual-line-mode)
-(add-hook 'markdown-mode-hook 'visual-line-mode)
-
-;; Optional: Set preferred text width (80 characters) for text wrapping
-(setq-default fill-column 80)
+  ;; Optional: Set preferred text width (80 characters) for text wrapping
+  (setq-default fill-column 80)
 
 (global-set-key (kbd "C-=") 'text-scale-increase) ; Increase text size
 (global-set-key (kbd "C--") 'text-scale-decrease) ; Decrease text size
@@ -611,9 +611,8 @@
   :config
   (require 'smartparens-config)) ; Load default smartparens configuration
 
-(use-package solarized-theme
+(use-package moe-theme
 :ensure t
 :config
-;; Load the Solarized Dark theme by default
-(load-theme 'solarized-dark t);; if you want light theme change dark to light
-)
+;; Load a specific Moe theme by default (e.g., Moe Dark)
+(load-theme 'moe-dark t))

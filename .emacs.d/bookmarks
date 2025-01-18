@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("qute browser config"
+(("french encuisine"
+ (filename . "~/adel-notes/french/encusine.org")
+ (front-context-string . "#+Title: ENCUISI")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 26504 54565 781774 772000))
+("qute browser config"
  (filename . "~/.config/qutebrowser/config.py")
  (front-context-string . "# Or uncomment t")
  (rear-context-string . "ad_autoconfig()\n")

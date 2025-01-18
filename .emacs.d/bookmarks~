@@ -22,10 +22,10 @@
  (last-modified 26490 16422 765899 601000))
 ("org-capture-last-stored"
  (filename . "~/adel-notes/org/gtd.org")
- (front-context-string . "** TODO \n  \n  [[")
- (rear-context-string)
- (position . 9)
- (last-modified 26492 64563 754448 789000))
+ (front-context-string . "** Todo today wo")
+ (rear-context-string . "zation]]\nGjjjkb\n")
+ (position . 110)
+ (last-modified 26493 5210 538012 258000))
 ("bakery cookies showpeices"
  (filename . "~/adel-notes/work/bakery-recipes.org")
  (front-context-string . "#+TITLE: Bakery,")

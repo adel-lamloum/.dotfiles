@@ -753,20 +753,20 @@
 
  #+END_SRC
 
-** COMMENT Jinx spell checker
+** Jinx spell checker
 #+begin_src emacs-lisp
-(use-package jinx
-  :ensure t
-  :hook ((text-mode . jinx-mode) ; Enable in text modes
-         (org-mode . jinx-mode)  ; Enable in Org mode
-         (markdown-mode . jinx-mode)) ; Enable in Markdown mode
-  :config
-  ;; Set the default language
-  (setq jinx-languages "en_US")
-  ;; Enable Jinx globally (optional)
-  (global-jinx-mode))
+  (use-package jinx
+    :ensure t
+    :hook ((text-mode . jinx-mode) ; Enable in text modes
+           (org-mode . jinx-mode)  ; Enable in Org mode
+           (markdown-mode . jinx-mode)) ; Enable in Markdown mode
+    :config
+    ;; Set the default language
+    (setq jinx-languages "en_US")
+    ;; Enable Jinx globally (optional)
+    (global-jinx-mode))
 
-
+  
 #+end_src
 
 ** Smartparens
@@ -794,7 +794,7 @@
   (use-package leuven-theme :ensure t) ; Leuven theme
 #+END_SRC
 
-** Solarized Theme
+** COMMENT Solarized Theme
 #+BEGIN_SRC emacs-lisp
   (use-package solarized-theme
   :ensure t
@@ -824,7 +824,7 @@
   (load-theme 'sanityinc-tomorrow-eighties t))
 
 #+end_src
-** COMMENT Moe theme
+** Moe theme
 #+begin_src emacs-lisp
   (use-package moe-theme
   :ensure t
