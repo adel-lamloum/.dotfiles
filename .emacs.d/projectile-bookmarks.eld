@@ -1,1 +1,1 @@
-("~/.dotfiles/" "~/adel-notes/" "~/my-start-page/")
+("~/adel-notes/" "~/.dotfiles/" "~/my-start-page/")

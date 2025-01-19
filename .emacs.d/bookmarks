@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("french encuisine"
+(("hyprland config"
+ (filename . "~/.config/hypr/hyprland.conf")
+ (front-context-string . "# ##############")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 26507 22075 701218 824000))
+("french encuisine"
  (filename . "~/adel-notes/french/encusine.org")
  (front-context-string . "#+Title: ENCUISI")
  (rear-context-string)
@@ -27,11 +33,11 @@
  (position . 72)
  (last-modified 26490 16422 765899 601000))
 ("org-capture-last-stored"
- (filename . "~/adel-notes/org/gtd.org")
- (front-context-string . "** Todo today wo")
- (rear-context-string . "zation]]\nGjjjkb\n")
- (position . 110)
- (last-modified 26493 5210 538012 258000))
+ (filename . "~/adel-notes/org/journal.org")
+ (front-context-string . "**** الحفط بطريق")
+ (rear-context-string . "-01-18 Saturday\n")
+ (position . 320)
+ (last-modified 26507 54957 110882 563000))
 ("bakery cookies showpeices"
  (filename . "~/adel-notes/work/bakery-recipes.org")
  (front-context-string . "#+TITLE: Bakery,")

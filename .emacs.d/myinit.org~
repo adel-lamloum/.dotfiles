@@ -55,7 +55,7 @@
 
   ;; Enable line numbers in Org-mode
   (add-hook 'org-mode-hook #'display-line-numbers-mode)
-
+(global-display-line-numbers-mode 1)
   ;; Enable visual line mode (helps with soft wrapping in text-based modes)
   (add-hook 'text-mode-hook 'visual-line-mode)
   (add-hook 'org-mode-hook 'visual-line-mode)
@@ -749,7 +749,12 @@
   (setq flycheck-javascript-eslint-executable "eslint")
   (add-hook 'js-mode-hook 'flycheck-mode)
   (add-hook 'js2-mode-hook 'flycheck-mode)) ; If you use js2-mode
-
+ ;; Enable Flycheck for Rust
+    (add-hook 'rust-mode-hook 'flycheck-mode)
+    ;; Configure Flycheck to use rust-analyzer
+    (setq flycheck-rust-cargo-executable "cargo") ; Use cargo for Flycheck
+    (setq flycheck-rust-check-tests t) ; Check tests in addition to the main code
+    (setq flycheck-rust-crate-root (lambda () (locate-dominating-file buffer-file-name "Cargo.toml"))) ; Find the Cargo.toml file for the project
 
  #+END_SRC
 

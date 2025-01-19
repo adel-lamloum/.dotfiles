@@ -456,6 +456,31 @@
 (setq sh-basic-offset 2) ; Set Bash indent offset
 (use-package company-shell :ensure t) ; Shell auto-completion
 
+;; Rust mode for syntax highlighting and basic functionality
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'" ; Automatically open .rs files in rust-mode
+  :config
+  (setq rust-format-on-save t)) ; Automatically format Rust code on save
+
+;; Cargo integration for Rust projects
+(use-package cargo
+  :ensure t
+  :hook (rust-mode . cargo-minor-mode)) ; Enable cargo minor mode in rust-mode
+
+;; LSP mode for Rust (using rust-analyzer)
+(use-package lsp-mode
+  :ensure t
+  :hook (rust-mode . lsp) ; Enable LSP for Rust
+  :config
+  (setq lsp-rust-analyzer-server-command '("rust-analyzer")) ; Set rust-analyzer as the LSP server
+  (lsp-enable-which-key-integration t)) ; Enable which-key integration for LSP commands
+
+;; LSP UI for better LSP integration (e.g., documentation, errors, etc.)
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
 ;; Enable abbrev-mode globally
 (setq-default abbrev-mode t)
 (setq save-abbrevs 'silently) ; Save abbreviations between sessions
@@ -593,6 +618,12 @@
   (setq flycheck-javascript-eslint-executable "eslint")
   (add-hook 'js-mode-hook 'flycheck-mode)
   (add-hook 'js2-mode-hook 'flycheck-mode)) ; If you use js2-mode
+ ;; Enable Flycheck for Rust
+    (add-hook 'rust-mode-hook 'flycheck-mode)
+    ;; Configure Flycheck to use rust-analyzer
+    (setq flycheck-rust-cargo-executable "cargo") ; Use cargo for Flycheck
+    (setq flycheck-rust-check-tests t) ; Check tests in addition to the main code
+    (setq flycheck-rust-crate-root (lambda () (locate-dominating-file buffer-file-name "Cargo.toml"))) ; Find the Cargo.toml file for the project
 
 (use-package jinx
   :ensure t
