@@ -70,15 +70,15 @@ for CONFIG_FILE in "${CONFIG_HOME_FILES[@]}"; do
 done
 
 # Navigate to the .dotfiles directory
-cd "$DOTFILES_DIR"
+#cd "$DOTFILES_DIR"
 
 # Add the changes to git
-git add .
+#git add .
 
 # Commit the changes
-git commit -m "Update configuration files: hypr, wofi, zathura, mpv, kitty, starship.toml, .emacs.d, .vim, .vimrc"
+#git commit -m "Update configuration files: hypr, wofi, zathura, mpv, kitty, starship.toml, .emacs.d, .vim, .vimrc"
 
 # Push the changes to GitHub
-git push origin main
+#git push origin main
 
 echo "Configuration files copied and pushed to .dotfiles repository."

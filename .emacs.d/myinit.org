@@ -547,9 +547,13 @@
 
 ** Python Development
 #+BEGIN_SRC emacs-lisp
-  (use-package python-mode :ensure t) ; Python language support
-  (use-package lsp-mode :ensure t) ; Language Server Protocol support
-  (use-package lsp-pyright :ensure t) ; Pyright LSP for Python
+    (use-package python-mode :ensure t) ; Python language support
+    (use-package lsp-mode :ensure t) ; Language Server Protocol support
+  (use-package lsp-pyright
+    :hook (python-mode . (lambda () (require 'lsp-pyright)))
+    :init (when (executable-find "python3")
+            (setq lsp-pyright-python-executable-cmd "python3")))
+
 #+END_SRC
 
 ** Bash Scripting
