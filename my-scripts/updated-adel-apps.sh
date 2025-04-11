@@ -111,7 +111,7 @@ install_packages "${productivity_packages[@]}"
 # ==================================================
 log "Installing Development Tools..."
 development_packages=(
-    neovim visual-studio-code-bin pycharm-community-edition git gitfiend nodejs ripgrep fd fzf emacs
+    neovim visual-studio-code-bin git gitfiend nodejs ripgrep fd fzf emacs
 )
 install_packages "${development_packages[@]}"
 
@@ -132,18 +132,18 @@ enable_service tlp
 # ==================================================
 log "Installing Networking & Remote Access tools..."
 networking_packages=(
-    remmina syncthing wget yt-dlp
+    syncthing wget yt-dlp
 )
 install_packages "${networking_packages[@]}"
 
 # ==================================================
 # 7. Gaming
 # ==================================================
-log "Installing Gaming tools..."
-gaming_packages=(
-    wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader lutris
-)
-install_packages "${gaming_packages[@]}"
+#log "Installing Gaming tools..."
+#gaming_packages=(
+  #  wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils #lib32-v4l-utils libpulse lib32-libpulse libgpg-error lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-#libjpeg-turbo sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt #lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader lutris
+#)
+#install_packages "${gaming_packages[@]}"
 
 # ==================================================
 # 8. Printing & Scanning
@@ -159,7 +159,7 @@ install_packages "${printing_packages[@]}"
 # ==================================================
 log "Installing Miscellaneous tools..."
 miscellaneous_packages=(
-    blanket lolcat meld python-pywal rnote telegram-desktop thefuck toilet tauon-music-box variety xcolor zoom
+    blanket lolcat meld rnote telegram-desktop thefuck toilet variety xcolor zoom
 )
 install_packages "${miscellaneous_packages[@]}"
 
