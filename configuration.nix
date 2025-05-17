@@ -1,10 +1,16 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
 { config, pkgs, ... }:
+let
+  unstable = import <nixos-unstable> {};
+in 
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos> 
     ];
 
   # Bootloader.
@@ -14,22 +20,18 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
   # Enable networking
   networking.networkmanager.enable = true;
-  # enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  #services.xserver.inputMethod = "ibus";  # Enable ibus input method
-  # enable Hyprland
-
-
-  programs.hyprland.enable = true; 
   # Set your time zone.
   time.timeZone = "Africa/Cairo";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -49,12 +51,30 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
+   # Dark mode and theming
+  environment.gnome.excludePackages = [];
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.desktop.interface]
+    color-scheme='prefer-dark'
+    gtk-theme='Adwaita-dark'
+    icon-theme='Adwaita'
+    cursor-theme='Adwaita'
+  '';
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
+services.syncthing = {
+    enable = true;
+    user = "adel";  # Your user (must exist)
+    dataDir = "/home/adel/Sync";  # Default sync directory
+    configDir = "/home/adel/.config/syncthing";  # Config files
+    # Open firewall ports (optional but recommended)
+    openDefaultPorts = true;
+  };
+  # Flatpak support
+  services.flatpak.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -67,146 +87,149 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
   };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adel = {
     isNormalUser = true;
-    home = "/home/adel";
     description = "adel";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      zsh
+    #  thunderbird
     ];
-    shell = pkgs.zsh;
   };
-
-  home-manager.users.adel = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      zsh-syntax-highlighting
-      zsh-autosuggestions
-    ];
-
-    programs.zsh = {
-      enable = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" ];
-        theme = "random";
-      };
-      initExtra = ''
-        # Customize your zsh configuration here
-        source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-        source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-        fastfetch
-      '';
-    };
-
-    # The state version is required and should stay at the version you
-    # originally installed.
-    home.stateVersion = "24.05";
-  };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.backupFileExtension = "backup";
-
-  # Enable zsh globally
-  programs.zsh.enable = true;
-
-  # enable zsh
-  users.defaultUserShell = pkgs.zsh;
+  # enable fish shell
+  programs.fish.enable = true;
+  # Set Fish as default shell for all users
+  users.defaultUserShell = pkgs.fish;
 
   # Install firefox.
   programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  # allow flatpak
-  services.flatpak.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    kitty
-    gimp
-    emacs
-    brave
-    git
-    vlc
-    tauon
-    zsh
-    obs-studio
-    audacity
-    fd
-    fzf
-    gh
-    cmatrix
-    telegram-desktop
-    zathura
-    zoom-us
-    yt-dlp
-    libreoffice-qt6-fresh
-    fastfetch  
-    fragments  
-    htop
-    gedit
-    swww
-    calibre
-    unzip
-    ripgrep
-    krita
-    meld
-    figlet
-    syncthing
-    vscode
-    xcolor
-    feh
-    lolcat
-    gnome-extension-manager
-    gnome.gnome-tweaks
-    nodejs_22
-    python3
-    kdenlive
-    krop
-    imagemagick
-    qutebrowser
-    netsurf.browser
-    variety
-    aria2
-    gparted
-    handbrake
-    neovim
+  # Editors  
+  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  pkgs.emacs-gtk
+  gedit
+  neovim
+  vscode
+  # tools
+  fish
+  kitty
+  wget
+  yt-dlp
+  gh
+  git
+  htop
+  neofetch
+  unzip
+  p7zip
+  rsync
+  fzf
+  nomacs
+  appimage-run
+  appimagekit
+  # internet
+  brave
+  pkgs.telegram-desktop
+  zoom-us
+  thunderbird
+  # docs
+  pkgs.libreoffice-qt6-fresh
+  pkgs.onlyoffice-desktopeditors
+  okular
+  pdfarranger
+  krop
+  k2pdfopt
+  zathura
+  mupdf
+  calibre
+  openboard
+  rnote
+ # media  
+ vlc
+ mpv
+ strawberry
+ # editing
+  unstable.gimp3-with-plugins
+  unstable.inkscape-with-extensions
+  krita
+  audacity
+  obs-studio
+  pkgs.kdePackages.kdenlive
+  pkgs.handbrake
+  pkgs.ffmpeg_6-full
+  # gnome extentions
+  gnomeExtensions.gsconnect  # GSConnect extension
+  kdePackages.kdeconnect-kde  # KDE Connect (required for backend)
+  gnome-tweaks
+  gnomeExtensions.appindicator  # System tray icons
+  gnomeExtensions.dash-to-dock  # Customizable dock
+  gnomeExtensions.arcmenu       # Windows-style start menu
+  gnomeExtensions.blur-my-shell # Modern blur effects
+  gnomeExtensions.clipboard-indicator  # Clipboard history
+  gnomeExtensions.gsconnect     # Phone integration (KDE Connect)
+  gnomeExtensions.todotxt
+  gnomeExtensions.net-speed-indicator
+  gnomeExtensions.vitals
+  gnomeExtensions.syncthing-indicator
+  gnomeExtensions.just-perfection  # UI tweaks
+  gnomeExtensions.tiling-assistant  # Advanced window tiling
+  gnomeExtensions.quick-settings-tweaker  # Customize quick settings
   ];
 
-  #----=[ Fonts ]=----#
+# Font configuration
   fonts = {
-    enableDefaultPackages = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "UbuntuSans" "UbuntuMono" "DroidSansMono" ]; })  
-
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-extra
       noto-fonts-emoji
-      liberation_ttf
-      fira-code
-      cascadia-code
-      fira-code-symbols
-      font-awesome
-      proggyfonts
-      scheherazade-new
-      scheherazade
       amiri
-      ubuntu_font_family
+      scheherazade-new
+      fira-code
+      fira-go
     ];
     fontconfig = {
       defaultFonts = {
-        serif = [  "Liberation Serif" "amiri" ];
-        sansSerif = [ "UbuntuSans Nerd Font" "Noto Naskh Arabic" ];
-        monospace = [ "UbuntuMono Nerd Font" "Noto Naskh Arabic"];
+        sansSerif = [ "Noto Sans Arabic" "DejaVu Sans" ];
+        serif = [ "Amiri" "DejaVu Serif" ];
+        monospace = [ "Noto Sans Mono" ];
       };
     };
   };
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -214,5 +237,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
+
 }
