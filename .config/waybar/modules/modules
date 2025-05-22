@@ -20,6 +20,14 @@
         "on-scroll-down": "brightnessctl set 5%-"
     },
 
+ // Cliphist
+  "custom/cliphist": {
+    "format": "",
+    "on-click": "sleep 0.1 && ~/.config/wabar/modules/scripts/cliphist.sh",
+    "on-click-right": "sleep 0.1 && ~/.config/waybar/modules/scripts/cliphist.sh d",
+    "on-click-middle": "sleep 0.1 && ~/.config/waybar/modules/scripts/cliphist.sh w",
+    "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list"
+  },
 
     "group/hardware": {
         "orientation": "horizontal",
