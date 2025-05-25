@@ -119,6 +119,94 @@ window.top_bar .modules-center {
   margin-bottom: 5;
 
 }
+#custom-file_manager {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  padding-left: 15;
+  padding-right: 15;
+  margin-left: 2;
+  margin-right: 2;
+  margin-top: 5;
+  margin-bottom: 5;
+
+}
+#custom-mail {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  padding-left: 15;
+  padding-right: 15;
+  margin-left: 2;
+  margin-right: 2;
+  margin-top: 5;
+  margin-bottom: 5;
+
+}
+
+#custom-tty {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  padding-left: 15;
+  padding-right: 15;
+  margin-left: 2;
+  margin-right: 2;
+  margin-top: 5;
+  margin-bottom: 5;
+
+}
+#custom-browser {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  padding-left: 15;
+  padding-right: 15;
+  margin-left: 2;
+  margin-right: 2;
+  margin-top: 5;
+  margin-bottom: 5;
+
+}
+
+#custom-hyprpicker {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  padding-left: 15;
+  padding-right: 15;
+  margin-left: 2;
+  margin-right: 2;
+  margin-top: 5;
+  margin-bottom: 5;
+
+}
+
+
+
+
+
+
+#group-misc {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  padding-left: 15;
+  padding-right: 15;
+  margin-left: 2;
+  margin-right: 2;
+  margin-top: 5;
+  margin-bottom: 5;
+
+}
+
+#custom-updates {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  padding-left: 15;
+  padding-right: 15;
+  margin-left: 2;
+  margin-right: 2;
+  margin-top: 5;
+  margin-bottom: 5;
+
+}
+
+
 
 #custom-separator_dot {
   color: @green;
@@ -268,6 +356,8 @@ window.top_bar .modules-center {
   margin-top: 5;
   margin-bottom: 5;
 }
+
+
 
 window.left_bar .modules-center {
   background-color: alpha(@surface1, 0.7);
