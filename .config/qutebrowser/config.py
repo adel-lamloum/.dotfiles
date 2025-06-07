@@ -117,78 +117,6 @@ c.url.searchengines = {
 c.url.default_page = 'https://www.google.com/'
 c.url.start_pages = 'https://www.google.com/'
 
-### Keybindings ###
-# General navigation
-config.bind('<Ctrl-n>', 'scroll down')
-config.bind('<Ctrl-p>', 'scroll up')
-config.bind('<Ctrl-a>', 'back')
-config.bind('B', 'back')
-config.bind('<Ctrl-e>', 'forward')
-config.bind('F', 'forward')
-config.bind('<Ctrl-x><Ctrl-f>', 'set-cmd-text -s :open -t')
-config.bind('G', 'set-cmd-text -s :open -t')
-config.bind('<Ctrl-u><Ctrl-x><Ctrl-f>', 'set-cmd-text -s :open')
-config.bind('g', 'set-cmd-text -s :open')
-
-# Tab management
-config.bind('<Ctrl-Tab>', 'tab-next')
-config.bind('<Ctrl-Shift-Tab>', 'tab-prev')
-config.bind('<Ctrl-t>', 'open -t')
-config.bind('<Ctrl-w>', 'tab-close')
-config.bind('<Ctrl-x>0', 'tab-close')
-config.bind('q', 'tab-close')
-config.bind('<Ctrl-x>1', 'tab-only')
-config.bind('<Alt-a>', 'tab-prev')
-config.bind('<Ctrl-c><Ctrl-p>', 'tab-prev')
-config.bind('<Alt-e>', 'tab-next')
-config.bind('<Ctrl-c><Ctrl-n>', 'tab-next')
-config.bind('r', 'reload')
-config.bind('c', 'yank')
-
-# Searching
-config.bind('<Ctrl-s>', 'set-cmd-text /', mode='normal')
-config.bind('<Ctrl-r>', 'set-cmd-text ?', mode='normal')
-config.bind('<Ctrl-s>', 'search-next', mode='command')
-config.bind('<Ctrl-r>', 'search-prev', mode='command')
-
-# Zooming
-config.bind('+', 'zoom-in')
-config.bind('-', 'zoom-out')
-
-# Command mode
-config.bind('<Alt-x>', 'cmd-set-text :')
-config.bind('<Up>', 'command-history-prev', mode='command')
-config.bind('<Ctrl-p>', 'command-history-prev', mode='command')
-config.bind('<Down>', 'command-history-next', mode='command')
-config.bind('<Ctrl-n>', 'command-history-next', mode='command')
-config.bind('<Escape>', 'leave-mode', mode='command')
-config.bind('<Ctrl-g>', 'leave-mode', mode='command')
-config.bind('<Return>', 'command-accept', mode='command')
-config.bind('<Ctrl-m>', 'command-accept', mode='command')
-config.bind('<Shift-Tab>', 'completion-item-focus prev', mode='command')
-config.bind('<Ctrl-Shift-i>', 'completion-item-focus prev', mode='command')
-config.bind('<Tab>', 'completion-item-focus next', mode='command')
-config.bind('<Ctrl-i>', 'completion-item-focus next', mode='command')
-
-# Hinting
-config.bind('<Ctrl-u>f', 'hint --rapid links tab-bg')
-config.bind('f', 'hint')
-config.bind('if', 'hint images')
-config.bind('cf', 'hint links yank-primary')
-config.bind('<Escape>', 'leave-mode', mode='hint')
-config.bind('<Ctrl-g>', 'leave-mode', mode='hint')
-config.bind('<Return>', 'follow-hint', mode='hint')
-config.bind('<Ctrl-m>', 'follow-hint', mode='hint')
-
-# Yes/No prompts
-config.bind('y', 'prompt-accept yes', mode='yesno')
-config.bind('n', 'prompt-accept no', mode='yesno')
-config.bind('<Alt-w>', 'prompt-yank', mode='yesno')
-config.bind('<Alt-u><Alt-w>', 'prompt-yank --sel', mode='yesno')
-config.bind('<Escape>', 'leave-mode', mode='yesno')
-config.bind('<Ctrl-g>', 'leave-mode', mode='yesno')
-config.bind('<Return>', 'prompt-accept', mode='yesno')
-
 # MPV bindings
 config.bind('<Ctrl-v>', 'spawn mpv {url}')
 config.bind('<Ctrl-Shift-v>', 'hint links spawn mpv {hint-url}')
@@ -197,5 +125,3 @@ config.bind('<Ctrl-Shift-v>', 'hint links spawn mpv {hint-url}')
 # Smooth scrolling
 config.set('scrolling.smooth', True)
 
-# Scroll speed
-config.set('scrolling.speed', 100)  # Adjust scroll speed

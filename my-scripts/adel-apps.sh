@@ -18,20 +18,20 @@ sudo pacman -S --noconfirm --needed blanket
 #sudo pacman -S --noconfirm --needed bitwarden
 sudo pacman -S --noconfirm --needed bat
 sudo pacman -S --noconfirm --needed bash-completion
-sudo pacman -S --noconfirm --needed calibre
+#sudo pacman -S --noconfirm --needed calibre
 #sudo pacman -S --noconfirm --needed discord
 sudo pacman -S --noconfirm --needed ddgr # search from terminal duck duck go engine 
 sudo pacman -S --noconfirm --needed dconf-editor
-sudo pacman -S --noconfirm --needed emacs
+#sudo pacman -S --noconfirm --needed emacs
 sudo pacman -S --noconfirm --needed fd
 sudo pacman -S --noconfirm --needed filezilla
 sudo pacman -S --noconfirm --needed fzf
-sudo pacman -S --noconfirm --needed font-manager
+#sudo pacman -S --noconfirm --needed font-manager
 sudo pacman -S --noconfirm --needed figlet
 sudo pacman -S --noconfirm --needed ffmpeg
 sudo pacman -S --noconfirm --needed fribidi # arabic support
 sudo pacman -S --noconfirm --needed flameshot
-sudo pacman -S --noconfirm --needed fish 
+#sudo pacman -S --noconfirm --needed fish 
 sudo pacman -S --noconfirm --needed flatpak
 sudo pacman -S --noconfirm --needed gitfiend
 sudo pacman -S --noconfirm --needed galculator
@@ -39,7 +39,7 @@ sudo pacman -S --noconfirm --needed gparted
 sudo pacman -S --noconfirm --needed gimp
 sudo pacman -S --noconfirm --needed git
 #sudo pacman -S --noconfirm --needed geany
-sudo pacman -S --noconfirm --needed gnome-disk-utility
+sudo pacman -S --noconfirm --needed gnome-disk-utilit
 sudo pacman -S --noconfirm --needed hardcode-fixer-git
 sudo pacman -S --noconfirm --needed handbrake
 sudo pacman -S --noconfirm --needed harfbuzz # arabic support
@@ -56,7 +56,7 @@ sudo pacman -S --noconfirm --needed meld
 sudo pacman -S --noconfirm --needed man-db
 sudo pacman -S --noconfirm --needed man-pages
 sudo pacman -S --noconfirm --needed neovim
-sudo pacman -S --noconfirm --needed nomacs
+#sudo pacman -S --noconfirm --needed nomacs
 sudo pacman -S --noconfirm --needed neofetch
 sudo pacman -S --noconfirm --needed nodejs
 #sudo pacman -S --noconfirm --needed nitrogen # wallpaper app
@@ -66,13 +66,13 @@ sudo pacman -S --noconfirm --needed obs-studio
 sudo pacman -S --noconfirm --needed python-pywal
 sudo pacman -S --noconfirm --needed paru-git
 sudo pacman -S --noconfirm --needed pycharm-community-edition
-sudo pacman -S --noconfirm --needed pamac
+#sudo pacman -S --noconfirm --needed pamac
 sudo pacman -S --noconfirm --needed pdfarranger
 sudo pacman -S --noconfirm --needed qutebrowser
 sudo pacman -S --noconfirm --needed qbittorrent
 sudo pacman -S --noconfirm --needed ripgrep # search tool
 sudo pacman -S --noconfirm --needed rnote
-sudo pacman -S --noconfirm --needed remmina
+#sudo pacman -S --noconfirm --needed remmina
 sudo pacman -S --noconfirm --needed syncthing
 #sudo pacman -S --noconfirm --needed screenkey
 #sudo pacman -S --noconfirm --needed strawberry

@@ -449,8 +449,11 @@
 (use-package typescript-mode :ensure t) ; TypeScript language support
 
 (use-package python-mode :ensure t) ; Python language support
-(use-package lsp-mode :ensure t) ; Language Server Protocol support
-(use-package lsp-pyright :ensure t) ; Pyright LSP for Python
+  (use-package lsp-mode :ensure t) ; Language Server Protocol support
+(use-package lsp-pyright
+  :hook (python-mode . (lambda () (require 'lsp-pyright)))
+  :init (when (executable-find "python3")
+          (setq lsp-pyright-python-executable-cmd "python3")))
 
 (add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode)) ; Bash scripting support
 (setq sh-basic-offset 2) ; Set Bash indent offset
@@ -586,55 +589,6 @@
   (projectile-mode +1) ; Enable Projectile
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map) ; Define Projectile keybindings
   (define-key projectile-command-map (kbd "f") 'projectile-find-file)) ; Find file in project
-
-;; Set Brave as the default browser
-(setq browse-url-browser-function 'browse-url-default-browser)
-(setq browse-url-generic-program "/usr/bin/brave")
-
-;; Set XDG_SESSION_TYPE for Wayland
-(setenv "XDG_SESSION_TYPE" "wayland")
-
-(use-package flycheck
-  :ensure t
-  :init
-  (require 'flycheck) ; Ensure flycheck is loaded
-  (global-flycheck-mode 1) ; Enable Flycheck globally
-  :config
-  ;; Show errors in the left fringe
-  (setq flycheck-indication-mode 'left-fringe)
-  ;; Enable real-time checking
-  (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled))
-  ;; Enable debugging
-  (setq flycheck-log-level 3)
-
-  ;; Python configuration
-  (setq-default flycheck-python-flake8-executable "flake8")
-  (add-hook 'python-mode-hook 'flycheck-mode)
-
-  ;; Bash configuration
-  (add-hook 'sh-mode-hook 'flycheck-mode)
-
-  ;; JavaScript configuration
-  (setq flycheck-javascript-eslint-executable "eslint")
-  (add-hook 'js-mode-hook 'flycheck-mode)
-  (add-hook 'js2-mode-hook 'flycheck-mode)) ; If you use js2-mode
- ;; Enable Flycheck for Rust
-    (add-hook 'rust-mode-hook 'flycheck-mode)
-    ;; Configure Flycheck to use rust-analyzer
-    (setq flycheck-rust-cargo-executable "cargo") ; Use cargo for Flycheck
-    (setq flycheck-rust-check-tests t) ; Check tests in addition to the main code
-    (setq flycheck-rust-crate-root (lambda () (locate-dominating-file buffer-file-name "Cargo.toml"))) ; Find the Cargo.toml file for the project
-
-(use-package jinx
-  :ensure t
-  :hook ((text-mode . jinx-mode) ; Enable in text modes
-         (org-mode . jinx-mode)  ; Enable in Org mode
-         (markdown-mode . jinx-mode)) ; Enable in Markdown mode
-  :config
-  ;; Set the default language
-  (setq jinx-languages "en_US")
-  ;; Enable Jinx globally (optional)
-  (global-jinx-mode))
 
 (use-package smartparens
   :ensure t

@@ -1,4 +1,4 @@
-# to source this aliases use "source ~/dir/aliases.fish"
+# to source this aliases use "source ~/.dotfiles/aliases.fish"
 #list
 alias ll='ls --color=auto'
 alias la='ls -a'
