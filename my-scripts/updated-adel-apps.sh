@@ -93,7 +93,7 @@ install_packages "${audio_video_packages[@]}"
 # ==================================================
 log "Installing Graphics & Design tools..."
 graphics_design_packages=(
-  gimp inkscape krita nomacs figlet imagemagick
+  gimp inkscape krita figlet imagemagick
 )
 install_packages "${graphics_design_packages[@]}"
 
@@ -103,6 +103,7 @@ install_packages "${graphics_design_packages[@]}"
 log "Installing Productivity & Office tools..."
 productivity_packages=(
   calibre libreoffice-fresh pdfarranger zathura zathura-pdf-mupdf zathura-ps zathura-djvu xournalpp
+  gnome-contacts
 )
 install_packages "${productivity_packages[@]}"
 
@@ -132,7 +133,7 @@ enable_service tlp
 # ==================================================
 log "Installing Networking & Remote Access tools..."
 networking_packages=(
-  syncthing wget yt-dlp
+  syncthing wget yt-dlp qbittorrent
 )
 install_packages "${networking_packages[@]}"
 
