@@ -112,7 +112,7 @@ install_packages "${productivity_packages[@]}"
 # ==================================================
 log "Installing Development Tools..."
 development_packages=(
-  neovim git lazygit nodejs ripgrep fd fzf emacs
+  neovim git lazygit nodejs emacs
 )
 install_packages "${development_packages[@]}"
 
@@ -121,7 +121,7 @@ install_packages "${development_packages[@]}"
 # ==================================================
 log "Installing System Utilities..."
 system_utilities_packages=(
-  bash-completion bat ddgr dconf-editor fish flameshot font-manager galculator gparted gnome-disk-utility hardinfo2 man-db man-pages neofetch pamac paru-git thunar-archive-plugin tlp xorg-xkill zsh zsh-completions zsh-syntax-highlighting
+bash-completion bat ddgr dconf-editor fish flameshot ripgrep fd fzf font-manager galculator gparted gnome-disk-utility hardinfo2 man-db man-pages neofetch pamac paru-git thunar-archive-plugin tlp xorg-xkill zsh zsh-completions zsh-syntax-highlighting
 )
 install_packages "${system_utilities_packages[@]}"
 
@@ -133,7 +133,7 @@ enable_service tlp
 # ==================================================
 log "Installing Networking & Remote Access tools..."
 networking_packages=(
-  syncthing wget yt-dlp qbittorrent
+  syncthing wget yt-dlp qbittorrent clipgrab
 )
 install_packages "${networking_packages[@]}"
 

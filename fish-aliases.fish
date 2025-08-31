@@ -82,3 +82,4 @@ alias kernels="ls /usr/lib/modules"
 #give the list of all installed desktops - xsessions desktops
 alias xd="ls /usr/share/xsessions"
 alias xdw="ls /usr/share/wayland-sessions"
+alias fnvim='nvim $(fzf --preview="bat --color=always {}")'
