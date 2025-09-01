@@ -104,21 +104,6 @@
         "on-click-right": "hyprpicker -a -f rgb"
     },
 
-  // dunst
-  
- "custom/dunst2": {
-    "format": "{}",
-    "exec": "echo '{\"text\":\"'$(dunstctl is-paused | grep -q 'false' && echo '󰂚' || echo '󰂛')'\",\"tooltip\":\"Dunst: '$(dunstctl is-paused | grep -q 'false' && echo 'Active' || echo 'Paused')\\n\\n'$(dunstctl count waiting)' waiting\\n'$(dunstctl count displayed)' displayed\\n'$(dunstctl count history)' in history\",\"class\":\"'$(dunstctl is-paused | grep -q 'false' && echo 'active' || echo 'paused')'\"}'",
-    "return-type": "json",
-    "on-click": "dunstctl set-paused toggle",
-    "on-click-right": "dunstctl close-all",
-    "on-click-middle": "dunstctl history-pop",
-    "on-scroll-up": "dunstctl context",
-    "on-scroll-down": "dunstctl history",
-    "restart-interval": 1,
-    "signal": 1,
-},
-
 //submap 
 
     "hyprland/submap": {
@@ -368,7 +353,7 @@
         "return-type": "json",
         "exec": "echo '{ \"text\":\" 󰐥\", \"tooltip\": \"logout menu\" }'",
         "interval": "once",
-        "on-click": "nwgbar",
+        "on-click": "wlogout",
     },
  
 },
@@ -418,6 +403,8 @@
 
 
 // Left Bar Config
+
+
 {
     // Main Config
     "name": "left_bar",
