@@ -236,6 +236,13 @@ window.top_bar .modules-center {
   margin-top: 5;
   margin-bottom: 5;
 }
+#custom-notifcation {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15;
+  margin: 0px 13px 0px 0px;
+  padding: 0px;
+}
+
 
 #bluetooth.disabled {
   background-color: alpha(@surface0, 0.7);

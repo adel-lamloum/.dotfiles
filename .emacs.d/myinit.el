@@ -50,7 +50,7 @@
   (add-hook 'markdown-mode-hook 'visual-line-mode)
 
   ;; Optional: Set preferred text width (80 characters) for text wrapping
-  (setq-default fill-column 80)
+  (setq-default fill-column 60)
 
 (global-set-key (kbd "C-=") 'text-scale-increase) ; Increase text size
 (global-set-key (kbd "C--") 'text-scale-decrease) ; Decrease text size
@@ -74,106 +74,6 @@
 (use-package org-bullets
   :ensure t
   :hook (org-mode . (lambda () (org-bullets-mode 1))))
-
-;; Org Agenda Configuration
-(setq org-agenda-deadline-leaders '("" "" "%2d d. ago: ")
-      org-deadline-warning-days 0
-      org-agenda-span 7
-      org-agenda-start-day "-0d"
-      org-agenda-skip-function-global '(org-agenda-skip-entry-if 'todo 'done)
-      org-log-done 'time)
-
-;; Custom agenda commands
-(setq org-agenda-custom-commands
-      '(("d" "Daily Agenda"
-         ((agenda "" ((org-agenda-span 1)
-                      (org-agenda-overriding-header "Today's Agenda"))))
-         ((org-agenda-files '("~/adel-notes/org/gtd.org"))))
-        ("w" "Weekly Agenda"
-         ((agenda "" ((org-agenda-span 7)
-                      (org-agenda-overriding-header "This Week's Agenda"))))
-         ((org-agenda-files '("~/adel-notes/org/gtd.org"))))
-        ("t" "Todo List"
-         ((todo "TODO"
-                ((org-agenda-overriding-header "Pending Tasks"))))
-         ((org-agenda-files '("~/adel-notes/org/gtd.org"))))))
-
-;; Highlight deadlines and scheduled tasks
-(setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
-        (todo . " %i %-12:c")
-        (tags . " %i %-12:c")
-        (search . " %i %-12:c")))
-
-;; Enable agenda logging
-(setq org-agenda-log-mode-items '(closed state))
-
-;; Add tags and priorities
-(setq org-tag-alist '(("work" . ?w) ("personal" . ?p) ("urgent" . ?u)))
-(setq org-priority-highest ?A
-      org-priority-lowest ?C
-      org-priority-default ?B)
-
-;; Enable time grid
-(setq org-agenda-time-grid
-      '((daily today require-timed)
-        (800 1000 1200 1400 1600 1800 2000)
-        "......" "----------------"))
-
-;; Integrate with calendar
-(setq org-agenda-include-diary t)
-
-;; Use org-super-agenda for better grouping
-(use-package org-super-agenda
-  :ensure t
-  :after org-agenda
-  :config
-  (org-super-agenda-mode 1)
-  (setq org-super-agenda-groups
-        '((:name "Today"
-                 :time-grid t
-                 :scheduled today)
-          (:name "Overdue"
-                 :deadline past)
-          (:name "Work"
-                 :tag "work")
-          (:name "Personal"
-                 :tag "personal")
-          (:name "Urgent"
-                 :priority "A"))))
-
-;; Add refile targets
-(setq org-refile-targets
-      '(("~/adel-notes/org/gtd.org" :maxlevel . 3)
-        ("~/adel-notes/org/someday.org" :level . 1)
-        ("~/adel-notes/org/notes.org" :maxlevel . 2)))
-
-;; Enable habit tracking
-(require 'org-habit)
-(add-to-list 'org-modules 'org-habit)
-(setq org-habit-graph-column 60)
-
-(use-package org-roam
-:ensure t
-:init
-(setq org-roam-v2-ack t)
-:custom
-(org-roam-directory "~/adel-notes/RoamNotes")
-(org-roam-completion-everywhere t)
-(org-roam-dailies-capture-templates
-  '(("d" "default" entry "* %<%I:%M %p>: %?"
-     :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
-:bind (
-       :map org-mode-map
-       ("C-M-i" . completion-at-point)
-       :map org-roam-dailies-map
-       ("Y" . org-roam-dailies-capture-yesterday)
-       ("T" . org-roam-dailies-capture-tomorrow))
-:bind-keymap
-("C-c n d" . org-roam-dailies-map)
-:config
-(require 'org-roam-dailies) ;; Ensure the keymap is available
-(org-roam-db-autosync-mode))
 
 (use-package gcmh
   :ensure t
@@ -213,17 +113,6 @@
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable)) ; Generate table of contents in Org mode
-
-(use-package org-ai
-  :ensure t
-  :commands (org-ai-mode
-             org-ai-global-mode)
-  :init
-  (add-hook 'org-mode-hook #'org-ai-mode) ; Enable org-ai in org-mode
-  (org-ai-global-mode) ; Install global keybindings on C-c M-a
-  :config
-  (setq org-ai-default-chat-model "gpt-4") ; Use GPT-4
-  (org-ai-install-yasnippets)) ; Install AI snippets
 
 (use-package general
 :ensure t
@@ -425,8 +314,6 @@
   (setq ace-popup-menu-style 'full) ; Use the full style for the popup menu
   (setq ace-popup-menu-max-items 10)) ; Set the maximum number of items to display
 
-(use-package haskell-mode :ensure t) ; Haskell language support
-
 (use-package lua-mode :ensure t) ; Lua language support
 
 (use-package php-mode :ensure t) ; PHP language support
@@ -444,7 +331,6 @@
   (setq web-mode-code-indent-offset 2)) ; Set JS indent offset
 
 (use-package css-mode :ensure t) ; CSS language support
-(use-package scss-mode :ensure t) ; SCSS language support
 (use-package js2-mode :ensure t) ; JavaScript language support
 (use-package typescript-mode :ensure t) ; TypeScript language support
 
@@ -483,22 +369,6 @@
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode)
-
-;; Enable abbrev-mode globally
-(setq-default abbrev-mode t)
-(setq save-abbrevs 'silently) ; Save abbreviations between sessions
-
-;; Define global abbreviations
-(define-abbrev global-abbrev-table "adel" "Adel")
-(define-abbrev global-abbrev-table "lamloum" "Lamloum")
-(define-abbrev global-abbrev-table "linux" "Linux")
-(define-abbrev global-abbrev-table "Ana" "Adel Lamloum")
-;; Disable abbrev-mode in programming modes
-(add-hook 'prog-mode-hook (lambda () (abbrev-mode -1)))
-
-;; Enable abbrev-mode in org-mode and text-mode
-(add-hook 'org-mode-hook 'abbrev-mode)
-(add-hook 'text-mode-hook 'abbrev-mode)
 
 (defun capitalize-first-letter-of-line ()
   "Capitalize the first letter of the current line, including org-mode headings, text, and markdown."
@@ -582,13 +452,6 @@
 (use-package magit
   :ensure t
   :bind ("C-x g" . magit-status)) ; Magit for Git integration
-
-(use-package projectile
-  :ensure t
-  :config
-  (projectile-mode +1) ; Enable Projectile
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map) ; Define Projectile keybindings
-  (define-key projectile-command-map (kbd "f") 'projectile-find-file)) ; Find file in project
 
 (use-package smartparens
   :ensure t

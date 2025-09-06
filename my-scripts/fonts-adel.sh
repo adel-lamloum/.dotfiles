@@ -29,6 +29,10 @@ FONTS=(
     ttf-jetbrains-mono
     otf-hermit
     ttf-firacode-nerd
+    ttf-nerd-fonts-symbols
+    noto-fonts 
+    noto-fonts-emoji
+
 )
 
 # Install all fonts in one command

@@ -10,7 +10,7 @@
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["clock#time", "custom/separator", "clock#week", "custom/separator_dot", "clock#month", "custom/separator", "clock#calendar"],
-    "modules-right": [ "bluetooth", "custom/browser", "custom/tty", "custom/file_manager", "custom/hyprpicker", "group/misc" ],
+    "modules-right": [ "custom/notification", "custom/separator",  "custom/browser", "custom/tty", "custom/file_manager", "custom/hyprpicker", "group/misc" ],
 
     // Modules Config
     "hyprland/workspaces": {
@@ -62,6 +62,43 @@
        "exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 7200 --network-interval-seconds",
        "on-click": "foot -e update"
 },
+
+  // Group Hardware
+  "group/hardware": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": false
+    },
+    "modules": ["custom/system", "disk", "cpu", "memory", "hyprland/language"]
+  },
+
+  // SwayNC
+  "custom/notification": {
+    "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+    "format": " ",
+    "format-icons": {
+      "notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "none": "",
+      "dnd-notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "dnd-none": "",
+      "inhibited-notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification":
+        "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
 // network traffic
 
   "custom/network_traffic": {
@@ -81,7 +118,7 @@
   },
  "custom/file_manager": {
         "format": " ",
-        "on-click": "thunar",
+        "on-click": "nautilus",
         "tooltip": true,
         "tooltip-format": "File Manager"
     },
@@ -255,10 +292,9 @@
     "group/misc": {
         "orientation": "horizontal",
         "modules": [
-"custom/network_traffic",
-    "custom/mail",
-    "custom/updates",
-            "custom/logout_menu"
+    "custom/network_traffic",
+    "bluetooth",
+    "custom/logout_menu"
         ],
     },
 

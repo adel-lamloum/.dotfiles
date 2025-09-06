@@ -93,7 +93,7 @@ install_packages "${audio_video_packages[@]}"
 # ==================================================
 log "Installing Graphics & Design tools..."
 graphics_design_packages=(
-  gimp inkscape krita figlet imagemagick
+  gimp inkscape krita figlet imagemagick gthumb
 )
 install_packages "${graphics_design_packages[@]}"
 
@@ -121,7 +121,7 @@ install_packages "${development_packages[@]}"
 # ==================================================
 log "Installing System Utilities..."
 system_utilities_packages=(
-bash-completion bat ddgr dconf-editor fish flameshot ripgrep fd fzf font-manager galculator gparted gnome-disk-utility hardinfo2 man-db man-pages neofetch pamac paru-git thunar-archive-plugin tlp xorg-xkill zsh zsh-completions zsh-syntax-highlighting
+bash-completion bat ddgr dconf-editor fish ripgrep fd fzf font-manager galculator gparted gnome-disk-utility hardinfo2 man-db man-pages neofetch tlp xorg-xkill zsh zsh-completions zsh-syntax-highlighting
 )
 install_packages "${system_utilities_packages[@]}"
 
@@ -133,7 +133,7 @@ enable_service tlp
 # ==================================================
 log "Installing Networking & Remote Access tools..."
 networking_packages=(
-  syncthing wget yt-dlp qbittorrent clipgrab
+  syncthing wget yt-dlp qbittorrent clipgrab kdeconnect
 )
 install_packages "${networking_packages[@]}"
 
@@ -160,7 +160,7 @@ install_packages "${printing_packages[@]}"
 # ==================================================
 log "Installing Miscellaneous tools..."
 miscellaneous_packages=(
-  blanket lolcat meld rnote telegram-desktop thefuck toilet variety xcolor zoom
+  blanket lolcat meld rnote telegram-desktop thefuck toilet zoom
 )
 install_packages "${miscellaneous_packages[@]}"
 
