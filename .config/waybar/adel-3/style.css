@@ -1,0 +1,219 @@
+@import url("/home/adel/.config/waybar/colors/macchiato.css");
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    border: none;
+    font-family: "JetBrainsMono";
+    /* Recommended font sizes: 720p: ~14px, 1080p: ~18px */
+    font-size: 14px;
+    font-weight: bold;
+}
+
+window#waybar {
+
+    background-color: rgba(34, 36, 54, 0.6);
+    /* border-bottom: 0px solid rgba(100, 114, 125, 0.5); */
+    color: @base;
+    transition-property: background-color;
+    transition-duration: .5s;
+    border-radius: 4px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#workspaces button {
+    padding: 0px;
+    margin: 4px 0 6px 0;
+    background-color: transparent;
+    color: @text;
+    min-width: 36px;
+}
+
+#workspaces button.active {
+    padding: 0 0 0 0;
+    margin: 4px 0 6px 0;
+    background-color: @surface0;
+    color: @text;
+    min-width: 36px;
+}
+
+#workspaces button:hover {
+    background: alpha(@surface2 , 0.2);
+}
+
+#workspaces button.focused {
+    background-color: @sky;
+    color: @flamingo;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#mode {
+    background-color: @text;
+    border-bottom: 1px solid @crust;
+}
+#custom-notification
+#language
+#window
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#custom-power,
+#custom-pacman,
+#language {
+    padding: 0px 3px;
+    margin: 4px 3px 5px 3px;
+    color: @sky;
+    background-color:transparent;
+}
+
+#window,
+#custom-notification {
+color: @sky;
+}
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    color: @green;
+}
+
+#battery {
+    color: @green;
+}
+
+@keyframes blink {
+    to {
+        background-color: @crust;
+        color: @text;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: @red;
+    color: @white;
+}
+
+label:focus {
+    background-color: @text;
+}
+
+#cpu {
+    color: @maroon;
+}
+
+#memory {
+    color: @green;
+}
+
+#backlight {
+    color: @yellow;
+}
+
+#network {
+    color: @blue;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+#pulseaudio {
+    color: @pink;
+}
+
+#pulseaudio.muted {
+    color: @base;
+}
+
+#custom-power {
+    color: @maroon;
+}
+
+#custom-waylandvsxorg {
+    color: @text;
+}
+
+#custom-pacman {
+    color: @blue;
+}
+
+#custom-media {
+    background-color: @green;
+    color: @teal;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: @green;
+}
+
+#custom-media.custom-vlc {
+    background-color: @yellow;
+}
+
+#temperature {
+    color: @yellow;
+}
+
+#temperature.critical {
+    background-color: @red;
+}
+
+#tray {
+
+}
+
+#idle_inhibitor {
+    border-radius: 4px;
+}
+
+#mpd {
+    color: @yellow;
+}
+
+#custom-language {
+    color: @flamingo;
+    min-width: 16px;
+}
+
+#custom-separator {
+    color: @flamingo;
+    margin: 0 1px;
+    padding-bottom: 5px;
+}
+
+#custom-wmname {
+    min-width: 36px;
+    font-size: 15px;
+    color: @red;
+}
+
+#custom-recorder,
+#custom-audiorec {
+    color: @pink;
+}
+

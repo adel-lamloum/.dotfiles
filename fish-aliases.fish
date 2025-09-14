@@ -1,4 +1,4 @@
-# to source this aliases use "source ~/.dotfiles/aliases.fish"
+# to source this aliases use "source ~/dir/aliases.fish"
 #list
 alias ll='ls --color=auto'
 alias la='ls -a'
@@ -82,4 +82,3 @@ alias kernels="ls /usr/lib/modules"
 #give the list of all installed desktops - xsessions desktops
 alias xd="ls /usr/share/xsessions"
 alias xdw="ls /usr/share/wayland-sessions"
-alias fnvim='nvim $(fzf --preview="bat --color=always {}")'

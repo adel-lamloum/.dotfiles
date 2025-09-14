@@ -1,0 +1,237 @@
+{
+
+    
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "width": 1350,
+    "margin": "3, 0, 2, 0",
+    
+    "modules-left": [
+        "custom/wmname",
+        "hyprland/workspaces",
+        "cpu",
+        "custom/notification",
+        "custom/separator",
+        "network",
+       
+      
+    ],
+
+    "modules-center": [
+        "tray",
+        "mpd",
+        "hyprland/window"
+    ],
+
+    "modules-right": [
+        "hyprland/language",
+        "custom/separator",
+        "backlight", 
+        "custom/separator",
+        "battery",
+        "custom/separator",
+        "pulseaudio",
+        "custom/separator",
+        "clock"
+    ],
+
+    "custom/wmname": {
+        "format": "",
+        "tooltip": false
+    },
+    
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+
+    "custom/separator": {
+        "format": " | ",
+        "interval": "once",
+        "tooltip": false
+    },
+
+    "custom/traffic": {
+        "exec": "~/.config/waybar/scripts/network_traffic.sh",
+        "return-type": "json",
+        "format-ethernet": "{icon} {ifname} ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}"
+    },
+
+   "custom/notification": {
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "return-type": "json",
+    "escape": true,
+    "format": "<big>{icon}</big>",
+    "format-icons": {
+      "none": "  ",
+      "notification": "  ",
+      "dnd-none": "  ",
+      "dnd-notification": "  "
+    },
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw"
+  },
+  
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 20,
+        "rewrite": {
+            "": "Empty Workspace"
+        }
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    
+     "hyprland/language": {
+        "format-en": "🇺🇸 (US)",
+        "format-ara": "🇪🇬 (EG)",
+        "keyboard-name": "at-translated-set-2-keyboard",
+        "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
+    },
+
+    "tray": {
+        "icon-size": 20,
+        "spacing": 6
+    },
+
+    "clock": {
+        "interval": 1,
+        "locale": "C", 
+        "format": " {:%I:%M %p}",
+        "format-alt": " {:%a,%b %d}"
+    },
+
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false,
+        "on-click": "kitty -e 'htop'"
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": " {used:0.2f}GB",
+        "max-length": 10,
+        "tooltip": false,
+        "warning": 70,
+        "critical": 90
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{icon}{temperatureC}°C",
+        "format-icons": ["", "", ""]
+    },
+    
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["💡", "💡"],
+        "on-scroll-down": "brightnessctl -c backlight set 1%-",
+        "on-scroll-up": "brightnessctl -c backlight set +1%"
+    },
+    
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    
+    "network": {
+        "format-wifi": " ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "✈ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format": "{essid}: {ipaddr}"
+    },
+    
+    "pulseaudio": {
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {format_source}",
+        "format-muted": "  {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "🎧",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [" ", " ", " "]
+        },
+        "on-click": "pavucontrol"
+    },
+    
+    "mpd": {
+        "format": "{stateIcon} {artist} - {title}",
+        "format-disconnected": "🎶",
+        "format-stopped": "♪",
+        "interval": 10,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "max-length": 45
+    },
+
+    "custom/recorder": {
+        "format": " Rec",
+        "format-disabled": " Off-air",
+        "return-type": "json",
+        "interval": 1,
+        "exec": "echo '{\"class\": \"recording\"}'",
+        "exec-if": "pgrep wf-recorder"
+    },
+
+    "custom/audiorec": {
+        "format": "♬ Rec",
+        "format-disabled": "♬ Off-air",
+        "return-type": "json",
+        "interval": 1,
+        "exec": "echo '{\"class\": \"audio recording\"}'",
+        "exec-if": "pgrep ffmpeg"
+    }
+}

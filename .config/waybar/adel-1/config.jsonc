@@ -1,0 +1,247 @@
+{
+
+"layer": "top",
+"position": "top",
+"height": 42,
+// PACMAN Style
+"hyprland/workspaces": {
+"active-only":false,
+"all-outputs": true,
+"format": "{icon}",
+"on-click": "activate",
+"on-scroll-up": "hyprctl dispatch workspace e+1",
+"on-scroll-down": "hyprctl dispatch workspace e-1",
+"show-special": false,
+"persistent-workspaces":{
+"1": [],
+"2": [],
+"3": [],
+"4": [],
+"5": []
+},
+"format": "{icon}",
+"format-icons": {
+"active": " 󰮯 ",
+"default": "󰊠",
+"persistent":"󰊠"
+}
+
+
+},
+
+
+  "hyprland/workspaces2": {
+    "active-only": true,
+    "all-outputs": false,
+    "format": "<big>{icon}</big>",
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8"
+    },
+    "on-click": "activate",
+    "on-scroll-down": "hyprctl dispatch workspace m-1",
+    "on-scroll-up": "hyprctl dispatch workspace m+1"
+  }, 
+
+  "modules-center": [
+
+  ],
+  "modules-left": [
+    "hyprland/workspaces",
+    "wlr/taskbar"
+  ],
+
+  "modules-right": [
+    "hyprland/language",
+    "tray",
+    "cpu",
+    "battery",
+    "custom/traffic",
+    "pulseaudio#out",
+    "custom/notification",
+    "clock",
+    "group/user"
+  ],
+
+
+
+
+  "clock": {
+    "calendar": {
+      "format": {
+        "days": "<span color='#cad3f5'><b>{}</b></span>",
+        "today": "<span color='#f5a97f'><b>{}</b></span>",
+        "weekdays": "<span color='#ee99a0'><b>{}</b></span>"
+      },
+      "mode": "month"
+    },
+    "format": "  {:%I:%M %p}",
+    "format-alt": "   {:%d %m %Y}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+
+
+  "cpu": {
+    "format": "   {usage}%",
+    "format-alt": "   {avg_frequency}GHz",
+    "interval": 5
+  },
+
+ "custom/traffic": {
+             "exec": "~/.config/waybar/scripts/network_traffic.sh",
+             "return-type": "json",
+             "format-ethernet": "{icon} {ifname} ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}"    // optional
+},
+
+
+    "hyprland/language": {
+        "format-en": "🇺🇸 (US)",
+        "format-ara": "🇪🇬 (EG)",
+        "keyboard-name": "at-translated-set-2-keyboard",
+        "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
+    },
+
+
+  "custom/notification": {
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "return-type": "json",
+    "escape": true,
+    "format": "<big>{icon}</big>",
+    "format-icons": {
+      "none": "",
+      "notification": "",
+      "dnd-none": "",
+      "dnd-notification": ""
+    },
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw"
+  },
+  "custom/power": {
+    "format": "<big></big>",
+    "on-click": "systemctl poweroff",
+    "tooltip-format": "Shutdown"
+  },
+  "custom/reboot": {
+    "format": "<big></big>",
+    "on-click": "systemctl reboot",
+    "tooltip-format": "Reboot"
+  },
+  "custom/user-menu": {
+    "format": "<big></big>",
+    "on-click": "",
+    "tooltip": false
+  },
+  "group/user": {
+    "drawer": {
+      "children-class": "group-power",
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/user-menu",
+      "custom/reboot",
+      "custom/power"
+    ],
+    "orientation": "inherit"
+  },
+
+ 
+ "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 20,
+        "icon-theme": "Papirus-Dark",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-right": "close",
+        "on-click-middle": "fullscreen"
+    },
+
+
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span size='13000'>{icon} </span>{capacity}%",
+    "format-warning": "<span size='13000'>{icon} </span>{capacity}%",
+    "format-critical": "<span size='13000'>{icon} </span>{capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-full": "󰂄 {capacity}%",
+    "format-icons": ["󰁺","󰁼","󰁾","󰂀","󰂂"],
+    "tooltip-format": "Time remaining: {time}\nPower draw: {power}W"
+  },
+
+
+"network": {
+        "format": " 󰤭 ",
+        "format-wifi": "{icon}({signalStrength}%){essid}",
+        "format-icons": [ " 󰤯  ", " 󰤟  ", " 󰤢  ", " 󰤥  ", " 󰤨  " ],
+        "format-disconnected": "󰤫 Disconnected",
+        "tooltip-format": "wifi <span color='#ee99a0'>off</span>",
+        "tooltip-format-wifi":"SSID: {essid}( {signalStrength}% ), {frequency} MHz\nInterface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
+        "tooltip-format-disconnected": "<span color='#ed8796'>disconnected</span>",
+        // "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        // "format-linked": "󰈀 {ifname} (No IP)",
+        // "tooltip-format-ethernet":"Interface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
+        "max-length": 35,
+//     "on-click": "nm-connection-editor",
+      // "on-click": "fish -c wifi_toggle",
+  //      "on-click-right": "iwgtk",
+  		"on-click-right": "nm-connection-editor",
+    },
+
+
+
+
+
+
+  "pulseaudio#in": {
+    "format": "{format_source}",
+    "format-muted": "{format_source}",
+    "format-source": "<big></big>",
+    "format-source-muted": "<big></big>",
+    "on-click": "pavucontrol",
+    "on-scroll-down": "",
+    "on-scroll-up": "",
+    "tooltip-format": "Open VU Control"
+  },
+
+  "pulseaudio#out": {
+    "format": "<big>{icon}</big>",
+    "format-icons": {
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ],
+      "headphone": ""
+    },
+    "format-muted": "<big>󰝟</big>",
+    "on-click": "pavucontrol",
+    "states": {
+      "loud": 80,
+      "low": 15,
+      "max": 100,
+      "medium": 30,
+      "sweet": 60,
+      "zero": 0
+    },
+    "tooltip-format": "{volume}"
+  },
+
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 5
+  }
+
+}
