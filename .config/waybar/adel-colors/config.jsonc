@@ -1,8 +1,13 @@
 {
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 4,
+    "exclusive": true,
+    "passthrough": false,
+    "fixed-center": true,
 
-"layer": "top",
-"position": "top",
-"height": 42,
+
 // PACMAN Style
 "hyprland/workspaces": {
 "active-only":false,

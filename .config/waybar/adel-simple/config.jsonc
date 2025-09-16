@@ -1,11 +1,15 @@
 {
 
-    
-    "layer": "top",
-    "position": "top",
-    "height": 34,
+  
     "width": 1350,
     "margin": "3, 0, 2, 0",
+     "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 4,
+    "exclusive": true,
+    "passthrough": false,
+    "fixed-center": true,
     
     "modules-left": [
         "custom/wmname",
