@@ -118,7 +118,7 @@
     "exec": "swaync-client -swb",
     "return-type": "json",
     "escape": true,
-    "format": "<big>{icon}</big>",
+    "format": "{icon}",
     "format-icons": {
       "none": "",
       "notification": "",
