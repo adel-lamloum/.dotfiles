@@ -103,7 +103,7 @@ install_packages "${graphics_design_packages[@]}"
 log "Installing Productivity & Office tools..."
 productivity_packages=(
   calibre libreoffice-fresh pdfarranger zathura zathura-pdf-mupdf zathura-ps zathura-djvu xournalpp
-  gnome-contacts
+  gnome-contacts thunderbird
 )
 install_packages "${productivity_packages[@]}"
 
@@ -151,7 +151,7 @@ install_packages "${networking_packages[@]}"
 # ==================================================
 log "Installing Printing & Scanning tools..."
 printing_packages=(
-  cups cups-pdf ghostscript gsfonts gutenprint gtk3-print-backends libcups system-config-printer sane simple-scan
+  cups cups-pdf ghostscript gsfonts gutenprint gtk3-print-backends libcups system-config-printer sane simple-scan foomatic-db foomatic-db-engine foomatic-db-gutenprint-ppds foomatic-db-nonfree foomatic-db-nonfree-ppds foomatic-db-ppds 
 )
 install_packages "${printing_packages[@]}"
 
